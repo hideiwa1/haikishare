@@ -1,0 +1,12 @@
+.footer {
+	text-align: center;
+	font-size: $font-size_s;
+	color: $font-color_header;
+
+	&__back{
+		background-color: $background-color_header;
+	}
+	a{
+		color: $font-color_header;
+	}
+}

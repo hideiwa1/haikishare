@@ -1,0 +1,187 @@
+/*均等配置*/
+.u-flex-default{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.u-flex-between{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.u-flex-around{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.u-flex {
+	@include mq() {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+}
+
+.u-flex-form{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+	@include mq() {
+		display: block;
+	}
+}
+
+.u-flex-flash{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*右寄せ*/
+.u-right {
+	text-align: right;
+}
+
+/*中央揃え*/
+.u-center {
+	text-align: center;
+}
+
+.u-middle{
+	vertical-align: middle;
+}
+
+/*マージン*/
+.u-mb_m {
+	margin-bottom: $space_m;
+}
+
+.u-mb_l {
+	margin-bottom: $space_l;
+}
+
+.u-mb_xl {
+	margin-bottom: $space_xl;
+}
+
+.u-mr_l {
+	margin-right: $space_l;
+}
+
+/*パディング*/
+.u-p_m{
+	padding: $space_m;
+}
+.u-pl_l {
+	padding-left: $space_l;
+}
+
+.u-pb_m {
+	padding-bottom: $space_m;
+}
+
+/*テーブル*/
+.u-table {
+	display: table;
+	width: 100%;
+}
+
+.u-tcell {
+	display: table-cell;
+}
+
+.u-block{
+	display: block;
+}
+
+/*インラインブロック*/
+.u-inline{
+	display: inline-block;
+}
+
+.u-toggle{
+	@extend .u-inline;
+	@include mq(){
+		display: block;
+	}
+}
+
+.u-error{
+	color: red;
+}
+
+.u-active{
+	color: red;
+}
+
+/*文字の丸め*/
+.u-ellipsis__default{
+	overflow: hidden;
+	position: relative;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.u-ellipsis{
+	@extend .u-ellipsis__default;
+	@include mq(){
+		white-space: normal;
+
+		&::before{
+			content: "…";
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			background: #fefefe;
+		}
+
+		&::after{
+			content: "";
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background: #fefefe;
+		}
+	}
+}
+
+/*折り返し*/
+.u-word{
+	word-break: break-all;
+}
+
+/*高さ*/
+.u-height__3line{
+	@include mq(){
+		height: $font-size_default * 4 + $space_m * 2;
+	}
+}
+
+.u-height__2inline{
+	@include mq(){
+		height: $font-size_default * 2.5 + $space_m;
+	}
+}
+
+/*非表示*/
+.u-hidden{
+	display: none;
+}
+
+/*ライン高さ*/
+.u-lineheight{
+	line-height: 100%;
+}
+
+/*行中央*/
+.u-vertical{
+	vertical-align: middle;
+}

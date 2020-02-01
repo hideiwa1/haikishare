@@ -1,0 +1,12 @@
+/*ヘッダーメニュー*/
+.p-navmenu {
+	display: none;
+	@include mq(){
+		display: block;
+	}
+	&__item {
+		height: 100%;
+		margin: 0 $space_s;
+
+	}
+}

@@ -1,0 +1,22 @@
+/*ボタン*/
+.c-button {
+	display: block;
+	padding: $space_m;
+	border-radius: $space_s;
+	height: 100%;
+
+	&__menu{
+		background-color: $background-color_nav;
+		color: $font-color_header;
+
+		&:hover{
+			background-color: $background-color_hover;
+			color: $font-color_base;
+		}
+	}
+
+	&__link{
+		background-color: $background-color_button;
+	}
+
+}

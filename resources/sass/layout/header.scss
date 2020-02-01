@@ -1,0 +1,21 @@
+.header {
+	padding: $space_l;
+	height: $space_xxxl;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: $font-color_header;
+
+	@include mq() {
+		width: $site-width;
+		margin: auto;
+		position: relative;
+		z-index: 3;
+	}
+	&__back{
+			background-color: $background-color_header;
+			width: 100%;
+	}
+}

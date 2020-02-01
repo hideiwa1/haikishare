@@ -1,0 +1,8 @@
+/*お気に入り*/
+.c-like{
+	font-size: $font-size-l;
+	vertical-align: top;
+	&:hover{
+		cursor: pointer;
+	}
+}
