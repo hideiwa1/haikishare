@@ -57,4 +57,12 @@ class StoreController extends Controller
         $user = Store::find($id);
         return $user;
     }
+    
+    public function profile($id){
+        $store = Store::find($id);
+        if($store -> delete_flg == true || empty($store)){
+            return redirect() -> back() -> with('message','ユーザー情報がありません');
+        }
+        return view('store/profile', compact('store'));
+    }
 }

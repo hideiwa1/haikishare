@@ -4,4 +4,9 @@
 	font-size: $font-size_m;
 	padding: $space_m;
 	box-sizing: border-box;
+	&__product{
+		@include mq(){
+			width: 80%;
+		}
+	}
 }

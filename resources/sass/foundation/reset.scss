@@ -84,3 +84,18 @@ img {
 p {
 	margin-bottom: 15px;
 }
+
+select{
+	cursor: pointer;
+  outline: none;
+  text-indent: 0;
+  text-overflow: '';
+  background: none transparent;
+  box-shadow: none;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+	background-color: #ffffff;
+	border: 1px solid #eeeeee;
+}

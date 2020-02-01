@@ -44,6 +44,7 @@ class ProductController extends Controller
         }
         if(empty($area)){
             $products = Product::where($sql)
+                ->where('delete_flg', false)
                 -> orderBy('updated_at', 'desc') 
                 -> paginate($span);
         }else{
@@ -51,6 +52,7 @@ class ProductController extends Controller
                 $q -> where('address1', $area);
             })
                 -> where($sql)
+                ->where('delete_flg', false)
                 -> orderBy('updated_at', 'desc') 
                 -> paginate($span);
         }
@@ -114,7 +116,7 @@ class ProductController extends Controller
     
     public function detail($id=''){
         $detail = Product::find($id);
-        if($detail -> delete_flg == true){
+        if($detail -> delete_flg == true || empty($detail)){
             return redirect() -> action('ProductController@productlist');
         }
         $user_id = Auth::id();

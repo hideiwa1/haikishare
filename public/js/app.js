@@ -2110,7 +2110,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2578,6 +2577,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search.vue */ "./resources/js/components/search.vue");
 /* harmony import */ var _pagenate_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pagenate.vue */ "./resources/js/components/pagenate.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3253,6 +3268,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -22032,7 +22050,7 @@ var render = function() {
     "div",
     { staticClass: "u-flex-default u-mb_m", attrs: { id: "index" } },
     _vm._l(_vm.product, function(val, key) {
-      return _c("div", { staticClass: "p-panel p-panel__item3 u-p_m" }, [
+      return _c("div", { staticClass: "p-panel p-panel__item3 u-p_m u-mr_l" }, [
         _c("a", { attrs: { href: "/detail/" + val.id } }, [
           _c("img", {
             staticClass: "c-img c-img__index",
@@ -22048,9 +22066,7 @@ var render = function() {
               _vm._v(
                 "\n            期限：" + _vm._s(_vm._f("moment")(val.limit))
               )
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v("住所：")])
+            ])
           ])
         ])
       ])
@@ -22630,6 +22646,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
+    { staticClass: "p-pagenation u-flex-between u-center" },
     [
       _vm.currentPage > 1
         ? _c("li", { key: "top", staticClass: "pagenation__item active" }, [
@@ -22715,44 +22732,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "product" } },
-    [
-      _c("search", {
-        attrs: {
-          keyword: _vm.keyword,
-          category: _vm.category,
-          min: _vm.min,
-          max: _vm.max,
-          area: _vm.area,
-          limit: _vm.limit
-        },
-        on: { change: _vm.searchProduct }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.products, function(product, key) {
-        return _c("div", [
-          _c("a", { attrs: { href: "detail/" + product.id } }, [
-            _c("h2", [_vm._v(_vm._s(product.name))]),
+  return _c("main", { staticClass: "main", attrs: { id: "product" } }, [
+    _c("h1", { staticClass: "c-title" }, [_vm._v("商品検索")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "u-flex" },
+      [
+        _c("search", {
+          attrs: {
+            keyword: _vm.keyword,
+            category: _vm.category,
+            min: _vm.min,
+            max: _vm.max,
+            area: _vm.area,
+            limit: _vm.limit
+          },
+          on: { change: _vm.searchProduct }
+        }),
+        _vm._v(" "),
+        _c(
+          "article",
+          { staticClass: "p-maincontent" },
+          [
+            _c("div", { staticClass: "u-flex-between" }, [
+              _c("span", [
+                _vm._v(
+                  _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
+                    "-" +
+                    _vm._s(
+                      Math.min(
+                        _vm.activePage * _vm.itemsPerPage,
+                        _vm.totalItemCount
+                      )
+                    ) +
+                    "件"
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("全" + _vm._s(_vm.totalItemCount) + "件")])
+            ]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm._f("moment")(product.limit)))])
-          ])
-        ])
-      }),
-      _vm._v(" "),
-      _c("pagenate", {
-        attrs: {
-          "active-page": _vm.activePage,
-          "items-per-page": _vm.itemsPerPage,
-          "total-item-count": _vm.totalItemCount,
-          "page-range": _vm.pageRange
-        },
-        on: { change: _vm.pageChange }
-      })
-    ],
-    2
-  )
+            _c(
+              "div",
+              { staticClass: "u-mb_m" },
+              _vm._l(_vm.products, function(product, key) {
+                return _c(
+                  "div",
+                  { staticClass: "p-panel u-p_m u-mr_l u-mb_l" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "u-flex-default",
+                        attrs: { href: "detail/" + product.id }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "c-img c-img__product",
+                          attrs: { src: product.pic }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "c-textarea c-textarea__product" },
+                          [
+                            _c("h2", [_vm._v(_vm._s(product.name))]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v("価格：" + _vm._s(product.price) + "円"),
+                              _c("br"),
+                              _vm._v(
+                                "\n                            期限：" +
+                                  _vm._s(_vm._f("moment")(product.limit))
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("pagenate", {
+              attrs: {
+                "active-page": _vm.activePage,
+                "items-per-page": _vm.itemsPerPage,
+                "total-item-count": _vm.totalItemCount,
+                "page-range": _vm.pageRange
+              },
+              on: { change: _vm.pageChange }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -23332,233 +23412,253 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "search" } }, [
-    _c("form", [
-      _c("div", [
-        _c("label", [_vm._v("\n               キーワード\n            ")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.s_keyword,
-              expression: "s_keyword"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.s_keyword },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.s_keyword = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("label", [_vm._v("\n               カテゴリー\n           ")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.s_category,
-                expression: "s_category"
-              }
-            ],
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.s_category = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "" } }, [
-              _vm._v("選択してください")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.categoryList, function(val) {
-              return _c("option", { domProps: { value: val.id } }, [
-                _vm._v(
-                  "\n                   " +
-                    _vm._s(val.name) +
-                    "\n               "
-                )
-              ])
-            })
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("label", [_vm._v("\n               価格帯\n           ")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.s_min,
-              expression: "s_min"
-            }
-          ],
-          attrs: { type: "number", placeholder: "0円" },
-          domProps: { value: _vm.s_min },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.s_min = $event.target.value
-            }
-          }
-        }),
-        _vm._v("\n           ~\n           "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.s_max,
-              expression: "s_max"
-            }
-          ],
-          attrs: { type: "number", placeholder: "上限なし" },
-          domProps: { value: _vm.s_max },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.s_max = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("label", [_vm._v("\n               都道府県\n           ")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.s_area,
-                expression: "s_area"
-              }
-            ],
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.s_area = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "", selected: "" } }, [
-              _vm._v("選択してください")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.areaList, function(val) {
-              return _c("option", { domProps: { value: val.id } }, [
-                _vm._v(
-                  "\n                   " +
-                    _vm._s(val.name) +
-                    "\n               "
-                )
-              ])
-            })
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("label", [
+  return _c(
+    "aside",
+    { staticClass: "p-sidecontent u-pr_l", attrs: { id: "search" } },
+    [
+      _c("form", [
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n               キーワード\n            ")
+          ]),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.s_limit,
-                expression: "s_limit"
+                value: _vm.s_keyword,
+                expression: "s_keyword"
               }
             ],
-            attrs: { type: "checkbox" },
-            domProps: {
-              checked: Array.isArray(_vm.s_limit)
-                ? _vm._i(_vm.s_limit, null) > -1
-                : _vm.s_limit
-            },
+            staticClass: "c-form c-form__text",
+            attrs: { type: "text" },
+            domProps: { value: _vm.s_keyword },
             on: {
-              change: function($event) {
-                var $$a = _vm.s_limit,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && (_vm.s_limit = $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      (_vm.s_limit = $$a
-                        .slice(0, $$i)
-                        .concat($$a.slice($$i + 1)))
-                  }
-                } else {
-                  _vm.s_limit = $$c
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
+                _vm.s_keyword = $event.target.value
               }
             }
-          }),
-          _vm._v("期限切れの商品も含める\n           ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          attrs: { type: "submit", value: "検索する" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.handleClick($event)
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n               カテゴリー\n           ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.s_category,
+                  expression: "s_category"
+                }
+              ],
+              staticClass: "c-form c-form__select u-pl_m",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.s_category = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [
+                _vm._v("選択してください▼")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.categoryList, function(val) {
+                return _c("option", { domProps: { value: val.id } }, [
+                  _vm._v(
+                    "\n                   " +
+                      _vm._s(val.name) +
+                      "\n               "
+                  )
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n               価格帯\n           ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "u-flex-between" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.s_min,
+                  expression: "s_min"
+                }
+              ],
+              staticClass: "c-form c-form__num",
+              attrs: { type: "number", placeholder: "0円" },
+              domProps: { value: _vm.s_min },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.s_min = $event.target.value
+                }
+              }
+            }),
+            _vm._v("\n               ~\n               "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.s_max,
+                  expression: "s_max"
+                }
+              ],
+              staticClass: "c-form c-form__num",
+              attrs: { type: "number", placeholder: "上限なし" },
+              domProps: { value: _vm.s_max },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.s_max = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n               都道府県\n           ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.s_area,
+                  expression: "s_area"
+                }
+              ],
+              staticClass: "c-form c-form__select u-pl_m",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.s_area = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("選択してください▼")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.areaList, function(val) {
+                return _c("option", { domProps: { value: val.id } }, [
+                  _vm._v(
+                    "\n                   " +
+                      _vm._s(val.name) +
+                      "\n               "
+                  )
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n               期限切れの商品も含める\n               "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.s_limit,
+                  expression: "s_limit"
+                }
+              ],
+              attrs: { type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(_vm.s_limit)
+                  ? _vm._i(_vm.s_limit, null) > -1
+                  : _vm.s_limit
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.s_limit,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.s_limit = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.s_limit = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.s_limit = $$c
+                  }
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("input", {
+            staticClass: "c-form c-button c-form__text",
+            attrs: { type: "submit", value: "検索する" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.handleClick($event)
+              }
             }
-          }
-        })
+          })
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37400,8 +37500,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/hidemi/Desktop/haikishare/vagrant/htdocs/sample/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/hidemi/Desktop/haikishare/vagrant/htdocs/sample/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/hidemi/Desktop/vagrant/htdocs/sample/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/hidemi/Desktop/vagrant/htdocs/sample/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

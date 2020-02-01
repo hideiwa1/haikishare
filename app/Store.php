@@ -44,4 +44,7 @@ class Store extends Authenticatable
     public function products(){
         return $this -> hasMany('App\Product');
     }
+    public function area(){
+        return $this -> belongsTo('App\area', 'address1');
+    }
 }

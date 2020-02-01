@@ -61,4 +61,12 @@ class UserController extends Controller
     public function mypage(){
         return view('mypage');
     }
+    
+    public function profile($id){
+        $user = User::find($id);
+        if($user -> delete_flg == true || empty($user)){
+            return redirect() -> back() -> with('message','ユーザー情報がありません');
+        }
+        return view('profile', compact('user'));
+    }
 }

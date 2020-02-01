@@ -13,7 +13,9 @@ class IndexController extends Controller
     }
     
     public function json(){
-        $products = Product::orderBy('updated_at', 'desc') -> take(3) -> get();
+        $products = Product::where('delete_flg', false)
+            -> orderBy('updated_at', 'desc') 
+            -> take(3) -> get();
         return $products;
     }
     

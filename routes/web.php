@@ -29,6 +29,9 @@ Route::get('/productlist/json', 'ProductController@productlistJson');
 Route::get('/categorylist/json', 'ProductController@categoryJson');
 Route::get('/arealist/json', 'ProductController@areaJson');
 
+Route::get('/profile/{id}', 'UserController@profile');
+Route::get('/store/profile/{id}', 'StoreController@profile');
+
 Route::get('/auth/json','IndexController@auth');
 
 Route::get('/sample/mail/preview', function(){

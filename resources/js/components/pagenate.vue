@@ -1,5 +1,5 @@
 <template>
-    <ul>
+<ul class="p-pagenation u-flex-between u-center">
         <li class="pagenation__item active" key='top' v-if="currentPage > 1"><a :name='1' @click = "handleLinkClick">先頭へ</a></li>
         <li class="pagenation__item active" key='prev' v-if="currentPage > 1"><a :name="currentPage - 1" @click = "handleLinkClick">前へ</a></li>
         <li v-for="page in Pages"  class="pagenation__item active"><a :name="page" @click = "handleLinkClick">{{page}}</a></li>

@@ -1,7 +1,7 @@
 /*パネル*/
 .p-panel {
 	background-color: #fefefe;
-	
+
 	&__item {
 		width: 100%;
 		margin-right: 5%;
@@ -29,7 +29,6 @@
 
 		@include mq() {
 			width: 30%;
-			margin-right: 5%;
 			display: block;
 		}
 
