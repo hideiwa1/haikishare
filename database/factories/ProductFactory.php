@@ -13,7 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker -> numberBetween($min = 200, $max = 2000),
         'limit' => $faker -> dateTimeBetween($startDate = '-1 weeks',$endDate = '+1 months'),
         'category_id' => $faker -> numberBetween($min = 1, $max = 3),
-        'store_id' => $faker -> randomElement(['1','11','21','31']),
+        'store_id' => $faker -> randomElement(['2','12','22','32']),
         'delete_flg' => false
     ];
 });
