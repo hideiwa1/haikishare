@@ -17,22 +17,22 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('categories')->insert([
             [
-                'id' => 2,
+                'id' => 1,
                 'name' => '弁当・惣菜',
                 'delete_flg' => false
             ],
             [
-                'id' => 12,
+                'id' => 2,
                 'name' => 'パン',
                 'delete_flg' => false
             ],
             [
-                'id' => 22,
+                'id' => 3,
                 'name' => '飲料',
                 'delete_flg' => false
             ],
             [
-                'id' => 32,
+                'id' => 4,
                 'name' => '雑貨',
                 'delete_flg' => false
             ],
