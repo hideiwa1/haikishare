@@ -2,8 +2,13 @@
     <div id="mypage">
        <h1 class="c-title">購入履歴</h1>
         <div v-for="(buylist, i) in buylists" :key="i" class="p-panel u-p_m u-mb_m">
+           <div class="u-flex-between">
+           <img :src="buylist.product.pic" class="c-img c-img__product">
+               <div class="c-textarea c-textarea__product">
             <h2>{{buylist.product.name}}</h2>
             <p>購入日：{{buylist.updated_at | moment}}</p>
+    </div>
+        </div>
             <div class="u-flex-between u-w_50 u-m_auto">
                 <button class="c-button c-button__link"><a :href="'/detail/' + buylist.product_id" >詳細を見る</a></button>
                 <Attention @click="handleClick" :value="buylist.id">キャンセルする</Attention>

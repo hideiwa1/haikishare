@@ -1,10 +1,23 @@
 <template>
     <div id="product">
-        <div v-for="(buylist, i) in buylists" :key="i" class="p-panel">
-            <h2>{{buylist.product.name}}</h2>
-            <p>{{buylist.updated_at | moment}}</p>
-            <button><a :href="'/detail/' + buylist.product_id">詳細を見る</a></button>
-            <Attention @click="handleClick" :value="buylist.id">キャンセルする</Attention>
+        <h1 class="c-title">購入履歴一覧</h1>
+        <div class="u-flex-between">
+            <span>{{(activePage-1) * itemsPerPage +1}}-{{Math.min(activePage * itemsPerPage, totalItemCount)}}件</span>
+            <span>全{{totalItemCount}}件</span>
+    </div>
+        <div v-for="(buylist, i) in buylists" :key="i" class="p-panel u-p_m u-mb_m">
+            <div class="u-flex-between">
+                <img :src="buylist.product.pic" class="c-img c-img__product">
+                <div class="c-textarea c-textarea__product">
+                    <h2>{{buylist.product.name}}</h2>
+                    <p>価格：{{buylist.product.price}}円<br>
+                        期限：{{buylist.product.limit | moment}}</p>
+    </div>
+    </div>
+            <div class="u-flex-between u-w_50 u-m_auto">
+                <button class="c-button c-button__link"><a :href="'/detail/' + buylist.product_id" >詳細を見る</a></button>
+                <Attention @click="handleClick" :value="buylist.id">キャンセルする</Attention>
+    </div>
             
         </div>
         <pagenate :active-page="activePage" :items-per-page="itemsPerPage" :total-item-count="totalItemCount" :page-range="pageRange" @change = "pageChange"/>

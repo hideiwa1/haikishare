@@ -1,28 +1,29 @@
 <template>
     <div id="registProduct">
-        <form enctype="multipart/form-data" method="post" :action="'/store/saveJson/' + this.url">
+        <h1 class="c-title">商品登録・編集</h1>
+        <form enctype="multipart/form-data" method="post" :action="'/store/saveJson/' + this.url" class="p-form">
             <input type="hidden" name="_token" :value="csrf">
             <div>
-                <label>商品名</label>
-                <input type="text" name='name' v-model="name">
+                <label class="c-form__title">商品名</label>
+                <input type="text" name='name' v-model="name" class="c-form c-form__text">
             </div>
             <Liveview :pic="pic" @change="picChange" />
             <div>
-                <label>
+                <label class="c-form__title">
                     JANコード
                 </label>
-                <input type="num" name="jan" v-model="jan" @change="searchJan">
+                <input type="num" name="jan" v-model="jan" @change="searchJan" class="c-form c-form__text">
                 <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
             </div>
             <div>
-                <label>
+                <label class="c-form__title">
                     価格
                 </label>
                 <input type="num" name="price" v-model="price">
             </div>
             
             <div>
-                <label>
+                <label class="c-form__title">
                     賞味期限・品質保持期限
                 </label>
                 <input type="radio" name="limit_flg" value=false v-model="limit_flg">期限なし
@@ -30,7 +31,7 @@
                 <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg !== 'false'">
             </div>
             <div>
-                <input type="submit" :disabled="isValid" >
+                <input type="submit" :disabled="isValid" class="c-button c-form__text c-button__link">
             </div>
         </form>
     </div>

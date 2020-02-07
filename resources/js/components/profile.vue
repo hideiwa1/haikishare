@@ -1,5 +1,6 @@
 <template>
     <div id="Profile">
+        <h1 class="c-title">プロフィール編集</h1>
         <form enctype="multipart/form-data" method="post" action="/saveProfile" class="p-form">
             <input type="hidden" name="_token" :value="csrf">
             <div>
@@ -28,7 +29,7 @@
                 <label>
                     コメント
                 </label>
-                <input type="num" name="comment" v-model="comment">
+                <input type="text" name="comment" v-model="comment">
             </div>
 
             <div>

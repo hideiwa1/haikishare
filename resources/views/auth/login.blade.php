@@ -27,8 +27,8 @@
                 <input type="password" name="password" placeholder="password" class="c-form__text">
                 <span class="c-form__title"><a href="password/reset">>>パスワードを忘れた方はこちらへ</a></span>
             </p>
-            <input type="submit" name="submit" value="ログイン" class="c-form__button">
-            <button class="c-form__button"><a href="/register">新規登録はこちら</a></button>
+            <input type="submit" name="submit" value="ログイン" class="c-button c-form__text c-button__link u-mb_l">
+            <button  class="c-button c-form__text c-button__small"><a href="/register">新規登録はこちら</a></button>
         </div>
     </form>
 </main>

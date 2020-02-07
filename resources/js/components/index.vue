@@ -22,6 +22,7 @@
             axios.get('/index/json')
             .then(response => {
                 this.product = response.data;
+                console.log(this.product);
             });
         },
         data: function(){

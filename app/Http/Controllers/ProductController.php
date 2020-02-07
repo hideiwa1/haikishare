@@ -47,9 +47,15 @@ class ProductController extends Controller
         /*都道府県の指定なしの場合*/
         if(empty($area)){
             $products = Product::where($sql)
-                ->where('delete_flg', false)
-                -> orderBy('updated_at', 'desc') 
-                -> paginate($span);
+                ->where('products.delete_flg', false)
+                -> leftJoin('sales', function($q){
+                    $q -> on('products.id', '=', 'sales.product_id')
+                        -> where('sales.delete_flg', false);
+                })
+                /*saleのデータがないものを抽出*/
+                -> whereNull('sales.product_id')
+                -> orderBy('products.updated_at', 'desc') 
+                -> paginate($span, ['products.*']);
         /*都道府県の指定ありの場合*/
         }else{
             /*ストアの住所検索後、その他の検索を実施*/
@@ -57,9 +63,14 @@ class ProductController extends Controller
                 $q -> where('address1', $area);
             })
                 -> where($sql)
-                ->where('delete_flg', false)
-                -> orderBy('updated_at', 'desc') 
-                -> paginate($span);
+                -> leftJoin('sales', function($q){
+                    $q -> on('products.id', '=', 'sales.product_id')
+                        -> where('sales.delete_flg', false);
+                })
+                /*saleのデータがないものを抽出*/
+                -> whereNull('sales.product_id')
+                -> orderBy('products.updated_at', 'desc') 
+                -> paginate($span, ['products.*']);
         }
         return $products;
     }

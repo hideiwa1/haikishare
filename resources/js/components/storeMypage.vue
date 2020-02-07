@@ -1,25 +1,39 @@
 <template>
 <div id="mypage">
     <div>
-    <h1>販売履歴</h1>
+        <h1 class="c-title">販売履歴一覧</h1>
     <div v-for="(salelist, i) in salelists" :key="i">
+        <div class="u-flex-between">
+            <img :src="salelist.product.pic" class="c-img c-img__product">
+            <div class="c-textarea c-textarea__product">
         <h2>{{salelist.name}}</h2>
         <p>{{salelist.updated_at | moment}}</p>
-        <button><a :href="'/detail/' + salelist.id">詳細を見る</a></button>
     </div>
-    <div><a href="/store/salelist">さらに見る</a></div>
+    </div>
+        <div class="u-flex-between u-w_50 u-m_auto">
+            <button class="c-button c-button__link"><a :href="'/detail/' + salelist.id">詳細を見る</a></button>
+    </div>
+    </div>
+        <div class="u-right"><a href="/store/salelist" class="u-right">さらに見る</a></div>
     </div>
     
     <div>
-    <h1>商品一覧</h1>
+        <h1 class="c-title">出品商品一覧</h1>
     <div v-for="(productlist, i) in productlists" :key="i">
+        <div class="u-flex-between">
+            <img :src="productlist.pic" class="c-img c-img__product">
+            <div class="c-textarea c-textarea__product">
         <h2>{{productlist.name}}</h2>
         <p>{{productlist.updated_at | moment}}</p>
-        <button><a :href="'/detail/' + productlist.id">詳細を見る</a></button>
-        <button v-if=!productlist.sale><a :href="'/store/registProduct/' + productlist.id">編集する</a></button>
-
     </div>
-    <div><a href="/store/productlist">さらに見る</a></div>
+    </div>
+        <div class="u-flex-between u-w_50 u-m_auto">
+            <button class="c-button c-button__link">
+            <a :href="'/detail/' + productlist.id">詳細を見る</a></button>
+            <button v-if=!productlist.sale class="c-button c-button__link"><a :href="'/store/registProduct/' + productlist.id">編集する</a></button>
+    </div>
+    </div>
+        <div class="u-right"><a href="/store/productlist" class="u-right">さらに見る</a></div>
     </div>
     
     </div>

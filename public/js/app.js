@@ -2001,6 +2001,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2124,6 +2137,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 
     axios.get('/index/json').then(function (response) {
       _this.product = response.data;
+      console.log(_this.product);
     });
   },
   data: function data() {
@@ -2397,6 +2411,11 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attention_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attention.vue */ "./resources/js/components/attention.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2721,6 +2740,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2792,6 +2823,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _liveview_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./liveview.vue */ "./resources/js/components/liveview.vue");
+//
 //
 //
 //
@@ -3026,6 +3058,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
@@ -3192,6 +3225,19 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pagenate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pagenate.vue */ "./resources/js/components/pagenate.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3395,6 +3441,20 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -22017,29 +22077,67 @@ var render = function() {
     "div",
     { attrs: { id: "product" } },
     [
+      _c("h1", { staticClass: "c-title" }, [_vm._v("購入履歴一覧")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "u-flex-between" }, [
+        _c("span", [
+          _vm._v(
+            _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
+              "-" +
+              _vm._s(
+                Math.min(_vm.activePage * _vm.itemsPerPage, _vm.totalItemCount)
+              ) +
+              "件"
+          )
+        ]),
+        _vm._v(" "),
+        _c("span", [_vm._v("全" + _vm._s(_vm.totalItemCount) + "件")])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.buylists, function(buylist, i) {
-        return _c(
-          "div",
-          { key: i, staticClass: "p-panel" },
-          [
-            _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+        return _c("div", { key: i, staticClass: "p-panel u-p_m u-mb_m" }, [
+          _c("div", { staticClass: "u-flex-between" }, [
+            _c("img", {
+              staticClass: "c-img c-img__product",
+              attrs: { src: buylist.product.pic }
+            }),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm._f("moment")(buylist.updated_at)))]),
-            _vm._v(" "),
-            _c("button", [
-              _c("a", { attrs: { href: "/detail/" + buylist.product_id } }, [
-                _vm._v("詳細を見る")
+            _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+              _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("価格：" + _vm._s(buylist.product.price) + "円"),
+                _c("br"),
+                _vm._v(
+                  "\n                    期限：" +
+                    _vm._s(_vm._f("moment")(buylist.product.limit))
+                )
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "Attention",
-              { attrs: { value: buylist.id }, on: { click: _vm.handleClick } },
-              [_vm._v("キャンセルする")]
-            )
-          ],
-          1
-        )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "u-flex-between u-w_50 u-m_auto" },
+            [
+              _c("button", { staticClass: "c-button c-button__link" }, [
+                _c("a", { attrs: { href: "/detail/" + buylist.product_id } }, [
+                  _vm._v("詳細を見る")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "Attention",
+                {
+                  attrs: { value: buylist.id },
+                  on: { click: _vm.handleClick }
+                },
+                [_vm._v("キャンセルする")]
+              )
+            ],
+            1
+          )
+        ])
       }),
       _vm._v(" "),
       _c("pagenate", {
@@ -22616,10 +22714,21 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.buylists, function(buylist, i) {
         return _c("div", { key: i, staticClass: "p-panel u-p_m u-mb_m" }, [
-          _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("購入日：" + _vm._s(_vm._f("moment")(buylist.updated_at)))
+          _c("div", { staticClass: "u-flex-between" }, [
+            _c("img", {
+              staticClass: "c-img c-img__product",
+              attrs: { src: buylist.product.pic }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+              _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "購入日：" + _vm._s(_vm._f("moment")(buylist.updated_at))
+                )
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -22900,28 +23009,60 @@ var render = function() {
     "div",
     { attrs: { id: "productList" } },
     [
+      _c("h1", { staticClass: "c-title" }, [_vm._v("出品商品一覧")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "u-flex-between" }, [
+        _c("span", [
+          _vm._v(
+            _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
+              "-" +
+              _vm._s(
+                Math.min(_vm.activePage * _vm.itemsPerPage, _vm.totalItemCount)
+              ) +
+              "件"
+          )
+        ]),
+        _vm._v(" "),
+        _c("span", [_vm._v("全" + _vm._s(_vm.totalItemCount) + "件")])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.productlists, function(productlist, i) {
         return _c("div", { key: i }, [
-          _c("h2", [_vm._v(_vm._s(productlist.name))]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))]),
-          _vm._v(" "),
-          _c("button", [
-            _c("a", { attrs: { href: "/detail/" + productlist.id } }, [
-              _vm._v("詳細を見る")
+          _c("div", { staticClass: "u-flex-between" }, [
+            _c("img", {
+              staticClass: "c-img c-img__product",
+              attrs: { src: productlist.pic }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+              _c("h2", [_vm._v(_vm._s(productlist.name))]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))
+              ])
             ])
           ]),
           _vm._v(" "),
-          _c("button", [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/store/registProduct/" + productlist.product_id
-                }
-              },
-              [_vm._v("編集する")]
-            )
+          _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
+            _c("button", { staticClass: "c-button c-button__link" }, [
+              _c("a", { attrs: { href: "/detail/" + productlist.id } }, [
+                _vm._v("詳細を見る")
+              ])
+            ]),
+            _vm._v(" "),
+            !productlist.sale
+              ? _c("button", { staticClass: "c-button c-button__link" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/store/registProduct/" + productlist.product_id
+                      }
+                    },
+                    [_vm._v("編集する")]
+                  )
+                ])
+              : _vm._e()
           ])
         ])
       }),
@@ -22962,6 +23103,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "Profile" } }, [
+    _c("h1", { staticClass: "c-title" }, [_vm._v("プロフィール編集")]),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -23094,7 +23237,7 @@ var render = function() {
                 expression: "comment"
               }
             ],
-            attrs: { type: "num", name: "comment" },
+            attrs: { type: "text", name: "comment" },
             domProps: { value: _vm.comment },
             on: {
               input: function($event) {
@@ -23206,9 +23349,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "registProduct" } }, [
+    _c("h1", { staticClass: "c-title" }, [_vm._v("商品登録・編集")]),
+    _vm._v(" "),
     _c(
       "form",
       {
+        staticClass: "p-form",
         attrs: {
           enctype: "multipart/form-data",
           method: "post",
@@ -23222,7 +23368,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", [
-          _c("label", [_vm._v("商品名")]),
+          _c("label", { staticClass: "c-form__title" }, [_vm._v("商品名")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23233,6 +23379,7 @@ var render = function() {
                 expression: "name"
               }
             ],
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "name" },
             domProps: { value: _vm.name },
             on: {
@@ -23252,7 +23399,9 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", [
-          _c("label", [_vm._v("\n                JANコード\n            ")]),
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n                JANコード\n            ")
+          ]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23263,6 +23412,7 @@ var render = function() {
                 expression: "jan"
               }
             ],
+            staticClass: "c-form c-form__text",
             attrs: { type: "num", name: "jan" },
             domProps: { value: _vm.jan },
             on: {
@@ -23282,7 +23432,9 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("label", [_vm._v("\n                価格\n            ")]),
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n                価格\n            ")
+          ]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23307,7 +23459,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("label", [
+          _c("label", { staticClass: "c-form__title" }, [
             _vm._v("\n                賞味期限・品質保持期限\n            ")
           ]),
           _vm._v(" "),
@@ -23372,7 +23524,10 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("input", { attrs: { type: "submit", disabled: _vm.isValid } })
+          _c("input", {
+            staticClass: "c-button c-form__text c-button__link",
+            attrs: { type: "submit", disabled: _vm.isValid }
+          })
         ])
       ],
       1
@@ -23403,17 +23558,45 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "product" } },
+    { attrs: { id: "saleList" } },
     [
+      _c("h1", { staticClass: "c-title" }, [_vm._v("販売履歴一覧")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "u-flex-between" }, [
+        _c("span", [
+          _vm._v(
+            _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
+              "-" +
+              _vm._s(
+                Math.min(_vm.activePage * _vm.itemsPerPage, _vm.totalItemCount)
+              ) +
+              "件"
+          )
+        ]),
+        _vm._v(" "),
+        _c("span", [_vm._v("全" + _vm._s(_vm.totalItemCount) + "件")])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.salelists, function(salelist, i) {
         return _c("div", { key: i }, [
-          _c("h2", [_vm._v(_vm._s(salelist.name))]),
+          _c("div", { staticClass: "u-flex-between" }, [
+            _c("img", {
+              staticClass: "c-img c-img__product",
+              attrs: { src: salelist.pic }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+              _c("h2", [_vm._v(_vm._s(salelist.name))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))])
+            ])
+          ]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))]),
-          _vm._v(" "),
-          _c("button", [
-            _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
-              _vm._v("詳細を見る")
+          _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
+            _c("button", { staticClass: "c-button c-button__link" }, [
+              _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
+                _vm._v("詳細を見る")
+              ])
             ])
           ])
         ])
@@ -23728,17 +23911,28 @@ var render = function() {
     _c(
       "div",
       [
-        _c("h1", [_vm._v("販売履歴")]),
+        _c("h1", { staticClass: "c-title" }, [_vm._v("販売履歴一覧")]),
         _vm._v(" "),
         _vm._l(_vm.salelists, function(salelist, i) {
           return _c("div", { key: i }, [
-            _c("h2", [_vm._v(_vm._s(salelist.name))]),
+            _c("div", { staticClass: "u-flex-between" }, [
+              _c("img", {
+                staticClass: "c-img c-img__product",
+                attrs: { src: salelist.product.pic }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+                _c("h2", [_vm._v(_vm._s(salelist.name))]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))])
+              ])
+            ]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))]),
-            _vm._v(" "),
-            _c("button", [
-              _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
-                _vm._v("詳細を見る")
+            _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
+              _c("button", { staticClass: "c-button c-button__link" }, [
+                _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
+                  _vm._v("詳細を見る")
+                ])
               ])
             ])
           ])
@@ -23752,31 +23946,46 @@ var render = function() {
     _c(
       "div",
       [
-        _c("h1", [_vm._v("商品一覧")]),
+        _c("h1", { staticClass: "c-title" }, [_vm._v("出品商品一覧")]),
         _vm._v(" "),
         _vm._l(_vm.productlists, function(productlist, i) {
           return _c("div", { key: i }, [
-            _c("h2", [_vm._v(_vm._s(productlist.name))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))]),
-            _vm._v(" "),
-            _c("button", [
-              _c("a", { attrs: { href: "/detail/" + productlist.id } }, [
-                _vm._v("詳細を見る")
+            _c("div", { staticClass: "u-flex-between" }, [
+              _c("img", {
+                staticClass: "c-img c-img__product",
+                attrs: { src: productlist.pic }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "c-textarea c-textarea__product" }, [
+                _c("h2", [_vm._v(_vm._s(productlist.name))]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))
+                ])
               ])
             ]),
             _vm._v(" "),
-            !productlist.sale
-              ? _c("button", [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "/store/registProduct/" + productlist.id }
-                    },
-                    [_vm._v("編集する")]
-                  )
+            _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
+              _c("button", { staticClass: "c-button c-button__link" }, [
+                _c("a", { attrs: { href: "/detail/" + productlist.id } }, [
+                  _vm._v("詳細を見る")
                 ])
-              : _vm._e()
+              ]),
+              _vm._v(" "),
+              !productlist.sale
+                ? _c("button", { staticClass: "c-button c-button__link" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/store/registProduct/" + productlist.id
+                        }
+                      },
+                      [_vm._v("編集する")]
+                    )
+                  ])
+                : _vm._e()
+            ])
           ])
         }),
         _vm._v(" "),
@@ -23791,16 +24000,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { attrs: { href: "/store/salelist" } }, [_vm._v("さらに見る")])
+    return _c("div", { staticClass: "u-right" }, [
+      _c("a", { staticClass: "u-right", attrs: { href: "/store/salelist" } }, [
+        _vm._v("さらに見る")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { attrs: { href: "/store/productlist" } }, [_vm._v("さらに見る")])
+    return _c("div", { staticClass: "u-right" }, [
+      _c(
+        "a",
+        { staticClass: "u-right", attrs: { href: "/store/productlist" } },
+        [_vm._v("さらに見る")]
+      )
     ])
   }
 ]

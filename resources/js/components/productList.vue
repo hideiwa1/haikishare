@@ -1,11 +1,23 @@
 <template>
     <div id="productList">
+        <h1 class="c-title">出品商品一覧</h1>
+        <div class="u-flex-between">
+            <span>{{(activePage-1) * itemsPerPage +1}}-{{Math.min(activePage * itemsPerPage, totalItemCount)}}件</span>
+            <span>全{{totalItemCount}}件</span>
+    </div>
         <div v-for="(productlist, i) in productlists" :key="i">
+            <div class="u-flex-between">
+                <img :src="productlist.pic" class="c-img c-img__product">
+                <div class="c-textarea c-textarea__product">
             <h2>{{productlist.name}}</h2>
             <p>{{productlist.updated_at | moment}}</p>
-            <button><a :href="'/detail/' + productlist.id">詳細を見る</a></button>
-            <button><a :href="'/store/registProduct/' + productlist.product_id">編集する</a></button>
+    </div>
+    </div>
+            <div class="u-flex-between u-w_50 u-m_auto">
+                <button class="c-button c-button__link"><a :href="'/detail/' + productlist.id">詳細を見る</a></button>
+                <button v-if=!productlist.sale class="c-button c-button__link"><a :href="'/store/registProduct/' + productlist.product_id">編集する</a></button>
         </div>
+    </div>
         <pagenate :active-page="activePage" :items-per-page="itemsPerPage" :total-item-count="totalItemCount" :page-range="pageRange" @change="pageChange" />
     </div>
 </template>

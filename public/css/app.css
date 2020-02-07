@@ -217,6 +217,10 @@ select {
   background-color: #d0ccff;
 }
 
+.c-button__small {
+  background-color: #ffff66;
+}
+
 /*タイムスタンプ*/
 
 .c-date {

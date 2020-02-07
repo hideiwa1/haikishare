@@ -7,7 +7,7 @@
 
 @section('contents')
 
-<main class="main u-flex">
+<main class="main">
     {{ csrf_field() }}
     <div id="registProduct">
     </div>

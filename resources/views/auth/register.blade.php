@@ -28,7 +28,7 @@
                 <span class="c-form__title">Password再入力</span>
                 <input type="password" name="password_confirmation" placeholder="再入力" class="c-form__text">
             </p>
-            <input type="submit" value="新規登録" class="c-form__button">
+            <input type="submit" value="新規登録" class="c-button c-form__text c-button__link">
         </div>
     </form>
 </main>
