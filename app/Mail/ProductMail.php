@@ -14,11 +14,13 @@ class ProductMail extends Mailable
     protected $title;
     protected $text;
     
-    public function __construct($title, $name='テスト名前', $text='テスト本文')
+    public function __construct($title, $name='テスト名前', $text='テスト本文', $product, $visit)
     {
         $this->title = $title;
         $this->name = 'こんにちは、'.$name.'さん';
         $this->text = $text;
+        $this->product = $product;
+        $this->visit = $visit;
     }
 
     public function build()
@@ -28,7 +30,9 @@ class ProductMail extends Mailable
             ->with([
                 'title' => $this->title,
                 'name' => $this->name,
-                'text'=>$this->text,
+                'text' => $this->text,
+                'product' => $this->product,
+                'visit' => $this->visit,
             ]);
     }
 }

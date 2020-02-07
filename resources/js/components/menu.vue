@@ -21,7 +21,7 @@
         <li class="p-navmenu__item">
             <form method="post" action="/logout">
                 <input type="hidden" name="_token" :value="csrf">
-                <input type='submit' class="c-button c-button__menu" value="ログアウト">
+                <input type='submit' class="c-button c-button__menu u-font_default" value="ログアウト">
             </form>
         </li>
     </ul>
@@ -35,7 +35,7 @@
         <li class="p-navmenu__item">
            <form method="post" action="/store/logout">
                <input type="hidden" name="_token" :value="csrf">
-               <input type='submit' class="c-button c-button__menu" value="ログアウト">
+               <input type='submit' class="c-button c-button__menu u-font_default" value="ログアウト">
         </form>
         </li>
     </ul>

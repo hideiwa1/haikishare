@@ -7,7 +7,7 @@
 
 @section('contents')
 
-<main class="main u-flex">
+<main class="main">
     {{ csrf_field() }}
     @foreach ($errors -> all() as $error)
     <p class="u-error">{{ $error }}</p>

@@ -10,12 +10,12 @@
 <main class="main">
     {{ csrf_field() }}
 
-    <div class="p-form u-ellipsis">
+    <div class="p-form u-ellipsis__default">
         <h1 class="c-title u-center u-mb_m u-word">{{$detail -> name}}</h1>
         <div class="twitter u-right u-vertical">
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-show-count="false" data-lang="ja">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <img src="{{$detail -> pic}}" alt="">
+        <img src="{{$detail -> pic}}" alt="" class="c-img">
         
         <table>
             <tr>
@@ -56,26 +56,34 @@
         @if(!empty($detail -> sale))
         @if(!empty($user_id))
         @if($detail -> sale -> user_id == $user_id)
-        <div>
-            来店予定日：{{$detail -> sale -> visit -> timezone("JST") ->format('Y年m月d日')}}
-        </div>
+        <table>
+            <tr>
+                <td class="c-th">来店予定日</td>
+                <td class="u-word">{{$detail -> sale -> visit -> timezone("JST") ->format('Y年m月d日')}}</td>
+            </tr>
+        </table>
         <div id="attention">
             <button-attend @click="handleShow">キャンセルする</button-attend>
-            <div v-if="isShow" @click.self="closeModal">
-                本当にキャンセルしますか？
-                <form method="post" action="/cancel/{{$detail -> id}}">
+            <div v-if="isShow" @click.self="closeModal" class="p-modal p-modal-back" v-cloak>
+                
+                <form method="post" action="/cancel/{{$detail -> id}}" class="p-modal--center u-center u-p_xl">
+                    <p class="c-title">本当にキャンセルしますか？</p>
                     {{ csrf_field() }}
-                    <input type="submit" value="はい">
+                    <input type="submit" value="はい" class="c-button c-button__link u-w_50 u-m_auto">
                 </form>
+                
             </div>
         </div>
         @else
         <p>売り切れました</p>
         @endif
         @elseif(!empty($store_id) && $detail -> store_id == $store_id)
-        <div>
-            来店予定日：{{$detail -> sale -> visit -> timezone("JST") ->format('Y年m月d日')}}
-        </div>
+        <table>
+            <tr>
+                <td class="c-th">来店予定日</td>
+                <td class="u-word">{{$detail -> sale -> visit -> timezone("JST") ->format('Y年m月d日')}}</td>
+            </tr>
+        </table>
         <p>売り切れました</p>
         @else
         <p>売り切れました</p>
@@ -87,11 +95,11 @@
         <button><a href="/store/registProduct/{{$detail->id}}">編集する</a></button>
         <div id="attention">
             <button-attend @click="handleShow">削除する</button-attend>
-            <div v-if="isShow" @click.self="closeModal">
-                本当に削除しますか？
-                <form action="/store/deleteProduct/{{$detail->id}}" method="post">
+            <div v-if="isShow" @click.self="closeModal" class="p-modal p-modal-back" v-cloak>
+                <form action="/store/deleteProduct/{{$detail->id}}" method="post" class="p-modal--center u-center u-p_xl">
+                    <p class="c-title">本当に削除しますか？</p>
                     {{ csrf_field() }}
-                    <input type="submit" value="はい">
+                    <input type="submit" value="はい" class="c-button c-button__link u-w_50 u-m_auto">
                 </form>
             </div>
         </div>

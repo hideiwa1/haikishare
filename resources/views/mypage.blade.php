@@ -6,16 +6,17 @@
 @include('layouts.head')
 
 @section('contents')
-
-<main class="main u-flex">
+<div class="main u-flex">
+<main class="p-maincontent u-pr_l">
     {{ csrf_field() }}
     
     <div id="mypage"></div>
 </main>
 
-<side>
-    <h2>マイページメニュー</h2>
+<side class="p-sidecontent">
+    <h2 class="c-title u-mb_l">マイページメニュー</h2>
     <p><a href="/profileEdit">プロフィール編集</a></p>
     <p><a href="/buylist">購入履歴</a></p>
 </side>
+</div>
 @endsection

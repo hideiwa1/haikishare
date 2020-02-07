@@ -60,6 +60,10 @@
 }
 
 /*マージン*/
+.u-m_auto{
+	margin: auto;
+}
+
 .u-mb_m {
 	margin-bottom: $space_m;
 }
@@ -80,6 +84,13 @@
 .u-p_m{
 	padding: $space_m;
 }
+.u-p_l{
+	padding: $space_l;
+}
+.u-p_xl{
+	padding: $space_xl;
+}
+
 .u-pl_m{
 	padding-left: $space_m;
 }
@@ -130,35 +141,12 @@
 }
 
 /*文字の丸め*/
-.u-ellipsis__default{
-	overflow: hidden;
-	position: relative;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .u-ellipsis{
-	@extend .u-ellipsis__default;
-	@include mq(){
-		white-space: normal;
-
-		&::before{
-			content: "…";
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			background: #fefefe;
-		}
-
-		&::after{
-			content: "";
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			background: #fefefe;
-		}
-	}
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: wrap;
 }
+
 
 /*折り返し*/
 .u-word{
@@ -178,6 +166,11 @@
 	}
 }
 
+/*width*/
+.u-w_50{
+	width: 50%;
+}
+
 /*非表示*/
 .u-hidden{
 	display: none;
@@ -191,4 +184,9 @@
 /*行中央*/
 .u-vertical{
 	vertical-align: middle;
+}
+
+/**/
+.u-font_default{
+	font-size: $font-size_default;
 }

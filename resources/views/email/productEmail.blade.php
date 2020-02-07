@@ -12,8 +12,14 @@
         <p>
             {{$text}}
         </p>
+        <p>{{$product}}
+            商品名：{{$product -> name}}
+        </p>
         <p id="button">
-            <a href="https://www.google.co.jp">リンクのテスト</a>
+            <a href="https://www.google.co.jp.{{$product -> id}}">リンクのテスト</a>
+        </p>
+        <p>
+            来店予定日：{{$visit -> timezone("JST") -> format('m月d日')}}
         </p>
         <p>
             From ハイキシェア事務局

@@ -3,7 +3,7 @@ import Vue from 'vue';
 Vue.component('button-attend', {
     props: ['isShow'],
     template: 
-    `<button @click="modalShow"><slot></slot></button>`,
+    `<button @click="modalShow" class="c-button c-button__link u-w_50 u-m_auto"><slot></slot></button>`,
     methods: {
         modalShow(){
             console.log('kurikku');

@@ -1,10 +1,10 @@
 <template>
     <div id="Profile">
-        <form enctype="multipart/form-data" method="post" action="/saveProfile">
+        <form enctype="multipart/form-data" method="post" action="/saveProfile" class="p-form">
             <input type="hidden" name="_token" :value="csrf">
             <div>
                 <label>名前</label>
-                <input type="text" name='name' v-model="name">
+                <input type="text" name='name' v-model="name"  class="c-form__text">
             </div>
             <Liveview :pic="pic" @change="picChange" />
             <div>

@@ -1848,6 +1848,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -1916,6 +1918,8 @@ new Vue({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2393,6 +2397,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attention_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attention.vue */ "./resources/js/components/attention.vue");
+//
+//
 //
 //
 //
@@ -21811,12 +21817,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "attention" } }, [
-    _c("button", { on: { click: _vm.handleShow } }, [_vm._t("default")], 2),
+    _c(
+      "button",
+      { staticClass: "c-button c-button__link", on: { click: _vm.handleShow } },
+      [_vm._t("default")],
+      2
+    ),
     _vm._v(" "),
     _vm.isShow
       ? _c(
           "div",
           {
+            staticClass: "p-modal p-modal-back",
             on: {
               click: function($event) {
                 if ($event.target !== $event.currentTarget) {
@@ -21827,15 +21839,21 @@ var render = function() {
             }
           },
           [
-            _vm._v("\n        本当にキャンセルしますか？\n        "),
-            _c(
-              "button",
-              {
-                attrs: { type: "submit", id: this.value },
-                on: { click: _vm.handleClick }
-              },
-              [_vm._v("キャンセルする")]
-            )
+            _c("div", { staticClass: "p-modal--center u-center u-p_xl" }, [
+              _c("p", { staticClass: "c-title" }, [
+                _vm._v("本当にキャンセルしますか？")
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button__link u-w_50 u-m_auto",
+                  attrs: { type: "submit", id: this.value },
+                  on: { click: _vm.handleClick }
+                },
+                [_vm._v("キャンセルする")]
+              )
+            ])
           ]
         )
       : _vm._e()
@@ -21864,15 +21882,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "buyButton" } }, [
-    _c("button", { on: { click: _vm.showModal } }, [
-      _vm._v(_vm._s(this.message))
-    ]),
+    _c(
+      "button",
+      {
+        staticClass: "c-button c-button__link u-w_50 u-m_auto",
+        on: { click: _vm.showModal }
+      },
+      [_vm._v(_vm._s(this.message))]
+    ),
     _vm._v(" "),
     _vm.modalShow
       ? _c(
           "div",
           {
-            staticClass: "p-modal",
+            staticClass: "p-modal p-modal-back",
             attrs: { id: "modal" },
             on: {
               click: function($event) {
@@ -21886,73 +21909,81 @@ var render = function() {
           [
             _c(
               "form",
-              { attrs: { method: "post", action: "/buy/" + _vm.url } },
+              {
+                staticClass: "p-modal--center u-center u-p_xl",
+                attrs: { method: "post", action: "/buy/" + _vm.url }
+              },
               [
-                _c("input", {
-                  attrs: { type: "hidden", name: "_token" },
-                  domProps: { value: _vm.csrf }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.day_flg,
-                      expression: "day_flg"
-                    }
-                  ],
-                  attrs: { type: "radio", value: "today" },
-                  domProps: { checked: _vm._q(_vm.day_flg, "today") },
-                  on: {
-                    change: function($event) {
-                      _vm.day_flg = "today"
-                    }
-                  }
-                }),
-                _vm._v("今日\n            "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.day_flg,
-                      expression: "day_flg"
-                    }
-                  ],
-                  attrs: { type: "radio", value: "after" },
-                  domProps: { checked: _vm._q(_vm.day_flg, "after") },
-                  on: {
-                    change: function($event) {
-                      _vm.day_flg = "after"
-                    }
-                  }
-                }),
-                _vm._v("明日以降\n            "),
-                _vm.day_flg === "after"
-                  ? _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.visit,
-                          expression: "visit"
-                        }
-                      ],
-                      attrs: { type: "date", name: "visit" },
-                      domProps: { value: _vm.visit },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.visit = $event.target.value
-                        }
+                _c("div", { staticClass: "u-mb_m" }, [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.day_flg,
+                        expression: "day_flg"
                       }
-                    })
-                  : _vm._e(),
+                    ],
+                    attrs: { type: "radio", value: "today" },
+                    domProps: { checked: _vm._q(_vm.day_flg, "today") },
+                    on: {
+                      change: function($event) {
+                        _vm.day_flg = "today"
+                      }
+                    }
+                  }),
+                  _vm._v("今日\n            "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.day_flg,
+                        expression: "day_flg"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "after" },
+                    domProps: { checked: _vm._q(_vm.day_flg, "after") },
+                    on: {
+                      change: function($event) {
+                        _vm.day_flg = "after"
+                      }
+                    }
+                  }),
+                  _vm._v("明日以降\n            "),
+                  _vm.day_flg === "after"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.visit,
+                            expression: "visit"
+                          }
+                        ],
+                        attrs: { type: "date", name: "visit" },
+                        domProps: { value: _vm.visit },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.visit = $event.target.value
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
-                _c("input", { attrs: { type: "submit" } })
+                _c("input", {
+                  staticClass: "c-button c-button__link u-w_50 u-m_auto",
+                  attrs: { type: "submit" }
+                })
               ]
             )
           ]
@@ -21989,7 +22020,7 @@ var render = function() {
       _vm._l(_vm.buylists, function(buylist, i) {
         return _c(
           "div",
-          { key: i },
+          { key: i, staticClass: "p-panel" },
           [
             _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
             _vm._v(" "),
@@ -22163,7 +22194,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("input", {
-                staticClass: "c-button c-button__menu",
+                staticClass: "c-button c-button__menu u-font_default",
                 attrs: { type: "submit", value: "ログアウト" }
               })
             ])
@@ -22185,7 +22216,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("input", {
-                staticClass: "c-button c-button__menu",
+                staticClass: "c-button c-button__menu u-font_default",
                 attrs: { type: "submit", value: "ログアウト" }
               })
             ])
@@ -22581,31 +22612,38 @@ var render = function() {
     "div",
     { attrs: { id: "mypage" } },
     [
-      _c("h1", [_vm._v("購入履歴")]),
+      _c("h1", { staticClass: "c-title" }, [_vm._v("購入履歴")]),
       _vm._v(" "),
       _vm._l(_vm.buylists, function(buylist, i) {
-        return _c(
-          "div",
-          { key: i },
-          [
-            _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm._f("moment")(buylist.updated_at)))]),
-            _vm._v(" "),
-            _c("button", [
-              _c("a", { attrs: { href: "/detail/" + buylist.product_id } }, [
-                _vm._v("詳細を見る")
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "Attention",
-              { attrs: { value: buylist.id }, on: { click: _vm.handleClick } },
-              [_vm._v("キャンセルする")]
-            )
-          ],
-          1
-        )
+        return _c("div", { key: i, staticClass: "p-panel u-p_m u-mb_m" }, [
+          _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v("購入日：" + _vm._s(_vm._f("moment")(buylist.updated_at)))
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "u-flex-between u-w_50 u-m_auto" },
+            [
+              _c("button", { staticClass: "c-button c-button__link" }, [
+                _c("a", { attrs: { href: "/detail/" + buylist.product_id } }, [
+                  _vm._v("詳細を見る")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "Attention",
+                {
+                  attrs: { value: buylist.id },
+                  on: { click: _vm.handleClick }
+                },
+                [_vm._v("キャンセルする")]
+              )
+            ],
+            1
+          )
+        ])
       }),
       _vm._v(" "),
       _vm._m(0)
@@ -22618,8 +22656,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { attrs: { href: "/buylist" } }, [_vm._v("さらに見る")])
+    return _c("div", { staticClass: "u-right" }, [
+      _c("a", { staticClass: "u-right", attrs: { href: "/buylist" } }, [
+        _vm._v(">>さらに見る")
+      ])
     ])
   }
 ]
@@ -22925,6 +22965,7 @@ var render = function() {
     _c(
       "form",
       {
+        staticClass: "p-form",
         attrs: {
           enctype: "multipart/form-data",
           method: "post",
@@ -22949,6 +22990,7 @@ var render = function() {
                 expression: "name"
               }
             ],
+            staticClass: "c-form__text",
             attrs: { type: "text", name: "name" },
             domProps: { value: _vm.name },
             on: {
@@ -36281,7 +36323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('button-attend', {
   props: ['isShow'],
-  template: "<button @click=\"modalShow\"><slot></slot></button>",
+  template: "<button @click=\"modalShow\" class=\"c-button c-button__link u-w_50 u-m_auto\"><slot></slot></button>",
   methods: {
     modalShow: function modalShow() {
       console.log('kurikku');

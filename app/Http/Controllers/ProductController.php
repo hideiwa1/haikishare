@@ -3,8 +3,6 @@
 
 namespace App\Http\Controllers;
 
-ini_set("memory_limit", "200M");
-
 use Illuminate\Http\Request;
 use App\Product;
 use App\Sale;
@@ -21,11 +19,13 @@ use App\Mail\ProductMail;
 
 class ProductController extends Controller
 {
+    /*productページの表示*/
     public function index(){
         return view('product');
     }
     
     public function json(Request $request){
+        /*product.vueからのAjax通信*/
         $span = $request -> itemsPerPage;
         $keyword = $request -> keyword;
         $category = $request -> category;
@@ -34,7 +34,9 @@ class ProductController extends Controller
         $area = $request -> area;
         $limit = $request -> limit;
         
+        /*検索項目のSQL文作成*/
         $sql = [];
+        /*検索項目ごとに配列へ格納*/
         $keyword && $sql[] = ['name', 'LIKE', '%'.$keyword.'%'];
         $category && $sql[] = ['category_id', '=', $category];
         $min && $sql[] = ['price', '>=', $min];
@@ -42,12 +44,15 @@ class ProductController extends Controller
         if(!$limit || $limit == 'false'){
             $sql[] = ['limit', '>', date('Y/m/d H:i:s')];
         }
+        /*都道府県の指定なしの場合*/
         if(empty($area)){
             $products = Product::where($sql)
                 ->where('delete_flg', false)
                 -> orderBy('updated_at', 'desc') 
                 -> paginate($span);
+        /*都道府県の指定ありの場合*/
         }else{
+            /*ストアの住所検索後、その他の検索を実施*/
             $products = Product::whereHas('Store', function($q) use ($area){
                 $q -> where('address1', $area);
             })
@@ -59,20 +64,28 @@ class ProductController extends Controller
         return $products;
     }
     
+    /*search.vueからのAjax通信*/
+    /*商品カテゴリーの取得*/
     public function categoryJson(){
         $categories = Category::get();
         return $categories;
     }
     
+    /*search.vueからのAjax通信*/
+    /*都道府県の取得*/
     public function areaJson(){
         $areas = Area::get();
         return $areas;
     }
     
+    /*buylistページの表示*/
     public function buylist(){
         return view('buyList');
     }
     
+    /*buylist.vueからのAjax通信*/
+    /*購入済みの商品取得*/
+    /*ユーザーIDの一致*/
     public function buylistJson(Request $request){
         $span = $request -> itemsPerPage;
         $user_id = Auth::id();
@@ -217,19 +230,22 @@ class ProductController extends Controller
         $sale -> visit = $visit;
         $sale -> save();
         
+        /*メールの送信（ストアへ）*/
         $store = Store::find($sale -> product -> store_id);
         $title = '商品販売のお知らせ';
         $name = $store -> name.$store -> branch;
         $text = '登録した商品が購入されました。';
+        $product = Product::find($id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit));
         
+        /*メールの送信（ユーザーへ）*/
         $user = User::find($user_id);
         $title = '商品購入のお知らせ';
         $name = $user -> name;
         $text = '商品を購入しました。';
         $to = $user -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit));
         
         return redirect() -> action('ProductController@detail', [$id])->with('message', '購入完了');
     }

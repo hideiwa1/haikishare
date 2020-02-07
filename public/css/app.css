@@ -101,6 +101,10 @@ select {
   border: 1px solid #eeeeee;
 }
 
+[v-cloak] {
+  opacity: 0;
+}
+
 .body {
   display: -webkit-box;
   display: flex;
@@ -196,7 +200,7 @@ select {
   display: block;
   padding: 10px;
   border-radius: 5px;
-  height: 100%;
+  border: none;
 }
 
 .c-button__menu {
@@ -550,6 +554,25 @@ select {
   display: block;
 }
 
+.p-modal-back {
+  background-color: rgba(128, 128, 128, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.p-modal--center {
+  width: 50vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  box-sizing: border-box;
+}
+
 /*プロフィール画像*/
 
 .p-mypic {
@@ -777,6 +800,10 @@ select {
 
 /*マージン*/
 
+.u-m_auto {
+  margin: auto;
+}
+
 .u-mb_m {
   margin-bottom: 10px;
 }
@@ -797,6 +824,14 @@ select {
 
 .u-p_m {
   padding: 10px;
+}
+
+.u-p_l {
+  padding: 20px;
+}
+
+.u-p_xl {
+  padding: 40px;
 }
 
 .u-pl_m {
@@ -853,34 +888,10 @@ select {
 
 /*文字の丸め*/
 
-.u-ellipsis__default,
 .u-ellipsis {
   overflow: hidden;
-  position: relative;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@media screen and (min-width: 1000px) {
-  .u-ellipsis {
-    white-space: normal;
-  }
-
-  .u-ellipsis::before {
-    content: "\2026";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #fefefe;
-  }
-
-  .u-ellipsis::after {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: #fefefe;
-  }
+  white-space: wrap;
 }
 
 /*折り返し*/
@@ -903,6 +914,12 @@ select {
   }
 }
 
+/*width*/
+
+.u-w_50 {
+  width: 50%;
+}
+
 /*非表示*/
 
 .u-hidden {
@@ -919,5 +936,11 @@ select {
 
 .u-vertical {
   vertical-align: middle;
+}
+
+/**/
+
+.u-font_default {
+  font-size: 16px;
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div id="product">
-        <div v-for="(buylist, i) in buylists" :key="i">
+        <div v-for="(buylist, i) in buylists" :key="i" class="p-panel">
             <h2>{{buylist.product.name}}</h2>
             <p>{{buylist.updated_at | moment}}</p>
             <button><a :href="'/detail/' + buylist.product_id">詳細を見る</a></button>

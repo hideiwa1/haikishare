@@ -1,13 +1,15 @@
 <template>
     <div id="buyButton">
-        <button @click="showModal">{{this.message}}</button>
-        <div id="modal" class="p-modal" @click.self="closeModal" v-if="modalShow">
-            <form method="post" :action="'/buy/'+url" >
+        <button @click="showModal" class="c-button c-button__link u-w_50 u-m_auto">{{this.message}}</button>
+        <div id="modal" class="p-modal p-modal-back" @click.self="closeModal" v-if="modalShow">
+            <form method="post" :action="'/buy/'+url" class="p-modal--center u-center u-p_xl">
+                <div class="u-mb_m">
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="radio" value="today" v-model="day_flg">今日
                 <input type="radio" value="after" v-model="day_flg">明日以降
                 <input type="date" name="visit" v-model="visit" v-if="day_flg === 'after'">
-                <input type="submit">
+                </div>
+                <input type="submit" class="c-button c-button__link u-w_50 u-m_auto">
             </form>
         </div>
     </div>
