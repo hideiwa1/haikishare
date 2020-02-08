@@ -1,6 +1,6 @@
 <template>
     <div id="index" class="u-flex-default u-mb_m">
-        <div v-for="(val, key) in product"  class="p-panel p-panel__item3 u-p_m u-mr_l">
+        <div v-for="(val, key) in product"  class="p-panel p-panel__item3 u-p_m u-mr_l u-mb_l">
           <a :href="'/detail/' + val.id">
            <img :src=val.pic class="c-img c-img__index">
             <div class="c-textarea">
@@ -32,7 +32,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY年MM月DD日 HH:mm');
+                return moment(data).format('YY年MM月DD日 HH時');
             }
         },
     }

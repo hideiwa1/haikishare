@@ -1,61 +1,68 @@
 <template>
 <div id="storeProfile">
-    <form enctype="multipart/form-data" method="post" action="/store/saveProfile">
+    <form enctype="multipart/form-data" method="post" action="/store/saveProfile" class="p-form">
+        <h1 class="c-title u-center">プロフィール編集</h1>
         <input type="hidden" name="_token" :value="csrf">
-        <div>
-            <label>名前</label>
-            <input type="text" name='name' v-model="name">
+        
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">プロフィール画像</label>
+            <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
+            <Liveview :pic="pic" @change="picChange" class="c-img__profile"/>
     </div>
-        <div>
-            <label>支店名</label>
-            <input type="text" name='branch' v-model="branch">
+        <div  class="u-flex-form u-mb_m">
+            <label class="c-form__title">名前</label>
+            <input type="text" name='name' v-model="name" class="c-form__text">
     </div>
-        <Liveview :pic="pic" @change="picChange" />
-        <div>
-            <label>
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">支店名</label>
+            <input type="text" name='branch' v-model="branch" class="c-form__text">
+    </div>
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">
                 都道府県
     </label>
-            <select v-model="address1" name="address1">
+            <select v-model="address1" name="address1" class="c-form c-form__select">
+                <option value="" selected>選択してください▼</option>
                 <option v-for="val in areaList" :value="val.id">
                     {{val.name}}
     </option>
     </select>
     </div>
-        <div>
-            <label>
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title" >
                 住所
     </label>
-            <input type="text" name="address2" v-model="address2">
+            <input type="text" name="address2" v-model="address2"  class="c-form__text">
             <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
     </div>
-        <div>
-            <label>
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">
                 コメント
     </label>
-            <input type="num" name="comment" v-model="comment">
+            <input type="text" name="comment" v-model="comment" class="c-form__text">
     </div>
 
-        <div>
-            <label>
+        <div class="u-flex-form u-mb_xl">
+            <label class="c-form__title">
                 メールアドレス
     </label>
-            <input type="text" name="email" v-model="email">
+            <input type="text" name="email" v-model="email"  class="c-form__text">
     </div>
         <p>パスワードを変更する際は、下記に入力してください</p>
-        <div>
-            <label>現在のパスワード</label>
-            <input type="password" name="current_password">
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">現在のパスワード</label>
+            <input type="password" name="current_password" class="c-form__text">
+    </div>
+        <div class="u-flex-form u-mb_m">
+            <label class="c-form__title">新しいパスワード</label>
+            <input type="password" name="new_password" class="c-form__text">
+    </div>
+        <div class="u-flex-form u-mb_xl">
+            <label class="c-form__title">新しいパスワード（再入力）</label>
+            <input type="password" name="new_password_confirmation" class="c-form__text">
     </div>
         <div>
-            <label>新しいパスワード</label>
-            <input type="password" name="new_password">
-    </div>
-        <div>
-            <label>新しいパスワード（再入力）</label>
-            <input type="password" name="new_password_confirmation">
-    </div>
-        <div>
-            <input type="submit" :disabled="isValid" >
+            <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
     </div>
     </form>
     </div>

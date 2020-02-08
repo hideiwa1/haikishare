@@ -13,7 +13,7 @@
                カテゴリー
            </label>
            <select v-model="s_category" class="c-form c-form__select u-pl_m">
-              <option value="">選択してください▼</option>
+              <option value="" selected>選択してください▼</option>
                <option v-for="val in categoryList" :value="val.id">
                    {{val.name}}
                </option>

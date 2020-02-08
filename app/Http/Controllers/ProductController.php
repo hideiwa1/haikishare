@@ -130,10 +130,13 @@ class ProductController extends Controller
     public function salelistJson(Request $request){
         $span = $request -> itemsPerPage;
         $store_id = Auth::guard('store') -> id();
-        $salelists = Product::where('store_id', $store_id)
-            ->with('sale')
-            ->where('delete_flg', false)
-            ->orderBy('updated_at', 'desc') 
+        $salelists = Product::where('product.store_id', $store_id)
+            -> leftJoin('sales', function($q){
+                $q -> on('products.id', '=', 'sales.product_id')
+                    -> where('sales.delete_flg', false);
+            })
+            ->where('product.delete_flg', false)
+            ->orderBy('sale.updated_at', 'desc') 
             -> paginate($span);
         return $salelists;
     }

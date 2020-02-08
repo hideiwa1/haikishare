@@ -1,7 +1,7 @@
 <template>
-    <div id="liveview">
-        <input type="file" @change="onFileChange($event)" name="pic">
-        <img :src="imgData || pic" v-if="imgData || pic">
+    <div id="liveview" class="c-img__form">
+        <input type="file" @change="onFileChange($event)" name="pic" class="c-img c-img__input">
+        <img :src="imgData || pic" v-if="imgData || pic" class="c-img">
         <input type="hidden" :value="pic" name="old_pic">
     </div>
 </template>

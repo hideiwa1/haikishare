@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\CustomResetPassword;
+use App\Notifications\CustomResetStorePassword;
 
 class Store extends Authenticatable
 {
@@ -46,5 +46,10 @@ class Store extends Authenticatable
     }
     public function area(){
         return $this -> belongsTo('App\Area', 'address1');
+    }
+    
+    /*パスワード再設定メール　メソッドの上書き*/
+    public function sendPasswordResetNotification($token){
+        $this -> notify(new CustomResetPassword($token));
     }
 }

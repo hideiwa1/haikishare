@@ -4,7 +4,7 @@
         <h1 class="c-title">販売履歴一覧</h1>
     <div v-for="(salelist, i) in salelists" :key="i">
         <div class="u-flex-between">
-            <img :src="salelist.product.pic" class="c-img c-img__product">
+            <img :src="salelist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
         <h2>{{salelist.name}}</h2>
         <p>{{salelist.updated_at | moment}}</p>

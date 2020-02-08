@@ -22,6 +22,10 @@
             <div class="js-flash p-flash u-flex-flash">
                 <span>{{session('message')}}</span></div>
             @endif
+               @if(session('status'))
+               <div class="js-flash p-flash u-flex-flash">
+                   <span>{{session('status')}}</span></div>
+               @endif
             <nav>
                 <div id="menu"></div>
             </nav>
