@@ -28,6 +28,7 @@
                 this.isShow = false;
             },
             handleClick(e){
+                this.isShow = false;
                 this.$emit('click', e.target.id);
                 console.log(e.target.id);
             }

@@ -272,11 +272,9 @@ select {
   height: 150px;
 }
 
-@media screen and (min-width: 1000px) {
-  .c-img__product {
-    width: 20%;
-    height: 100%;
-  }
+.c-img__product {
+  width: 20%;
+  height: 100%;
 }
 
 .c-img__profile {
@@ -341,10 +339,8 @@ select {
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1000px) {
-  .c-textarea__product {
-    width: 80%;
-  }
+.c-textarea__product {
+  width: 80%;
 }
 
 /*テキストボックス*/

@@ -14,7 +14,7 @@ class ProductMail extends Mailable
     protected $title;
     protected $text;
     
-    public function __construct($title, $name='テスト名前', $text='テスト本文', $product, $visit)
+    public function __construct($title, $name='テスト名前', $text='テスト本文', $product, $visit="")
     {
         $this->title = $title;
         $this->name = 'こんにちは、'.$name.'さん';

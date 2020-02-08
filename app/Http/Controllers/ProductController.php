@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ProductMail;
+use App\Http\Controllers\DateTime;
 
 class ProductController extends Controller
 {
@@ -156,14 +157,37 @@ class ProductController extends Controller
             ->where('delete_flg', false) -> first();
         $sale -> delete_flg = true;
         $sale -> save();
+        
+        $store = Store::find($sale -> product -> store_id);
+        Log::debug('store:'.print_r($store, true));
+        $title = '商品キャンセルのお知らせ';
+        $name = $store -> name.$store -> branch;
+        $text = '購入された商品がキャンセルされました。';
+        $product = Product::find($id);
+        $to = $store -> email;
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product));
+        
         return redirect() -> action('ProductController@detail', [$id])->with('message', 'キャンセルしました');;
     }
     
     public function cancelJson(Request $request){
         $id = $request -> id;
         $sale = Sale::find($id);
+        Log::debug('sale:'.print_r($sale, true));
+        
+        $store = Store::find($sale -> product -> store_id);
+        Log::debug('store:'.print_r($store, true));
+        $title = '商品キャンセルのお知らせ';
+        $name = $store -> name.$store -> branch;
+        Log::debug('name:'.print_r($name, true));
+        $text = '購入された商品がキャンセルされました。';
+        $product = Product::find($sale -> product_id);
+        $to = $store -> email;
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product));
+        
         $sale -> delete_flg = true;
         $sale -> save();
+        
         return "";
     }
     
@@ -239,7 +263,7 @@ class ProductController extends Controller
         if(empty($request -> visit)){
             $visit = now();
         }else{
-            $visit = $request -> visit;
+            $visit = Carbon::parse($request -> visit)->format('Y-m-d');
         }
         $sale -> visit = $visit;
         $sale -> save();

@@ -16,7 +16,6 @@
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-show-count="false" data-lang="ja">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
         <img src="{{$detail -> pic}}" alt="" class="c-img">
-        {{$detail -> sale}}
         
         <table>
             <tr>

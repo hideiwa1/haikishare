@@ -1869,6 +1869,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.isShow = false;
     },
     handleClick: function handleClick(e) {
+      this.isShow = false;
       this.$emit('click', e.target.id);
       console.log(e.target.id);
     }
