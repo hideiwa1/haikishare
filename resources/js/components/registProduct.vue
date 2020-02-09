@@ -1,28 +1,42 @@
 <template>
     <div id="registProduct">
-        <h1 class="c-title">商品登録・編集</h1>
+        
         <form enctype="multipart/form-data" method="post" :action="'/store/saveJson/' + this.url" class="p-form">
+            <h1 class="c-title u-center u-mb_m">商品登録・編集</h1>
             <input type="hidden" name="_token" :value="csrf">
-            <div>
+            <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">商品名</label>
                 <input type="text" name='name' v-model="name" class="c-form c-form__text">
             </div>
-            <Liveview :pic="pic" @change="picChange" />
-            <div>
+            <div class="u-flex-form u-mb_m">
+                <label class="c-form__title">商品画像</label>
+                <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
+            <Liveview :pic="pic" @change="picChange" class="c-img__pic"/>
+    </div>
+            <div class="u-flex-form u-mb_m">
+                <label class="c-form__title">カテゴリー</label>
+                <select name='category' v-model="category" class="c-form c-form__select u-pl_m">
+                    <option value="" selected>選択してください▼</option>
+                    <option v-for="val in categoryList" :value="val.id">
+                        {{val.name}}
+    </option>
+    </select>
+    </div>
+            <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     JANコード
                 </label>
                 <input type="num" name="jan" v-model="jan" @change="searchJan" class="c-form c-form__text">
                 <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
             </div>
-            <div>
+            <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     価格
                 </label>
-                <input type="num" name="price" v-model="price">
+                <input type="num" name="price" v-model="price" class="c-form c-form__num">円
             </div>
             
-            <div>
+            <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     賞味期限・品質保持期限
                 </label>
@@ -31,7 +45,7 @@
                 <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg !== 'false'">
             </div>
             <div>
-                <input type="submit" :disabled="isValid" class="c-button c-form__text c-button__link">
+                <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
             </div>
         </form>
     </div>
@@ -49,8 +63,10 @@
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 url: (window.location.pathname !== '/store/registProduct') ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
+                categoryList: [],
                 name: this.name,
                 jan: this.jan,
+                category: "",
                 price: this.price,
                 limit_flg: 'false',
                 limit: this.limit,
@@ -76,6 +92,12 @@
                     });
                 
             }
+            
+            axios.get('/categorylist/json')
+                .then(response => {
+                this.categoryList = response.data;
+                console.log(response.data);
+            });
         },
         filters: {
             moment: function(data) {
@@ -87,7 +109,8 @@
                 let isValid = false;
                 const errMsgRequire = '入力必須項目です',
                       errMsgInteger = '半角数字で入力してください',
-                      errMsgMax = '190文字以内で入力してください';
+                      errMsgMax = '190文字以内で入力してください',
+                      errMsgJan = '13文字で入力してください';
                 return{
                     name: (()=>{
                         if(!this.name){
@@ -103,6 +126,9 @@
                         if(this.jan && !(/^\d*$/.test(this.jan))){
                             return errMsgInteger;
                         }else{
+                            if(this.jan.length !== 13){
+                                return errMsgJan;
+                            }
                             return '';
                         }
                     })(),
@@ -147,6 +173,8 @@
                 this.pic = data.pic;
             },
             searchJan(){
+                console.log(this.jan.length);
+                if(this.jan.length == 13){
                 const param = {
                     jan: this.jan,
                 };
@@ -161,6 +189,7 @@
                     this.pic = response.data.pic;
                     }
                 });
+                }
             }
             /*handleSubmit(){
                 const param = {

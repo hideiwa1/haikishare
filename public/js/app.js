@@ -3067,6 +3067,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
@@ -3081,8 +3095,10 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       url: window.location.pathname !== '/store/registProduct' ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
+      categoryList: [],
       name: this.name,
       jan: this.jan,
+      category: "",
       price: this.price,
       limit_flg: 'false',
       limit: this.limit,
@@ -3108,6 +3124,11 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         _this.pic = response.data.pic;
       });
     }
+
+    axios.get('/categorylist/json').then(function (response) {
+      _this.categoryList = response.data;
+      console.log(response.data);
+    });
   },
   filters: {
     moment: function moment(data) {
@@ -3121,7 +3142,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       var isValid = false;
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
-          errMsgMax = '190文字以内で入力してください';
+          errMsgMax = '190文字以内で入力してください',
+          errMsgJan = '13文字で入力してください';
       return {
         name: function () {
           if (!_this2.name) {
@@ -3138,6 +3160,10 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           if (_this2.jan && !/^\d*$/.test(_this2.jan)) {
             return errMsgInteger;
           } else {
+            if (_this2.jan.length !== 13) {
+              return errMsgJan;
+            }
+
             return '';
           }
         }(),
@@ -3186,20 +3212,24 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     searchJan: function searchJan() {
       var _this3 = this;
 
-      var param = {
-        jan: this.jan
-      };
-      axios.get('/store/searchJan', {
-        params: param
-      }).then(function (response) {
-        console.log(response.data);
+      console.log(this.jan.length);
 
-        if (response.data.length !== 0) {
-          _this3.name = response.data.name;
-          _this3.price = response.data.price;
-          _this3.pic = response.data.pic;
-        }
-      });
+      if (this.jan.length == 13) {
+        var param = {
+          jan: this.jan
+        };
+        axios.get('/store/searchJan', {
+          params: param
+        }).then(function (response) {
+          console.log(response.data);
+
+          if (response.data.length !== 0) {
+            _this3.name = response.data.name;
+            _this3.price = response.data.price;
+            _this3.pic = response.data.pic;
+          }
+        });
+      }
     }
     /*handleSubmit(){
         const param = {
@@ -22030,7 +22060,7 @@ var render = function() {
                       }
                     }
                   }),
-                  _vm._v("明日以降\n            "),
+                  _vm._v("明日以降\n                "),
                   _vm.day_flg === "after"
                     ? _c("input", {
                         directives: [
@@ -22041,6 +22071,7 @@ var render = function() {
                             expression: "visit"
                           }
                         ],
+                        staticClass: "c-form",
                         attrs: { type: "date", name: "visit" },
                         domProps: { value: _vm.visit },
                         on: {
@@ -23181,7 +23212,7 @@ var render = function() {
                 expression: "name"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "name" },
             domProps: { value: _vm.name },
             on: {
@@ -23262,7 +23293,7 @@ var render = function() {
                 expression: "address2"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "address2" },
             domProps: { value: _vm.address2 },
             on: {
@@ -23294,7 +23325,7 @@ var render = function() {
                 expression: "comment"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "comment" },
             domProps: { value: _vm.comment },
             on: {
@@ -23322,7 +23353,7 @@ var render = function() {
                 expression: "email"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "email" },
             domProps: { value: _vm.email },
             on: {
@@ -23365,7 +23396,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "current_password" }
       })
     ])
@@ -23380,7 +23411,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "new_password" }
       })
     ])
@@ -23395,7 +23426,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "new_password_confirmation" }
       })
     ])
@@ -23423,8 +23454,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "registProduct" } }, [
-    _c("h1", { staticClass: "c-title" }, [_vm._v("商品登録・編集")]),
-    _vm._v(" "),
     _c(
       "form",
       {
@@ -23436,12 +23465,16 @@ var render = function() {
         }
       },
       [
+        _c("h1", { staticClass: "c-title u-center u-mb_m" }, [
+          _vm._v("商品登録・編集")
+        ]),
+        _vm._v(" "),
         _c("input", {
           attrs: { type: "hidden", name: "_token" },
           domProps: { value: _vm.csrf }
         }),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
           _c("label", { staticClass: "c-form__title" }, [_vm._v("商品名")]),
           _vm._v(" "),
           _c("input", {
@@ -23467,12 +23500,75 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("Liveview", {
-          attrs: { pic: _vm.pic },
-          on: { change: _vm.picChange }
-        }),
+        _c(
+          "div",
+          { staticClass: "u-flex-form u-mb_m" },
+          [
+            _c("label", { staticClass: "c-form__title" }, [_vm._v("商品画像")]),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい"
+              )
+            ]),
+            _vm._v(" "),
+            _c("Liveview", {
+              staticClass: "c-img__pic",
+              attrs: { pic: _vm.pic },
+              on: { change: _vm.picChange }
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [_vm._v("カテゴリー")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category,
+                  expression: "category"
+                }
+              ],
+              staticClass: "c-form c-form__select u-pl_m",
+              attrs: { name: "category" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.category = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("選択してください▼")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.categoryList, function(val) {
+                return _c("option", { domProps: { value: val.id } }, [
+                  _vm._v("\n                    " + _vm._s(val.name) + "\n")
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
           _c("label", { staticClass: "c-form__title" }, [
             _vm._v("\n                JANコード\n            ")
           ]),
@@ -23505,7 +23601,7 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
           _c("label", { staticClass: "c-form__title" }, [
             _vm._v("\n                価格\n            ")
           ]),
@@ -23519,6 +23615,7 @@ var render = function() {
                 expression: "price"
               }
             ],
+            staticClass: "c-form c-form__num",
             attrs: { type: "num", name: "price" },
             domProps: { value: _vm.price },
             on: {
@@ -23529,10 +23626,11 @@ var render = function() {
                 _vm.price = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v("円\n        ")
         ]),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
           _c("label", { staticClass: "c-form__title" }, [
             _vm._v("\n                賞味期限・品質保持期限\n            ")
           ]),
@@ -23599,12 +23697,11 @@ var render = function() {
         _vm._v(" "),
         _c("div", [
           _c("input", {
-            staticClass: "c-button c-form__text c-button__link",
+            staticClass: "c-form c-button c-form__text c-button__link",
             attrs: { type: "submit", disabled: _vm.isValid }
           })
         ])
-      ],
-      1
+      ]
     )
   ])
 }
@@ -24126,7 +24223,7 @@ var render = function() {
         }
       },
       [
-        _c("h1", { staticClass: "c-title u-center" }, [
+        _c("h1", { staticClass: "c-title u-center u-mb_m" }, [
           _vm._v("プロフィール編集")
         ]),
         _vm._v(" "),
@@ -24170,7 +24267,7 @@ var render = function() {
                 expression: "name"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "name" },
             domProps: { value: _vm.name },
             on: {
@@ -24196,7 +24293,7 @@ var render = function() {
                 expression: "branch"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "branch" },
             domProps: { value: _vm.branch },
             on: {
@@ -24273,7 +24370,7 @@ var render = function() {
                 expression: "address2"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "address2" },
             domProps: { value: _vm.address2 },
             on: {
@@ -24305,7 +24402,7 @@ var render = function() {
                 expression: "comment"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "comment" },
             domProps: { value: _vm.comment },
             on: {
@@ -24333,7 +24430,7 @@ var render = function() {
                 expression: "email"
               }
             ],
-            staticClass: "c-form__text",
+            staticClass: "c-form c-form__text",
             attrs: { type: "text", name: "email" },
             domProps: { value: _vm.email },
             on: {
@@ -24376,7 +24473,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "current_password" }
       })
     ])
@@ -24391,7 +24488,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "new_password" }
       })
     ])
@@ -24406,7 +24503,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "c-form__text",
+        staticClass: "c-form c-form__text",
         attrs: { type: "password", name: "new_password_confirmation" }
       })
     ])

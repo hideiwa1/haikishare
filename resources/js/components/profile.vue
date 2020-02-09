@@ -12,7 +12,7 @@
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">名前</label>
-                <input type="text" name='name' v-model="name"  class="c-form__text">
+                <input type="text" name='name' v-model="name"  class="c-form c-form__text">
     </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
@@ -29,34 +29,34 @@
                 <label class="c-form__title">
                     住所
                 </label>
-                <input type="text" name="address2" v-model="address2" class="c-form__text">
+                <input type="text" name="address2" v-model="address2" class="c-form c-form__text">
                 <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     コメント
                 </label>
-                <input type="text" name="comment" v-model="comment" class="c-form__text">
+                <input type="text" name="comment" v-model="comment" class="c-form c-form__text">
             </div>
 
             <div class="u-flex-form u-mb_xl">
                 <label class="c-form__title">
                     メールアドレス
                 </label>
-                <input type="text" name="email" v-model="email" class="c-form__text">
+                <input type="text" name="email" v-model="email" class="c-form c-form__text">
             </div>
             <p>パスワードを変更する際は、下記に入力してください</p>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">現在のパスワード</label>
-                <input type="password" name="current_password" class="c-form__text">
+                <input type="password" name="current_password" class="c-form c-form__text">
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">新しいパスワード</label>
-                <input type="password" name="new_password" class="c-form__text">
+                <input type="password" name="new_password" class="c-form c-form__text">
             </div>
             <div class="u-flex-form u-mb_xl">
                 <label class="c-form__title">新しいパスワード（再入力）</label>
-                <input type="password" name="new_password_confirmation" class="c-form__text" >
+                <input type="password" name="new_password_confirmation" class="c-form c-form__text" >
             </div>
             <div>
                 <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">

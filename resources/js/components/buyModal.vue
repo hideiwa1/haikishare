@@ -7,7 +7,7 @@
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="radio" value="today" v-model="day_flg">今日
                 <input type="radio" value="after" v-model="day_flg">明日以降
-                <input type="date" name="visit" v-model="visit" v-if="day_flg === 'after'">
+                    <input type="date" name="visit" v-model="visit" v-if="day_flg === 'after'" class="c-form">
                 </div>
                 <input type="submit" class="c-button c-button__link u-w_50 u-m_auto">
             </form>
