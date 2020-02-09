@@ -2,7 +2,7 @@
 
 @section('title', '購入済み一覧')
 @section('description', '')
-@section('keyword', 'match, 案件, エンジニア, マッチング, 気軽')
+@section('keyword', 'はいきしぇあ, コンビニ, もったいない, 廃棄'))
 @include('layouts.head')
 
 @section('contents')

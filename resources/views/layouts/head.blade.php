@@ -9,17 +9,17 @@ ini_set('display_errors', 'on');
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@hideiwa1">
 <meta name="twitter:title" content="{{$detail -> title}}">
-<meta name="twitter:description" content="{{$detail -> min_price}},000円〜{{$detail -> max_price}},000円">
+<meta name="twitter:description" content="{{$detail -> price}}円">
 @if(app('env') == 'local')
-<meta name="twitter:image" content="{{(asset('/img/match.jpg'))}}">
+<meta name="twitter:image" content="{{(asset('/img/logo.png'))}}">
 @else
-<meta name="twitter:image" content="{{(secure_asset('/img/match1.jpg'))}}">
+<meta name="twitter:image" content="{{(secure_asset('/img/logo.png'))}}">
 @endif
 
 @endif
 <script src="https://kit.fontawesome.com/cf99747a60.js" crossorigin="anonymous"></script>
 
-<title>match! @yield('title')</title>
+<title>はいきしぇあ @yield('title')</title>
 <meta name="description" content="@yield('description')">
 <meta name="keyword" content="@yield('keyword')">
 

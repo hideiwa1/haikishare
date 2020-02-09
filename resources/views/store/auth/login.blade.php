@@ -1,8 +1,8 @@
 @extends('layouts.template')
 
 @section('title', 'ログイン')
-@section('description', 'エンジニアのマッチングサイト「match!」のログインページです。案件の依頼や応募、プロジェクトへの参加を簡単に、気軽に行えるようにする「エンジニアのマッチングサイト」です。')
-@section('keyword', 'match, 案件, エンジニア, マッチング, 気軽')
+@section('description', '')
+@section('keyword', 'はいきしぇあ, コンビニ, もったいない, 廃棄'))
 @include('layouts.head')
 
 @section('contents')

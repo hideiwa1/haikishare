@@ -64,13 +64,13 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 url: (window.location.pathname !== '/store/registProduct') ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
                 categoryList: [],
-                name: this.name,
-                jan: this.jan,
+                name: "",
+                jan: "",
                 category: "",
-                price: this.price,
+                price: "",
                 limit_flg: 'false',
-                limit: this.limit,
-                pic: this.pic,
+                limit: "",
+                pic: "",
             };
         },
         mounted() {
@@ -126,7 +126,7 @@
                         if(this.jan && !(/^\d*$/.test(this.jan))){
                             return errMsgInteger;
                         }else{
-                            if(this.jan.length !== 13){
+                            if(this.jan.length != '13'){
                                 return errMsgJan;
                             }
                             return '';

@@ -3096,13 +3096,13 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       url: window.location.pathname !== '/store/registProduct' ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
       categoryList: [],
-      name: this.name,
-      jan: this.jan,
+      name: "",
+      jan: "",
       category: "",
-      price: this.price,
+      price: "",
       limit_flg: 'false',
-      limit: this.limit,
-      pic: this.pic
+      limit: "",
+      pic: ""
     };
   },
   mounted: function mounted() {
@@ -3160,7 +3160,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           if (_this2.jan && !/^\d*$/.test(_this2.jan)) {
             return errMsgInteger;
           } else {
-            if (_this2.jan.length !== 13) {
+            if (_this2.jan.length != '13') {
               return errMsgJan;
             }
 
