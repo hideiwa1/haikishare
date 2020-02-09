@@ -11,9 +11,9 @@ ini_set('display_errors', 'on');
 <meta name="twitter:title" content="{{$detail -> name}}">
 <meta name="twitter:description" content="{{$detail -> price}}円">
 @if(app('env') == 'local')
-<meta name="twitter:image" content="{{(asset('/img/haikilogo.png'))}}">
+<meta name="twitter:image" content="{{(asset('/img/haikirogo.png'))}}">
 @else
-<meta name="twitter:image" content="{{(secure_asset('/img/haikilogo.png'))}}">
+<meta name="twitter:image" content="{{(secure_asset('/img/haikirogo.png'))}}">
 @endif
 
 @endif
