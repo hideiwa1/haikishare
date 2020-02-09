@@ -36,7 +36,7 @@
 
         <footer class="footer__back">
             <div class="footer">
-            <p>Copyright <a href="/">ハイキシェア</a> All Right Reserved</p>
+            <p>Copyright <a href="/">はいきしぇあ</a> All Right Reserved</p>
             <script src="https://polyfill.io/v3/polyfill.min.js?features=Object.values"></script>
             @if(app('env') == 'local')
             <script src="{{ asset('/js/app.js') }}"></script>

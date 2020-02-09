@@ -8,7 +8,7 @@ ini_set('display_errors', 'on');
 @if(Request::is('detail/*'))
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@hideiwa1">
-<meta name="twitter:title" content="{{$detail -> title}}">
+<meta name="twitter:title" content="{{$detail -> name}}">
 <meta name="twitter:description" content="{{$detail -> price}}円">
 @if(app('env') == 'local')
 <meta name="twitter:image" content="{{(asset('/img/logo.png'))}}">
