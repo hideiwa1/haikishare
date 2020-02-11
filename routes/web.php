@@ -88,6 +88,7 @@ Route::group(['prefix' => 'store', 'middleware' => 'guest:store'], function() {
 
 Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function(){
     Route::get('logout', 'store\Auth\LoginController@logout')->name('store.logout');
+    Route::get('logout', 'store\Auth\LoginController@logout')->name('store.logout');
     //Route::get('mypage', 'store\MypageController@index')->name('store.mypage');
     Route::get('mypage', function () {
         return view('store.mypage');

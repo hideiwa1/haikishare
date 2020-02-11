@@ -22,9 +22,9 @@
         <table>
             <tr>
                 <td class="c-th">住所</td>
-                <td>
-                    @if(!empty($user -> address1 ->area -> name))
-                    {{$user -> address1 ->area -> name}}
+                <td class="u-word">
+                    @if(!empty($user -> address1))
+                    {{$user ->area -> name}}
                     @else
                     住所未登録です
                     @endif
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td class="c-th">コメント</td>
-                <td>
+                <td class="u-word">
                     {{$user -> comment}}
                 </td>
             </tr>

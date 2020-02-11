@@ -224,13 +224,15 @@ class ProductController extends Controller
         $product = Product::find($id);
         return $product;
     }
-
+    
+    /*registProductページの表示*/
     public function regist($id = 'new'){
         if($id !== 'new'){
             $title = '登録商品編集';
             $data = Product::find($id);
             $store = Auth::guard('store')->id();
             $data = Product::find($id);
+            /*投稿者以外はマイページへリダイレクト*/
             if($data -> store_id !== $store){
                 return redirect('storemypage');
             }
@@ -238,9 +240,11 @@ class ProductController extends Controller
             $title = '新規商品登録';
             $data = '';
         }
-        return view('store/registProduct', compact('id'));
+        return view('store/registProduct', compact('id', 'title'));
     }
     
+    /*registProductからのAjax通信*/
+    /*JANによる商品検索*/
     public function searchJan(Request $request){
         $jan = $request -> jan;
         $product = Product::where('jan', $jan)
@@ -249,6 +253,8 @@ class ProductController extends Controller
         return $product;
     }
     
+    /*registProductからのAjax通信*/
+    /*商品登録*/
     public function saveJson(Request $request){
         Log::debug($request);
         $id = $request -> id;
@@ -285,6 +291,7 @@ class ProductController extends Controller
         return redirect() -> action('ProductController@detail', [$id])->with('message', '登録完了');
     }
     
+    /*商品購入*/
     public function buyProduct($id = '', Request $request){
         $user_id = Auth::id();
         $sale = new Sale;
@@ -318,6 +325,7 @@ class ProductController extends Controller
         return redirect() -> action('ProductController@detail', [$id])->with('message', '購入完了');
     }
     
+    /*商品削除*/
     public function delete($id = ''){
         if($id !== ''){
             $product = Product::find($id);

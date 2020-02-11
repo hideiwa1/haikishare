@@ -11,11 +11,13 @@ use Log;
 
 class StoreController extends Controller
 {
+    /*profileEditページの表示*/
     public function edit(){
         $data = Store::find(Auth::id());
         return view('store/profileEdit', compact('data'));
     }
 
+    /*プロフィールの保存*/
     public function saveProfile(Request $request){
         $user = Store::find(Auth::guard('store') -> id());
         /*重複チェックより自信を除外*/
@@ -37,6 +39,7 @@ class StoreController extends Controller
             $path = Storage::disk('s3') -> putFile('/', $request -> file('pic'), 'public');
             $user -> pic = Storage::disk('s3') -> url($path);
         }
+        /*バリデーションチェック*/
         if($request -> current_password){
             if(!(Hash::check($request -> current_password, Auth::guard('store') -> password))){
                 return redirect() -> back() -> with('message','パスワードが間違えています');
@@ -53,12 +56,14 @@ class StoreController extends Controller
         return back()->with('message', '登録完了');
     }
 
+    /*storeProfileからのAjax通信*/
     public function storeProfileJson(Request $request){
         $id = Auth::guard('store') -> id();
         $user = Store::find($id);
         return $user;
     }
     
+    /*profileページの表示*/
     public function profile($id){
         $store = Store::find($id);
         if($store -> delete_flg == true || empty($store)){

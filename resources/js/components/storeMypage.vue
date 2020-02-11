@@ -6,8 +6,8 @@
         <div class="u-flex-between">
             <img :src="salelist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
-        <h2>{{salelist.name}}</h2>
-        <p>販売日時：{{salelist.updated_at | moment}}</p>
+                <h2 class="u-word">{{salelist.name}}</h2>
+                <p class="u-word">販売日時：{{salelist.updated_at | moment}}</p>
     </div>
     </div>
         <div class="u-flex-between u-w_50 u-m_auto">
@@ -23,8 +23,8 @@
         <div class="u-flex-between">
             <img :src="productlist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
-        <h2>{{productlist.name}}</h2>
-        <p>最終更新日時：{{productlist.updated_at | moment}}</p>
+                <h2 class="u-word">{{productlist.name}}</h2>
+                <p class="u-word">最終更新日時：{{productlist.updated_at | moment}}</p>
     </div>
     </div>
         <div class="u-flex-between u-w_50 u-m_auto">
@@ -75,7 +75,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY/MM/DD HH:mm');
+                return moment(data).format('MM月DD日 HH時');
             }
         },
         computed: {

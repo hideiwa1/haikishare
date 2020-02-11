@@ -10,10 +10,7 @@
 <main class="main">
     {{ csrf_field() }}
     <div id="registProduct">
-        <?php /*バリデーションの表示*/ ?>
-        @foreach ($errors -> all() as $error)
-        <p class="u-error">{{ $error }}</p>
-        @endforeach
+        {{$title}}
     </div>
 </main>
 

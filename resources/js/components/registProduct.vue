@@ -116,6 +116,7 @@
                 const errMsgRequire = '入力必須項目です',
                       errMsgInteger = '半角数字で入力してください',
                       errMsgMax = '190文字以内で入力してください',
+                      errMsgMaxnum = '9文字以内で入力してください',
                       errMsgJan = '13文字で入力してください';
                 return{
                     name: (()=>{
@@ -147,7 +148,9 @@
                         }else{
                            if(!(/^\d*$/.test(this.price))){
                             return errMsgInteger;
-                        }else{
+                           }else if(this.price.length > 10){
+                               return errMsgMaxnum;
+                           }else{}
                             return '';
                         }}
                     })(),
@@ -193,6 +196,7 @@
                 .then(response =>{
                     console.log(response.data);
                     if(response.data.length !== 0){
+                        this.category = response.data.category_id;
                     this.name = response.data.name;
                     this.price = response.data.price;
                     this.pic = response.data.pic;

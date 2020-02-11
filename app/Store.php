@@ -50,6 +50,6 @@ class Store extends Authenticatable
     
     /*パスワード再設定メール　メソッドの上書き*/
     public function sendPasswordResetNotification($token){
-        $this -> notify(new CustomResetPassword($token));
+        $this -> notify(new CustomResetStorePassword($token));
     }
 }

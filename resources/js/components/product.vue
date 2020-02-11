@@ -15,8 +15,10 @@
                     <img :src=product.pic class="c-img c-img__product">
                         <div class="c-textarea c-textarea__product">
                             <h2>{{product.name}}</h2>
-                            <p>価格：{{product.price}}円<br>
+                            <p v-if="product.limit_flg == true">価格：{{product.price}}円<br>
                                 期限：{{product.limit | moment}}</p>
+                            <p v-else>価格：{{product.price}}円<br>
+                                期限：期限なし</p>
                         </div>
                     </a>
                 </div>
@@ -69,7 +71,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY/MM/DD HH:mm');
+                return moment(data).format('MM月DD日 HH時');
             }
         },
         computed: {

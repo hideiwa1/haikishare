@@ -9,10 +9,11 @@
             <div class="u-flex-between">
                 <img :src="productlist.pic" class="c-img c-img__product">
                 <div class="c-textarea c-textarea__product">
-            <h2>{{productlist.name}}</h2>
-            <p v-if="!storeId">最終更新日時：{{productlist.updated_at | moment}}</p>
-                <p v-if="storeId">期限：{{productlist.limit | moment}}<br>
-                価格：{{productlist.price}}円</p>
+                    <h2 class="u-word">{{productlist.name}}</h2>
+                    <p v-if="!storeId"  class="u-word">最終更新日時：{{productlist.updated_at | moment}}</p>
+                    <p v-else-if="storeId && productlist.limit == true"  class="u-word">価格：{{productlist.price}}円<br>期限：{{productlist.limit | moment}}
+                </p>
+                    <p v-else class="u-word">価格：{{productlist.price}}円<br>期限：期限なし</p>
     </div>
     </div>
             <div class="u-flex-between u-w_50 u-m_auto">
@@ -65,7 +66,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY/MM/DD HH:mm');
+                return moment(data).format('MM月DD日 HH時');
             }
         },
         computed: {

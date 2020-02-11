@@ -11,11 +11,13 @@ use Hash;
 
 class UserController extends Controller
 {
+    /*profileEditページの表示*/
     public function edit(){
         $data = User::find(Auth::id());
         return view('profileEdit', compact('data'));
     }
     
+    /*プロフィールの保存*/
     public function saveProfile(Request $request){
         $user = User::find(Auth::id());
         /*重複チェックより自信を除外*/
@@ -36,6 +38,7 @@ class UserController extends Controller
             $path = Storage::disk('s3') -> putFile('/', $request -> file('pic'), 'public');
             $user -> pic = Storage::disk('s3') -> url($path);
         }
+        /*バリデーションチェック*/
         if($request -> current_password){
             if(!(Hash::check($request -> current_password, Auth::user() -> password))){
                 return redirect() -> back() -> with('message','パスワードが間違えています');
@@ -52,16 +55,19 @@ class UserController extends Controller
         return back()->with('message', '登録完了');
     }
     
+    /*userProfileからのAjax通信*/
     public function userProfileJson(Request $request){
         $id = Auth::id();
         $user = User::find($id);
         return $user;
     }
     
+    /*マイページの表示*/
     public function mypage(){
         return view('mypage');
     }
     
+    /*profileページの表示*/
     public function profile($id){
         $user = User::find($id);
         if($user -> delete_flg == true || empty($user)){

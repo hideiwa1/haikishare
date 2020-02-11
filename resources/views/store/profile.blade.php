@@ -16,13 +16,13 @@
         <table>
             <tr>
                 <td class="c-th">住所</td>
-                <td>
+                <td class="u-word">
                     {{$store -> area -> name}} {{$store -> address2}}
                 </td>
             </tr>
             <tr>
                 <td class="c-th">お店からのコメント</td>
-                <td>
+                <td class="u-word">
                     {{$store -> comment}}
                 </td>
             </tr>

@@ -9,9 +9,9 @@
             <div class="u-flex-between">
                 <img :src="buylist.product.pic" class="c-img c-img__product">
                 <div class="c-textarea c-textarea__product">
-                    <h2>{{buylist.product.name}}</h2>
-                    <p>価格：{{buylist.product.price}}円<br>
-                        期限：{{buylist.product.limit | moment}}</p>
+                    <h2 class="u-word">{{buylist.product.name}}</h2>
+                    <p class="u-word">価格：{{buylist.product.price}}円<br>
+                        購入日：{{buylist.updated_at | moment}}</p>
     </div>
     </div>
             <div class="u-flex-between u-w_50 u-m_auto">
@@ -55,7 +55,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY/MM/DD HH:mm');
+                return moment(data).format('MM月DD日 HH時');
             }
         },
         computed: {

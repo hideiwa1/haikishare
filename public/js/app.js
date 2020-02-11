@@ -2052,7 +2052,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -2112,6 +2112,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2459,7 +2461,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -2623,6 +2625,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2666,7 +2670,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -2745,6 +2749,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2789,7 +2794,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -3024,243 +3029,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/registProduct.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _liveview_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./liveview.vue */ "./resources/js/components/liveview.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Liveview: _liveview_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      url: window.location.pathname !== '/store/registProduct' ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
-      categoryList: [],
-      name: "",
-      jan: "",
-      category: "",
-      price: "",
-      limit_flg: 'false',
-      limit: "",
-      pic: ""
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    if (this.url !== 'new') {
-      var param = {
-        id: this.url
-      };
-      axios.get('/store/registProductJson', {
-        params: param
-      }).then(function (response) {
-        console.log(response.data);
-        _this.name = response.data.name;
-        _this.category = response.data.category_id;
-        _this.jan = response.data.jan ? String(response.data.jan) : '';
-        _this.price = response.data.price;
-        _this.limit = _moment(response.data.limit).format('YYYY-MM-DDThh:mm');
-        _this.limit_flg = _this.limit && 'true';
-        _this.pic = response.data.pic;
-      });
-    }
-
-    axios.get('/categorylist/json').then(function (response) {
-      _this.categoryList = response.data;
-      console.log(response.data);
-    });
-  },
-  filters: {
-    moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
-    }
-  },
-  computed: {
-    errMsg: function errMsg() {
-      var _this2 = this;
-
-      var isValid = false;
-      var errMsgRequire = '入力必須項目です',
-          errMsgInteger = '半角数字で入力してください',
-          errMsgMax = '190文字以内で入力してください',
-          errMsgJan = '13文字で入力してください';
-      return {
-        name: function () {
-          if (!_this2.name) {
-            return errMsgRequire;
-          } else {
-            if (_this2.name.length > 190) {
-              return errMsgMax;
-            }
-
-            return '';
-          }
-        }(),
-        jan: function () {
-          console.log('jan' + _this2.jan);
-
-          if (_this2.jan && !/^\d*$/.test(_this2.jan)) {
-            return errMsgInteger;
-          } else {
-            if (_this2.jan.length != 0 && _this2.jan.length != 13) {
-              console.log(_this2.jan.length);
-              return errMsgJan;
-            }
-
-            return '';
-          }
-        }(),
-        price: function () {
-          if (!_this2.price) {
-            return errMsgRequire;
-          } else {
-            if (!/^\d*$/.test(_this2.price)) {
-              return errMsgInteger;
-            } else {
-              return '';
-            }
-          }
-        }(),
-        limit: function () {
-          if (!_this2.limit && _this2.limit_flg === 'true') {
-            return errMsgRequire;
-          } else {
-            return '';
-          }
-        }(),
-        pic: function () {
-          if (!_this2.pic) {
-            return errMsgRequire;
-          } else {
-            return '';
-          }
-        }()
-      };
-    },
-    isValid: function isValid() {
-      if (Object.values(this.errMsg).filter(function (value) {
-        return value !== '';
-      }).length === 0) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  },
-  methods: {
-    picChange: function picChange(data) {
-      console.log(data);
-      this.pic = data.pic;
-    },
-    searchJan: function searchJan() {
-      var _this3 = this;
-
-      console.log(this.jan.length);
-
-      if (this.jan.length == 13) {
-        var param = {
-          jan: this.jan
-        };
-        axios.get('/store/searchJan', {
-          params: param
-        }).then(function (response) {
-          console.log(response.data);
-
-          if (response.data.length !== 0) {
-            _this3.name = response.data.name;
-            _this3.price = response.data.price;
-            _this3.pic = response.data.pic;
-          }
-        });
-      }
-    }
-    /*handleSubmit(){
-        const param = {
-            id: this.url,
-            name: this.name,
-            jan: this.jan,
-            price: this.price,
-            limit: this.limit,
-            pic: this.pic,
-        };
-        axios.post('/store/saveJson',param,
-        )
-                .then(response => {
-                console.log(response.data);
-        })
-        
-    }*/
-
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/hidemi/Desktop/vagrant/htdocs/sample/resources/js/components/registProduct.vue: Unexpected token, expected \",\" (156:16)\n\n\u001b[0m \u001b[90m 154 | \u001b[39m                        \u001b[36mreturn\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 155 | \u001b[39m                    }}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 156 | \u001b[39m                })()\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 157 | \u001b[39m                limit\u001b[33m:\u001b[39m (()\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 158 | \u001b[39m                    \u001b[36mif\u001b[39m(\u001b[33m!\u001b[39m\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlimit \u001b[33m&&\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlimit_flg \u001b[33m===\u001b[39m \u001b[32m'true'\u001b[39m){\u001b[0m\n\u001b[0m \u001b[90m 159 | \u001b[39m                        \u001b[36mreturn\u001b[39m errMsgRequire\u001b[33m;\u001b[39m\u001b[0m\n    at Parser.raise (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:6975:17)\n    at Parser.unexpected (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:8368:16)\n    at Parser.expect (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:8354:28)\n    at Parser.parseParenAndDistinguishExpression (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9749:14)\n    at Parser.parseExprAtom (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9548:21)\n    at Parser.parseExprSubscripts (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9210:23)\n    at Parser.parseMaybeUnary (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9190:21)\n    at Parser.parseExprOps (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9056:23)\n    at Parser.parseMaybeConditional (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9029:23)\n    at Parser.parseMaybeAssign (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:8975:21)\n    at Parser.parseObjectProperty (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10079:101)\n    at Parser.parseObjPropValue (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10104:101)\n    at Parser.parseObjectMember (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10028:10)\n    at Parser.parseObj (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9948:25)\n    at Parser.parseExprAtom (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9570:28)\n    at Parser.parseExprSubscripts (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9210:23)\n    at Parser.parseMaybeUnary (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9190:21)\n    at Parser.parseExprOps (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9056:23)\n    at Parser.parseMaybeConditional (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9029:23)\n    at Parser.parseMaybeAssign (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:8975:21)\n    at Parser.parseExpression (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:8925:23)\n    at Parser.parseReturnStatement (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:11025:28)\n    at Parser.parseStatementContent (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10704:21)\n    at Parser.parseStatement (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10656:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:11232:25)\n    at Parser.parseBlockBody (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:11219:10)\n    at Parser.parseBlock (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:11203:10)\n    at Parser.parseFunctionBody (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10222:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10192:10)\n    at Parser.parseMethod (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10146:10)\n    at Parser.parseObjectMethod (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10062:19)\n    at Parser.parseObjPropValue (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10104:23)\n    at Parser.parseObjectMember (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:10028:10)\n    at Parser.parseObj (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9948:25)\n    at Parser.parseExprAtom (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9570:28)\n    at Parser.parseExprSubscripts (/Users/hidemi/Desktop/vagrant/htdocs/sample/node_modules/@babel/parser/lib/index.js:9210:23)");
 
 /***/ }),
 
@@ -3334,7 +3105,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -3568,7 +3339,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY/MM/DD HH:mm');
+      return _moment(data).format('MM月DD日 HH時');
     }
   },
   computed: {},
@@ -22160,14 +21931,16 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-              _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+              _c("h2", { staticClass: "u-word" }, [
+                _vm._v(_vm._s(buylist.product.name))
+              ]),
               _vm._v(" "),
-              _c("p", [
+              _c("p", { staticClass: "u-word" }, [
                 _vm._v("価格：" + _vm._s(buylist.product.price) + "円"),
                 _c("br"),
                 _vm._v(
-                  "\n                    期限：" +
-                    _vm._s(_vm._f("moment")(buylist.product.limit))
+                  "\n                    購入日：" +
+                    _vm._s(_vm._f("moment")(buylist.updated_at))
                 )
               ])
             ])
@@ -22247,15 +22020,22 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "c-textarea" }, [
-              _c("h2", [_vm._v(_vm._s(val.name))]),
+              _c("h2", { staticClass: "u-word" }, [_vm._v(_vm._s(val.name))]),
               _vm._v(" "),
-              _c("p", [
-                _vm._v("価格：" + _vm._s(val.price) + "円"),
-                _c("br"),
-                _vm._v(
-                  "\n            期限：" + _vm._s(_vm._f("moment")(val.limit))
-                )
-              ])
+              val.limit_flg == true
+                ? _c("p", { staticClass: "u-word" }, [
+                    _vm._v("価格：" + _vm._s(val.price) + "円"),
+                    _c("br"),
+                    _vm._v(
+                      "\n            期限：" +
+                        _vm._s(_vm._f("moment")(val.limit))
+                    )
+                  ])
+                : _c("p", { staticClass: "u-word" }, [
+                    _vm._v("価格：" + _vm._s(val.price) + "円"),
+                    _c("br"),
+                    _vm._v("\n                期限：期限なし")
+                  ])
             ])
           ])
         ]
@@ -22780,9 +22560,11 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-              _c("h2", [_vm._v(_vm._s(buylist.product.name))]),
+              _c("h2", { staticClass: "u-word" }, [
+                _vm._v(_vm._s(buylist.product.name))
+              ]),
               _vm._v(" "),
-              _c("p", [
+              _c("p", { staticClass: "u-word" }, [
                 _vm._v(
                   "購入日：" + _vm._s(_vm._f("moment")(buylist.updated_at))
                 )
@@ -23007,14 +22789,26 @@ var render = function() {
                           [
                             _c("h2", [_vm._v(_vm._s(product.name))]),
                             _vm._v(" "),
-                            _c("p", [
-                              _vm._v("価格：" + _vm._s(product.price) + "円"),
-                              _c("br"),
-                              _vm._v(
-                                "\n                            期限：" +
-                                  _vm._s(_vm._f("moment")(product.limit))
-                              )
-                            ])
+                            product.limit_flg == true
+                              ? _c("p", [
+                                  _vm._v(
+                                    "価格：" + _vm._s(product.price) + "円"
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                            期限：" +
+                                      _vm._s(_vm._f("moment")(product.limit))
+                                  )
+                                ])
+                              : _c("p", [
+                                  _vm._v(
+                                    "価格：" + _vm._s(product.price) + "円"
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                            期限：期限なし"
+                                  )
+                                ])
                           ]
                         )
                       ]
@@ -23094,28 +22888,32 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-              _c("h2", [_vm._v(_vm._s(productlist.name))]),
+              _c("h2", { staticClass: "u-word" }, [
+                _vm._v(_vm._s(productlist.name))
+              ]),
               _vm._v(" "),
               !_vm.storeId
-                ? _c("p", [
+                ? _c("p", { staticClass: "u-word" }, [
                     _vm._v(
                       "最終更新日時：" +
                         _vm._s(_vm._f("moment")(productlist.updated_at))
                     )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.storeId
-                ? _c("p", [
-                    _vm._v(
-                      "期限：" + _vm._s(_vm._f("moment")(productlist.limit))
-                    ),
+                : _vm.storeId && productlist.limit == true
+                ? _c("p", { staticClass: "u-word" }, [
+                    _vm._v("価格：" + _vm._s(productlist.price) + "円"),
                     _c("br"),
                     _vm._v(
-                      "\n            価格：" + _vm._s(productlist.price) + "円"
+                      "期限：" +
+                        _vm._s(_vm._f("moment")(productlist.limit)) +
+                        "\n            "
                     )
                   ])
-                : _vm._e()
+                : _c("p", { staticClass: "u-word" }, [
+                    _vm._v("価格：" + _vm._s(productlist.price) + "円"),
+                    _c("br"),
+                    _vm._v("期限：期限なし")
+                  ])
             ])
           ]),
           _vm._v(" "),
@@ -23851,9 +23649,11 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-              _c("h2", [_vm._v(_vm._s(salelist.name))]),
+              _c("h2", { staticClass: "u-word" }, [
+                _vm._v(_vm._s(salelist.name))
+              ]),
               _vm._v(" "),
-              _c("p", [
+              _c("p", { staticClass: "u-word" }, [
                 _vm._v(
                   "販売日時：" + _vm._s(_vm._f("moment")(salelist.updated_at))
                 )
@@ -24191,9 +23991,11 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-                _c("h2", [_vm._v(_vm._s(salelist.name))]),
+                _c("h2", { staticClass: "u-word" }, [
+                  _vm._v(_vm._s(salelist.name))
+                ]),
                 _vm._v(" "),
-                _c("p", [
+                _c("p", { staticClass: "u-word" }, [
                   _vm._v(
                     "販売日時：" + _vm._s(_vm._f("moment")(salelist.updated_at))
                   )
@@ -24230,9 +24032,11 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "c-textarea c-textarea__product" }, [
-                _c("h2", [_vm._v(_vm._s(productlist.name))]),
+                _c("h2", { staticClass: "u-word" }, [
+                  _vm._v(_vm._s(productlist.name))
+                ]),
                 _vm._v(" "),
-                _c("p", [
+                _c("p", { staticClass: "u-word" }, [
                   _vm._v(
                     "最終更新日時：" +
                       _vm._s(_vm._f("moment")(productlist.updated_at))

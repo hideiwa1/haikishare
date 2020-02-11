@@ -20,7 +20,7 @@
         <table>
             <tr>
                 <td class="c-th">販売者</td>
-                <td>
+                <td class="u-word">
                     <a href="/store/profile/{{$detail -> store_id}}">
                         {{$detail -> store -> name}}  {{$detail -> store -> branch}}
                     </a>
@@ -28,23 +28,23 @@
             </tr>
             <tr>
                 <td class="c-th">住所</td>
-                <td>
+                <td class="u-word">
                     {{$detail -> store -> area -> name}} {{$detail -> store -> address2}}
                 </td>
             </tr>
             @if(!empty($detail -> category_id))
             <tr>
                 <td class="c-th">カテゴリー</td>
-                <td>{{$detail -> category -> name }}</td>
+                <td class="u-word">{{$detail -> category -> name }}</td>
             </tr>
             @endif
             <tr>
                 <td class="c-th">価格</td>
-                <td>{{$detail -> price}}円</td>
+                <td class="u-word">{{$detail -> price}}円</td>
             </tr>
             <tr>
                 <td class="c-th">期限</td>
-                <td>
+                <td class="u-word">
                 @if($detail -> limit_flg)
                 {{$detail -> limit  ->format('Y年m月d日 H:i')}}
                 @else
