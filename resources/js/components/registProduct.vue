@@ -150,7 +150,7 @@
                             return errMsgInteger;
                            }else if(this.price.length > 10){
                                return errMsgMaxnum;
-                           }else{}
+                           }else{
                             return '';
                         }}
                     })(),
