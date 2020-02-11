@@ -61,12 +61,6 @@ body {
   font-family: -apple-system, BlinkMacAyatemFont, 'Helvetica Neue', 'Segoe UI', HiraginoCustom, 'Hiragino KakuGothic ProN', YuGothic, 'Yu Gothic Medium', Meiryo, sans-serif;
 }
 
-button,
-input[type='submit'] {
-  background-color: transparent;
-  font-size: 100%;
-}
-
 ol,
 ul {
   list-style: none;
@@ -217,6 +211,7 @@ select {
   padding: 10px;
   border-radius: 5px;
   border: none;
+  font-size: 18px;
 }
 
 .c-button__menu {
@@ -602,7 +597,7 @@ select {
   width: 50vw;
   height: 100vh;
   text-align: center;
-  background-color: rgba(128, 128, 128, 0.5);
+  background-color: rgba(128, 128, 128, 0.8);
   position: fixed;
   top: 0;
   right: 0;
@@ -926,6 +921,10 @@ select {
   margin-right: 20px;
 }
 
+.u-ml_l {
+  margin-left: 20px;
+}
+
 /*パディング*/
 
 .u-p_m {
@@ -990,6 +989,18 @@ select {
 
 .u-active {
   color: red;
+}
+
+.u-require {
+  font-size: 14px;
+  color: white;
+  background-color: red;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+
+.u-white {
+  color: white;
 }
 
 /*文字の丸め*/

@@ -3083,6 +3083,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
@@ -3120,7 +3125,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         console.log(response.data);
         _this.name = response.data.name;
         _this.category = response.data.category_id;
-        _this.jan = String(response.data.jan);
+        _this.jan = response.data.jan ? String(response.data.jan) : '';
         _this.price = response.data.price;
         _this.limit = _moment(response.data.limit).format('YYYY-MM-DDThh:mm');
         _this.limit_flg = _this.limit && 'true';
@@ -22560,9 +22565,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/product" } }, [
-        _vm._v("商品検索")
-      ])
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/product" } },
+        [_vm._v("商品検索")]
+      )
     ])
   },
   function() {
@@ -22570,88 +22577,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/login" } }, [
+      _c("a", { staticClass: "c-button u-white", attrs: { href: "/login" } }, [
         _vm._v("買いたい方")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/store/login" } }, [
-        _vm._v("売りたい方")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/product" } }, [
-        _vm._v("商品検索")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/mypage" } }, [
-        _vm._v("マイページ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/profileEdit" } }, [
-        _vm._v("プロフィール編集")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/buylist" } }, [
-        _vm._v("購入履歴")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/logout" } }, [
-        _vm._v("ログアウト")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/product" } }, [
-        _vm._v("商品検索")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/store/mypage" } }, [
-        _vm._v("ストアマイページ")
       ])
     ])
   },
@@ -22662,7 +22589,41 @@ var staticRenderFns = [
     return _c("li", { staticClass: "p-navmenu__item" }, [
       _c(
         "a",
-        { staticClass: "c-button", attrs: { href: "/store/profileEdit" } },
+        { staticClass: "c-button u-white", attrs: { href: "/store/login" } },
+        [_vm._v("売りたい方")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/product" } },
+        [_vm._v("商品検索")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c("a", { staticClass: "c-button u-white", attrs: { href: "/mypage" } }, [
+        _vm._v("マイページ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/profileEdit" } },
         [_vm._v("プロフィール編集")]
       )
     ])
@@ -22674,8 +22635,8 @@ var staticRenderFns = [
     return _c("li", { staticClass: "p-navmenu__item" }, [
       _c(
         "a",
-        { staticClass: "c-button", attrs: { href: "/store/productlist" } },
-        [_vm._v("登録商品一覧")]
+        { staticClass: "c-button u-white", attrs: { href: "/buylist" } },
+        [_vm._v("購入履歴")]
       )
     ])
   },
@@ -22684,8 +22645,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/store/salelist" } }, [
-        _vm._v("販売履歴")
+      _c("a", { staticClass: "c-button u-white", attrs: { href: "/logout" } }, [
+        _vm._v("ログアウト")
       ])
     ])
   },
@@ -22696,7 +22657,76 @@ var staticRenderFns = [
     return _c("li", { staticClass: "p-navmenu__item" }, [
       _c(
         "a",
-        { staticClass: "c-button", attrs: { href: "/store/registProduct" } },
+        { staticClass: "c-button u-white", attrs: { href: "/product" } },
+        [_vm._v("商品検索")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/store/mypage" } },
+        [_vm._v("ストアマイページ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "c-button u-white",
+          attrs: { href: "/store/profileEdit" }
+        },
+        [_vm._v("プロフィール編集")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "c-button u-white",
+          attrs: { href: "/store/productlist" }
+        },
+        [_vm._v("登録商品一覧")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/store/salelist" } },
+        [_vm._v("販売履歴")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "c-button u-white",
+          attrs: { href: "/store/registProduct" }
+        },
         [_vm._v("新規商品登録")]
       )
     ])
@@ -22706,9 +22736,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/store/logout" } }, [
-        _vm._v("ログアウト")
-      ])
+      _c(
+        "a",
+        { staticClass: "c-button u-white", attrs: { href: "/store/logout" } },
+        [_vm._v("ログアウト")]
+      )
     ])
   }
 ]
@@ -23465,7 +23497,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [_vm._v("商品名")]),
+          _vm._m(0),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23487,14 +23519,20 @@ var render = function() {
                 _vm.name = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.name
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.name))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c(
           "div",
           { staticClass: "u-flex-form u-mb_m" },
           [
-            _c("label", { staticClass: "c-form__title" }, [_vm._v("商品画像")]),
+            _vm._m(1),
             _vm._v(" "),
             _c("span", [
               _vm._v(
@@ -23506,7 +23544,13 @@ var render = function() {
               staticClass: "c-img__pic",
               attrs: { pic: _vm.pic },
               on: { change: _vm.picChange }
-            })
+            }),
+            _vm._v(" "),
+            this.errMsg.pic
+              ? _c("p", { staticClass: "u-error" }, [
+                  _vm._v(_vm._s(this.errMsg.pic))
+                ])
+              : _vm._e()
           ],
           1
         ),
@@ -23555,7 +23599,13 @@ var render = function() {
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          this.errMsg.category
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.category))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
@@ -23587,14 +23637,14 @@ var render = function() {
           }),
           _vm._v(" "),
           this.errMsg.jan
-            ? _c("p", [_vm._v(_vm._s(this.errMsg.jan))])
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.jan))
+              ])
             : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                価格\n            ")
-          ]),
+          _vm._m(2),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23617,13 +23667,16 @@ var render = function() {
               }
             }
           }),
-          _vm._v("円\n        ")
+          _vm._v("円\n            "),
+          this.errMsg.price
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.price))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                賞味期限・品質保持期限\n            ")
-          ]),
+          _vm._m(3),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23682,6 +23735,12 @@ var render = function() {
                   }
                 }
               })
+            : _vm._e(),
+          _vm._v(" "),
+          this.errMsg.limit
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.limit))
+              ])
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -23695,7 +23754,52 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("商品名"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("商品画像"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                価格"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                賞味期限・品質保持期限"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

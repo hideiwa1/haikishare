@@ -250,6 +250,7 @@ class ProductController extends Controller
     }
     
     public function saveJson(Request $request){
+        Log::debug($request);
         $id = $request -> id;
         if($id === "new"){
             $product = new Product;
@@ -260,7 +261,9 @@ class ProductController extends Controller
         $product -> category_id = $request -> category;
         $product -> jan = $request -> jan;
         $product -> price = $request -> price;
+        
         $product -> limit = Carbon::parse($request -> limit)->format('Y-m-d H:i:s');
+        $product -> limit_flg = ($request -> limit_flg === 'ture')? true: false;
         if($request -> file('pic')){
             //$this -> validate($request, $rules);
             /*herokuでは画像の保存ができないため、AWS s3を利用*/

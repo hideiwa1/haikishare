@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('comment') -> nullable();
             $table->integer('price');
             $table->timestamp('limit');
+            $table->boolean('limit_flg') ->default(false);
             $table->integer('category_id')-> nullable();
             $table->boolean('sale_flg') ->default(false);
             $table->integer('store_id')-> nullable();

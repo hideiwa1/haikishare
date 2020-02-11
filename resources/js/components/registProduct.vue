@@ -5,13 +5,15 @@
             <h1 class="c-title u-center u-mb_m">商品登録・編集</h1>
             <input type="hidden" name="_token" :value="csrf">
             <div class="u-flex-form u-mb_m">
-                <label class="c-form__title">商品名</label>
+                <label class="c-form__title">商品名<span class="u-require u-inline u-ml_l">＊必須</span></label>
                 <input type="text" name='name' v-model="name" class="c-form c-form__text">
+                <p v-if="this.errMsg.name" class="u-error">{{this.errMsg.name}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
-                <label class="c-form__title">商品画像</label>
+                <label class="c-form__title">商品画像<span class="u-require u-inline u-ml_l">＊必須</span></label>
                 <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
             <Liveview :pic="pic" @change="picChange" class="c-img__pic"/>
+                <p v-if="this.errMsg.pic" class="u-error">{{this.errMsg.pic}}</p>
     </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">カテゴリー</label>
@@ -21,28 +23,31 @@
                         {{val.name}}
     </option>
     </select>
+                <p v-if="this.errMsg.category" class="u-error">{{this.errMsg.category}}</p>
     </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     JANコード
                 </label>
                 <input type="num" name="jan" v-model="jan" @change="searchJan" class="c-form c-form__text">
-                <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
+                <p v-if="this.errMsg.jan" class="u-error">{{this.errMsg.jan}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
-                    価格
+                    価格<span class="u-require u-inline u-ml_l">＊必須</span>
                 </label>
                 <input type="num" name="price" v-model="price" class="c-form c-form__num">円
+                <p v-if="this.errMsg.price" class="u-error">{{this.errMsg.price}}</p>
             </div>
             
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
-                    賞味期限・品質保持期限
+                    賞味期限・品質保持期限<span class="u-require u-inline u-ml_l">＊必須</span>
                 </label>
                 <input type="radio" name="limit_flg" value=false v-model="limit_flg">期限なし
                 <input type="radio" name="limit_flg" value=true v-model="limit_flg">期限あり
                 <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg !== 'false'">
+                <p v-if="this.errMsg.limit" class="u-error">{{this.errMsg.limit}}</p>
             </div>
             <div>
                 <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
@@ -85,7 +90,7 @@
                         console.log(response.data);
                         this.name = response.data.name;
                     this.category = response.data.category_id;
-                    this.jan = String(response.data.jan);
+                    this.jan = response.data.jan ? String(response.data.jan): '';
                     this.price = response.data.price;
                     this.limit = moment(response.data.limit).format('YYYY-MM-DDThh:mm');
                     this.limit_flg = this.limit && 'true';

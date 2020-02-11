@@ -98,6 +98,10 @@
 	margin-right: $space_l;
 }
 
+.u-ml_l{
+    margin-left: $space_l;
+}
+
 /*パディング*/
 .u-p_m{
 	padding: $space_m;
@@ -156,6 +160,18 @@
 
 .u-active{
 	color: red;
+}
+
+.u-require{
+    font-size: $font-size_s;
+    color: white;
+    background-color: red;
+    border-radius: 15px;
+    padding:0 5px;
+}
+
+.u-white{
+    color: white;
 }
 
 /*文字の丸め*/

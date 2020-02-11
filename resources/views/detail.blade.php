@@ -44,7 +44,13 @@
             </tr>
             <tr>
                 <td class="c-th">期限</td>
-                <td>{{$detail -> limit -> timezone("JST") ->format('Y年m月d日 h:m')}}</td>
+                <td>
+                @if($detail -> limit_flg)
+                {{$detail -> limit  ->format('Y年m月d日 h:i')}}
+                @else
+                期限なし
+                @endif
+                </td>
             </tr>
             <tr>
                 <td class="c-th">説明文</td>

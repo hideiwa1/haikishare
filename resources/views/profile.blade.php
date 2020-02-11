@@ -23,8 +23,8 @@
             <tr>
                 <td class="c-th">住所</td>
                 <td>
-                    @if(!empty($user ->area -> name))
-                    {{$user ->area -> name}}
+                    @if(!empty($user -> address1 ->area -> name))
+                    {{$user -> address1 ->area -> name}}
                     @else
                     住所未登録です
                     @endif
