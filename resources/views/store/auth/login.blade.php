@@ -11,7 +11,7 @@
 
     <form action="login" method="post" class="p-form">
         {{ csrf_field() }}
-        <h1 class="c-title u-center u-mb_xl">ログイン</h1>
+        <h1 class="c-title u-center u-mb_xl">販売者ログイン</h1>
         <?php /*バリデーションの表示*/ ?>
         @foreach ($errors -> all() as $error)
         <p class="u-error">{{ $error }}</p>

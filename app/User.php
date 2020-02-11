@@ -48,6 +48,9 @@ class User extends Authenticatable
     public function likeStores(){
         return $this -> hasMany('App\LikeStore');
     }
+    public function area(){
+        return $this -> belongsTo('App\Area', 'address1');
+    }
     
     /*パスワード再設定メール　メソッドの上書き*/
     public function sendPasswordResetNotification($token){

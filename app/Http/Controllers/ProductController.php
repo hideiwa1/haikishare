@@ -263,7 +263,7 @@ class ProductController extends Controller
         $product -> price = $request -> price;
         
         $product -> limit = Carbon::parse($request -> limit)->format('Y-m-d H:i:s');
-        $product -> limit_flg = ($request -> limit_flg === 'ture')? true: false;
+        $product -> limit_flg = ($request -> limit_flg === 'true')? true: false;
         if($request -> file('pic')){
             //$this -> validate($request, $rules);
             /*herokuでは画像の保存ができないため、AWS s3を利用*/

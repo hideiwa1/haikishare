@@ -9,7 +9,7 @@
 <main class="main">
     <form class="p-form" action="/store/register" method="post">
         {{ csrf_field() }}
-        <h1 class="c-title u-center u-mb_xl">新規登録</h1>
+        <h1 class="c-title u-center u-mb_xl">販売者　新規登録</h1>
         <?php /*バリデーションの表示*/ ?>
         <div class="p-form__content">
             <p>

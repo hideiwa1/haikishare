@@ -23908,7 +23908,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "aside",
-    { staticClass: "p-sidecontent u-pr_l", attrs: { id: "search" } },
+    { staticClass: "p-searchcontent u-pr_l u-mb_xl", attrs: { id: "search" } },
     [
       _c("form", [
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
@@ -24140,7 +24140,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
           _c("input", {
-            staticClass: "c-form c-button c-form__text",
+            staticClass: "c-form c-button c-form__text c-button__link",
             attrs: { type: "submit", value: "検索する" },
             on: {
               click: function($event) {

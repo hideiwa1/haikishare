@@ -46,7 +46,7 @@
                 <td class="c-th">期限</td>
                 <td>
                 @if($detail -> limit_flg)
-                {{$detail -> limit  ->format('Y年m月d日 h:i')}}
+                {{$detail -> limit  ->format('Y年m月d日 H:i')}}
                 @else
                 期限なし
                 @endif

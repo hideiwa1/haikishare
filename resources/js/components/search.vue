@@ -1,5 +1,5 @@
 <template>
-<aside id="search" class="p-sidecontent u-pr_l">
+<aside id="search" class="p-searchcontent u-pr_l u-mb_xl">
    <form>
        <div class="u-flex-form u-mb_m">
            <label class="c-form__title">
@@ -51,7 +51,7 @@
        </div>
        
        <div class="u-flex-form u-mb_m">
-           <input type="submit" value="検索する" @click.prevent = "handleClick" class="c-form c-button c-form__text">
+           <input type="submit" value="検索する" @click.prevent = "handleClick" class="c-form c-button c-form__text c-button__link">
        </div>
    </form>
 </aside>

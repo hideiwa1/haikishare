@@ -10,7 +10,7 @@
 <main class="main">
     <form class="p-form" action="/register" method="post">
         {{ csrf_field() }}
-        <h1 class="c-title u-center u-mb_xl">新規登録</h1>
+        <h1 class="c-title u-center u-mb_xl">購入者　新規登録</h1>
         <?php /*バリデーションの表示*/ ?>
         <div class="p-form__content">
             <p>
