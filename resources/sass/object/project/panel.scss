@@ -38,7 +38,15 @@
 			}
 		}
 	}
+    &__item60 {
+        width: 100%;
 
+        @include mq() {
+            width: 60%;
+            display: block;
+        }
+    }
+    
 	&:last-child {
 		@include mq() {
 			margin-right: 0;

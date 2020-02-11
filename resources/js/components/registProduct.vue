@@ -84,7 +84,8 @@
                     .then(response => {
                         console.log(response.data);
                         this.name = response.data.name;
-                    this.jan = response.data.jan;
+                    this.category = response.data.category_id;
+                    this.jan = String(response.data.jan);
                     this.price = response.data.price;
                     this.limit = moment(response.data.limit).format('YYYY-MM-DDThh:mm');
                     this.limit_flg = this.limit && 'true';
@@ -113,6 +114,7 @@
                       errMsgJan = '13文字で入力してください';
                 return{
                     name: (()=>{
+                        
                         if(!this.name){
                             return errMsgRequire;
                         }else{
@@ -123,10 +125,12 @@
                         }
                     })(),
                     jan: (()=>{
+                        console.log('jan' + this.jan);
                         if(this.jan && !(/^\d*$/.test(this.jan))){
                             return errMsgInteger;
                         }else{
-                            if(this.jan.length != '13'){
+                            if(this.jan.length != 0 && this.jan.length != 13){
+                                console.log(this.jan.length);
                                 return errMsgJan;
                             }
                             return '';

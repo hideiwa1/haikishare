@@ -1,11 +1,11 @@
 <template>
     <div id="product">
-        <h1 class="c-title">購入履歴一覧</h1>
-        <div class="u-flex-between">
+        <h1 class="c-title u-mb_l">購入履歴一覧</h1>
+        <div class="u-flex-between u-mb_l">
             <span>{{(activePage-1) * itemsPerPage +1}}-{{Math.min(activePage * itemsPerPage, totalItemCount)}}件</span>
             <span>全{{totalItemCount}}件</span>
     </div>
-        <div v-for="(buylist, i) in buylists" :key="i" class="p-panel u-p_m u-mb_m">
+        <div v-for="(buylist, i) in buylists" :key="i" class="p-panel u-p_m u-mb_l">
             <div class="u-flex-between">
                 <img :src="buylist.product.pic" class="c-img c-img__product">
                 <div class="c-textarea c-textarea__product">

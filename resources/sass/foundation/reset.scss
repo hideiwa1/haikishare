@@ -1,4 +1,15 @@
-html,
+html{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-size: 18px;
+    vertical-align: baseline;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 body,
 h1,
 h2,
@@ -52,6 +63,11 @@ body {
 	font-family: -apple-system, BlinkMacAyatemFont, 'Helvetica Neue', 'Segoe UI', HiraginoCustom, 'Hiragino KakuGothic ProN', YuGothic, 'Yu Gothic Medium', Meiryo, sans-serif;
 }
 
+button, input[type='submit']{
+    background-color: transparent;
+    font-size: 100%;
+}
+
 ol,
 ul {
 	list-style: none;
@@ -69,6 +85,7 @@ a:hover {
 }
 
 button:hover{
+    color: #0056b3;
 	cursor: pointer;
 }
 

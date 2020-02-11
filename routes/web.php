@@ -23,8 +23,11 @@ Route::get('/product/json', 'ProductController@json');
 Route::get('/buylist', 'ProductController@buylist');
 Route::get('/buylist/json', 'ProductController@buylistJson');
 
-Route::get('/productlist', 'ProductController@productlist');
+//Route::get('/productlist', 'ProductController@productlist');
 Route::get('/productlist/json', 'ProductController@productlistJson');
+
+//Route::get('/salelist', 'ProductController@salelist');
+Route::get('/salelist/json', 'ProductController@salelistJson');
 
 Route::get('/categorylist/json', 'ProductController@categoryJson');
 Route::get('/arealist/json', 'ProductController@areaJson');
@@ -43,6 +46,8 @@ Route::get('/sample/saleMail', 'MailController@saleMail');
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('logout', 'Auth\LoginController@logout');
+    
     Route::get('/buylist', 'ProductController@buylist');
     Route::get('/buylist/json', 'ProductController@buylistJson');
     
@@ -76,21 +81,21 @@ Route::group(['prefix' => 'store', 'middleware' => 'guest:store'], function() {
     Route::post('password/email', 'store\Auth\ForgotPasswordController@sendResetLinkEmail')->name('store.password.email');
     Route::post('password/reset', 'store\Auth\ResetPasswordController@reset')->name('store.password.update');
     
+    //Route::get('/productlist/json', 'ProductController@productlistJson');
     
+    //Route::get('/salelist/json', 'ProductController@salelistJson');
 });
 
 Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function(){
-    Route::post('logout', 'store\Auth\LoginController@logout')->name('store.logout');
+    Route::get('logout', 'store\Auth\LoginController@logout')->name('store.logout');
     //Route::get('mypage', 'store\MypageController@index')->name('store.mypage');
     Route::get('mypage', function () {
         return view('store.mypage');
     });
     
     Route::get('/productlist', 'ProductController@productlist');
-    Route::get('/productlist/json', 'ProductController@productlistJson');
     
     Route::get('/salelist', 'ProductController@salelist');
-    Route::get('/salelist/json', 'ProductController@salelistJson');
     
     Route::get('/registProduct/{id?}', 'ProductController@regist');
     Route::get('/registProductJson', 'ProductController@registJson');

@@ -119,15 +119,25 @@ class ProductController extends Controller
         $span = $request -> itemsPerPage;
         if(empty($request -> storeId)){
             $store_id = Auth::guard('store') -> id();
+            $productlists = Product::where('store_id', $store_id) 
+                ->where('delete_flg', false)
+                ->orderBy('updated_at', 'desc') 
+                ->with('sale')
+                -> paginate($span);
         }else{
             $store_id = $request -> storeId;
+            $productlists = Product::select('products.*')
+                ->where('products.store_id', $store_id)
+                /*salesテーブルのdelete_flgがfalseの商品のみ取得*/
+                -> leftJoin('sales', function($q){
+                    $q -> on('products.id', '=', 'sales.product_id')
+                        -> where('sales.delete_flg', false);
+                })
+                -> whereNull('sales.product_id')
+                ->where('products.delete_flg', false)
+                ->orderBy('sales.updated_at', 'desc') 
+                -> paginate($span);
         }
-        
-        $productlists = Product::where('store_id', $store_id) 
-            ->where('delete_flg', false)
-            ->orderBy('updated_at', 'desc') 
-            ->with('sale')
-            -> paginate($span);
         return $productlists;
     }
     
@@ -141,14 +151,15 @@ class ProductController extends Controller
     public function salelistJson(Request $request){
         $span = $request -> itemsPerPage;
         $store_id = Auth::guard('store') -> id();
-        $salelists = Product::where('product.store_id', $store_id)
+        $salelists = Product::where('products.store_id', $store_id)
             /*salesテーブルのdelete_flgがfalseの商品のみ取得*/
             -> leftJoin('sales', function($q){
                 $q -> on('products.id', '=', 'sales.product_id')
                     -> where('sales.delete_flg', false);
             })
-            ->where('product.delete_flg', false)
-            ->orderBy('sale.updated_at', 'desc') 
+            -> whereNotNull('sales.product_id')
+            ->where('products.delete_flg', false)
+            ->orderBy('sales.updated_at', 'desc') 
             -> paginate($span);
         return $salelists;
     }
@@ -216,7 +227,7 @@ class ProductController extends Controller
 
     public function regist($id = 'new'){
         if($id !== 'new'){
-            $title = '登録案件編集';
+            $title = '登録商品編集';
             $data = Product::find($id);
             $store = Auth::guard('store')->id();
             $data = Product::find($id);
@@ -224,7 +235,7 @@ class ProductController extends Controller
                 return redirect('storemypage');
             }
         }else{
-            $title = '新規案件登録';
+            $title = '新規商品登録';
             $data = '';
         }
         return view('store/registProduct', compact('id'));
@@ -246,6 +257,7 @@ class ProductController extends Controller
             $product = Product::find($id);
         }
         $product -> name = $request -> name;
+        $product -> category_id = $request -> category;
         $product -> jan = $request -> jan;
         $product -> price = $request -> price;
         $product -> limit = Carbon::parse($request -> limit)->format('Y-m-d H:i:s');

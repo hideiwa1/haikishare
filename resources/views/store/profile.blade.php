@@ -11,9 +11,22 @@
     {{ csrf_field() }}
     
     <div class="p-form">
-       <img src="{{$store -> pic}}" alt="" class="c-img__profile u-block u-m_auto">
-        <h1 class="c-title">{{$store -> name}} {{$store -> branch}}</h1>
-        <p></p>
+       <img src="{{$store -> pic}}" alt="" class="c-img__profile u-block u-m_auto u-mb_l">
+        <h1 class="c-title u-center">{{$store -> name}} {{$store -> branch}}</h1>
+        <table>
+            <tr>
+                <td class="c-th">住所</td>
+                <td>
+                    {{$store -> area -> name}} {{$store -> address2}}
+                </td>
+            </tr>
+            <tr>
+                <td class="c-th">お店からのコメント</td>
+                <td>
+                    {{$store -> comment}}
+                </td>
+            </tr>
+        </table>
     </div>
     
     <div id=productList></div>

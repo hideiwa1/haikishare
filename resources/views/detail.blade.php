@@ -83,15 +83,26 @@
                 <td class="c-th">来店予定日</td>
                 <td class="u-word">{{$detail -> sale -> visit -> timezone("JST") ->format('Y年m月d日')}}</td>
             </tr>
+            <tr>
+                <td class="c-th">購入者</td>
+                <td class="u-word"><a href="/profile/{{$detail -> sale -> user_id}}">
+                    @if(!empty($detail -> sale -> user -> name))
+                {{$detail -> sale -> user -> name}}
+                @else
+                名無し
+                @endif
+                </a></td>
+            </tr>
         </table>
-        <p>売り切れました</p>
+        <p class="u-title u-center">売り切れました</p>
         @else
-        <p>売り切れました</p>
+        <p class="u-title u-center">売り切れました</p>
         @endif
         @else
         @if(!empty($user_id))
         <div id="buyButton"></div>
-        @elseif(!empty($store_id) && $detail -> store_id == $store_id)
+        @elseif(!empty($store_id))
+            @if($detail -> store_id == $store_id)
         <button class="c-button c-button__link u-w_50 u-m_auto u-mb_l"><a href="/store/registProduct/{{$detail->id}}">編集する</a></button>
         <div id="attention">
             <button-attend @click="handleShow">削除する</button-attend>
@@ -103,6 +114,8 @@
                 </form>
             </div>
         </div>
+        @endif
+        
         @else
         <button class="c-button c-button__link u-w_50 u-m_auto u-mb_l"><a href="/login">購入にはログインが必要です</a></button>
         @endif

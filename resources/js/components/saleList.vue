@@ -1,21 +1,21 @@
 <template>
 <div id="saleList">
-        <h1 class="c-title">販売履歴一覧</h1>
-        <div class="u-flex-between">
+    <h1 class="c-title u-mb_l">販売履歴一覧</h1>
+    <div class="u-flex-between u-mb_l">
             <span>{{(activePage-1) * itemsPerPage +1}}-{{Math.min(activePage * itemsPerPage, totalItemCount)}}件</span>
             <span>全{{totalItemCount}}件</span>
     </div>
-    <div v-for="(salelist, i) in salelists" :key="i">
+    <div v-for="(salelist, i) in salelists" :key="i" class=" u-mb_l">
         <div class="u-flex-between">
             <img :src="salelist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
         <h2>{{salelist.name}}</h2>
-        <p>{{salelist.updated_at | moment}}</p>
+        <p>販売日時：{{salelist.updated_at | moment}}</p>
     </div>
     </div>
         <div class="u-flex-between u-w_50 u-m_auto">
             <button class="c-button c-button__link">
-            <a :href="'/detail/' + salelist.id">詳細を見る</a></button>
+            <a :href="'/detail/' + salelist.product_id">詳細を見る</a></button>
     </div>
     </div>
     <pagenate :active-page="activePage" :items-per-page="itemsPerPage" :total-item-count="totalItemCount" :page-range="pageRange" @change = "pageChange"/>
@@ -42,7 +42,7 @@
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
-            axios.get('/store/salelist/json?page='+ this.activePage, {params: param})
+            axios.get('/salelist/json?page='+ this.activePage, {params: param})
                 .then(response => {
                 this.salelists = response.data.data;
                 this.activePage = response.data.current_page;
@@ -64,7 +64,7 @@
                 const param = {
                     itemsPerPage: this.itemsPerPage,
                 };
-                axios.get('/store/salelist/json?page='+ this.activePage, {params: param})
+                axios.get('/salelist/json?page='+ this.activePage, {params: param})
                     .then(response => {
                     this.salelists = response.data.data;
                     this.activePage = response.data.current_page;

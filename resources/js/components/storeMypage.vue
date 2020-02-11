@@ -1,30 +1,30 @@
 <template>
 <div id="mypage">
     <div>
-        <h1 class="c-title">販売履歴一覧</h1>
-    <div v-for="(salelist, i) in salelists" :key="i">
+        <h1 class="c-title u-mb_l">販売履歴一覧</h1>
+        <div v-for="(salelist, i) in salelists" :key="i" class="u-mb_l">
         <div class="u-flex-between">
             <img :src="salelist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
         <h2>{{salelist.name}}</h2>
-        <p>{{salelist.updated_at | moment}}</p>
+        <p>販売日時：{{salelist.updated_at | moment}}</p>
     </div>
     </div>
         <div class="u-flex-between u-w_50 u-m_auto">
-            <button class="c-button c-button__link"><a :href="'/detail/' + salelist.id">詳細を見る</a></button>
+            <button class="c-button c-button__link"><a :href="'/detail/' + salelist.product_id">詳細を見る</a></button>
     </div>
     </div>
         <div class="u-right"><a href="/store/salelist" class="u-right">さらに見る</a></div>
     </div>
     
     <div>
-        <h1 class="c-title">出品商品一覧</h1>
-    <div v-for="(productlist, i) in productlists" :key="i">
+        <h1 class="c-title u-mb_l">出品商品一覧</h1>
+        <div v-for="(productlist, i) in productlists" :key="i" class=" u-mb_l">
         <div class="u-flex-between">
             <img :src="productlist.pic" class="c-img c-img__product">
             <div class="c-textarea c-textarea__product">
         <h2>{{productlist.name}}</h2>
-        <p>{{productlist.updated_at | moment}}</p>
+        <p>最終更新日時：{{productlist.updated_at | moment}}</p>
     </div>
     </div>
         <div class="u-flex-between u-w_50 u-m_auto">
@@ -59,14 +59,14 @@
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
-            axios.get('/store/salelist/json?page=' + this.activePage, {
+            axios.get('/salelist/json?page=' + this.activePage, {
                 params: param
             })
                 .then(response => {
                 this.salelists = response.data.data;
                 console.log(response);
             });
-            axios.get('/store/productlist/json?page=' + this.activePage, {
+            axios.get('/productlist/json?page=' + this.activePage, {
                 params: param
             })
                 .then(response => {

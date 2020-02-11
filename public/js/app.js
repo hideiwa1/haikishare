@@ -2148,7 +2148,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   filters: {
     moment: function moment(data) {
-      return _moment(data).format('YY年MM月DD日 HH時');
+      return _moment(data).format('MM月DD日 HH時');
     }
   }
 });
@@ -2222,12 +2222,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal.vue */ "./resources/js/components/modal.vue");
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2378,18 +2372,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
   props: ['user'],
   filters: {
     moment: function moment(data) {
@@ -2711,7 +2701,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       this.max = data.max;
       this.area = data.area;
       this.limit = data.limit;
-      this.pageChange(this.activePage);
+      this.pageChange(1);
     }
   }
 });
@@ -2728,6 +2718,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pagenate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pagenate.vue */ "./resources/js/components/pagenate.vue");
+//
+//
 //
 //
 //
@@ -2781,11 +2773,12 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       this.storeId = location.pathname.replace('/store/profile/', "");
     }
 
+    console.log(this.storeId);
     var param = {
       itemsPerPage: this.itemsPerPage,
       storeId: this.storeId
     };
-    axios.get('/store/productlist/json?page=' + this.activePage, {
+    axios.get('/productlist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
       _this.productlists = response.data.data;
@@ -2806,9 +2799,10 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 
       this.activePage = Number(page);
       var param = {
-        itemsPerPage: this.itemsPerPage
+        itemsPerPage: this.itemsPerPage,
+        storeId: this.storeId
       };
-      axios.get('/product/json?page=' + this.activePage, {
+      axios.get('/productlist/json?page=' + this.activePage, {
         params: param
       }).then(function (response) {
         _this2.productlists = response.data.data;
@@ -3125,7 +3119,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       }).then(function (response) {
         console.log(response.data);
         _this.name = response.data.name;
-        _this.jan = response.data.jan;
+        _this.category = response.data.category_id;
+        _this.jan = String(response.data.jan);
         _this.price = response.data.price;
         _this.limit = _moment(response.data.limit).format('YYYY-MM-DDThh:mm');
         _this.limit_flg = _this.limit && 'true';
@@ -3165,10 +3160,13 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         jan: function () {
+          console.log('jan' + _this2.jan);
+
           if (_this2.jan && !/^\d*$/.test(_this2.jan)) {
             return errMsgInteger;
           } else {
-            if (_this2.jan.length != '13') {
+            if (_this2.jan.length != 0 && _this2.jan.length != 13) {
+              console.log(_this2.jan.length);
               return errMsgJan;
             }
 
@@ -3320,7 +3318,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     var param = {
       itemsPerPage: this.itemsPerPage
     };
-    axios.get('/store/salelist/json?page=' + this.activePage, {
+    axios.get('/salelist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
       _this.salelists = response.data.data;
@@ -3343,7 +3341,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       var param = {
         itemsPerPage: this.itemsPerPage
       };
-      axios.get('/store/salelist/json?page=' + this.activePage, {
+      axios.get('/salelist/json?page=' + this.activePage, {
         params: param
       }).then(function (response) {
         _this2.salelists = response.data.data;
@@ -3551,13 +3549,13 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     var param = {
       itemsPerPage: this.itemsPerPage
     };
-    axios.get('/store/salelist/json?page=' + this.activePage, {
+    axios.get('/salelist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
       _this.salelists = response.data.data;
       console.log(response);
     });
-    axios.get('/store/productlist/json?page=' + this.activePage, {
+    axios.get('/productlist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
       _this.productlists = response.data.data;
@@ -22131,9 +22129,9 @@ var render = function() {
     "div",
     { attrs: { id: "product" } },
     [
-      _c("h1", { staticClass: "c-title" }, [_vm._v("購入履歴一覧")]),
+      _c("h1", { staticClass: "c-title u-mb_l" }, [_vm._v("購入履歴一覧")]),
       _vm._v(" "),
-      _c("div", { staticClass: "u-flex-between" }, [
+      _c("div", { staticClass: "u-flex-between u-mb_l" }, [
         _c("span", [
           _vm._v(
             _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
@@ -22149,7 +22147,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.buylists, function(buylist, i) {
-        return _c("div", { key: i, staticClass: "p-panel u-p_m u-mb_m" }, [
+        return _c("div", { key: i, staticClass: "p-panel u-p_m u-mb_l" }, [
           _c("div", { staticClass: "u-flex-between" }, [
             _c("img", {
               staticClass: "c-img c-img__product",
@@ -22346,41 +22344,17 @@ var render = function() {
           _vm._v(" "),
           _vm._m(4),
           _vm._v(" "),
-          _c("li", { staticClass: "p-navmenu__item" }, [
-            _c("form", { attrs: { method: "post", action: "/logout" } }, [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "c-button c-button__menu u-font_default",
-                attrs: { type: "submit", value: "ログアウト" }
-              })
-            ])
-          ])
+          _vm._m(5)
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.user == "store"
       ? _c("ul", { staticClass: "p-navmenu u-flex" }, [
-          _vm._m(5),
-          _vm._v(" "),
           _vm._m(6),
           _vm._v(" "),
-          _c("li", { staticClass: "p-navmenu__item" }, [
-            _c("form", { attrs: { method: "post", action: "/store/logout" } }, [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "c-button c-button__menu u-font_default",
-                attrs: { type: "submit", value: "ログアウト" }
-              })
-            ])
-          ])
+          _vm._m(7),
+          _vm._v(" "),
+          _vm._m(8)
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -22471,6 +22445,18 @@ var staticRenderFns = [
     return _c("li", { staticClass: "p-navmenu__item" }, [
       _c(
         "a",
+        { staticClass: "c-button c-button__menu", attrs: { href: "/logout" } },
+        [_vm._v("ログアウト")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
         { staticClass: "c-button c-button__menu", attrs: { href: "/product" } },
         [_vm._v("商品検索")]
       )
@@ -22488,6 +22474,21 @@ var staticRenderFns = [
           attrs: { href: "/store/mypage" }
         },
         [_vm._v("ストアマイページ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "p-navmenu__item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "c-button c-button__menu",
+          attrs: { href: "/store/logout" }
+        },
+        [_vm._v("ログアウト")]
       )
     ])
   }
@@ -22529,16 +22530,16 @@ var render = function() {
             _vm._v(" "),
             _vm._m(6),
             _vm._v(" "),
-            _vm._m(7),
-            _vm._v(" "),
-            _vm._m(8),
-            _vm._v(" "),
-            _vm._m(9)
+            _vm._m(7)
           ])
         : _vm._e(),
       _vm._v(" "),
       _vm.user == "store"
         ? _c("ul", [
+            _vm._m(8),
+            _vm._v(" "),
+            _vm._m(9),
+            _vm._v(" "),
             _vm._m(10),
             _vm._v(" "),
             _vm._m(11),
@@ -22547,13 +22548,7 @@ var render = function() {
             _vm._v(" "),
             _vm._m(13),
             _vm._v(" "),
-            _vm._m(14),
-            _vm._v(" "),
-            _vm._m(15),
-            _vm._v(" "),
-            _vm._m(16),
-            _vm._v(" "),
-            _vm._m(17)
+            _vm._m(14)
           ])
         : _vm._e()
     ])
@@ -22635,26 +22630,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/likelist" } }, [
-        _vm._v("お気に入り一覧")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/passEdit" } }, [
-        _vm._v("パスワード編集")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
       _c("a", { staticClass: "c-button", attrs: { href: "/logout" } }, [
         _vm._v("ログアウト")
       ])
@@ -22724,16 +22699,6 @@ var staticRenderFns = [
         { staticClass: "c-button", attrs: { href: "/store/registProduct" } },
         [_vm._v("新規商品登録")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "p-navmenu__item" }, [
-      _c("a", { staticClass: "c-button", attrs: { href: "/store/passEdit" } }, [
-        _vm._v("パスワード編集")
-      ])
     ])
   },
   function() {
@@ -23071,9 +23036,9 @@ var render = function() {
     "div",
     { attrs: { id: "productList" } },
     [
-      _c("h1", { staticClass: "c-title" }, [_vm._v("出品商品一覧")]),
+      _c("h1", { staticClass: "c-title  u-mb_l" }, [_vm._v("出品商品一覧")]),
       _vm._v(" "),
-      _c("div", { staticClass: "u-flex-between" }, [
+      _c("div", { staticClass: "u-flex-between u-mb_l" }, [
         _c("span", [
           _vm._v(
             _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
@@ -23089,7 +23054,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.productlists, function(productlist, i) {
-        return _c("div", { key: i }, [
+        return _c("div", { key: i, staticClass: " u-mb_l" }, [
           _c("div", { staticClass: "u-flex-between" }, [
             _c("img", {
               staticClass: "c-img c-img__product",
@@ -23099,9 +23064,26 @@ var render = function() {
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
               _c("h2", [_vm._v(_vm._s(productlist.name))]),
               _vm._v(" "),
-              _c("p", [
-                _vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))
-              ])
+              !_vm.storeId
+                ? _c("p", [
+                    _vm._v(
+                      "最終更新日時：" +
+                        _vm._s(_vm._f("moment")(productlist.updated_at))
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.storeId
+                ? _c("p", [
+                    _vm._v(
+                      "期限：" + _vm._s(_vm._f("moment")(productlist.limit))
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n            価格：" + _vm._s(productlist.price) + "円"
+                    )
+                  ])
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -23112,7 +23094,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            !productlist.sale
+            !productlist.sale && !_vm.storeId
               ? _c("button", { staticClass: "c-button c-button__link" }, [
                   _c(
                     "a",
@@ -23739,9 +23721,9 @@ var render = function() {
     "div",
     { attrs: { id: "saleList" } },
     [
-      _c("h1", { staticClass: "c-title" }, [_vm._v("販売履歴一覧")]),
+      _c("h1", { staticClass: "c-title u-mb_l" }, [_vm._v("販売履歴一覧")]),
       _vm._v(" "),
-      _c("div", { staticClass: "u-flex-between" }, [
+      _c("div", { staticClass: "u-flex-between u-mb_l" }, [
         _c("span", [
           _vm._v(
             _vm._s((_vm.activePage - 1) * _vm.itemsPerPage + 1) +
@@ -23757,7 +23739,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.salelists, function(salelist, i) {
-        return _c("div", { key: i }, [
+        return _c("div", { key: i, staticClass: " u-mb_l" }, [
           _c("div", { staticClass: "u-flex-between" }, [
             _c("img", {
               staticClass: "c-img c-img__product",
@@ -23767,13 +23749,17 @@ var render = function() {
             _c("div", { staticClass: "c-textarea c-textarea__product" }, [
               _c("h2", [_vm._v(_vm._s(salelist.name))]),
               _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))])
+              _c("p", [
+                _vm._v(
+                  "販売日時：" + _vm._s(_vm._f("moment")(salelist.updated_at))
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
             _c("button", { staticClass: "c-button c-button__link" }, [
-              _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
+              _c("a", { attrs: { href: "/detail/" + salelist.product_id } }, [
                 _vm._v("詳細を見る")
               ])
             ])
@@ -24090,10 +24076,10 @@ var render = function() {
     _c(
       "div",
       [
-        _c("h1", { staticClass: "c-title" }, [_vm._v("販売履歴一覧")]),
+        _c("h1", { staticClass: "c-title u-mb_l" }, [_vm._v("販売履歴一覧")]),
         _vm._v(" "),
         _vm._l(_vm.salelists, function(salelist, i) {
-          return _c("div", { key: i }, [
+          return _c("div", { key: i, staticClass: "u-mb_l" }, [
             _c("div", { staticClass: "u-flex-between" }, [
               _c("img", {
                 staticClass: "c-img c-img__product",
@@ -24103,13 +24089,17 @@ var render = function() {
               _c("div", { staticClass: "c-textarea c-textarea__product" }, [
                 _c("h2", [_vm._v(_vm._s(salelist.name))]),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm._f("moment")(salelist.updated_at)))])
+                _c("p", [
+                  _vm._v(
+                    "販売日時：" + _vm._s(_vm._f("moment")(salelist.updated_at))
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "u-flex-between u-w_50 u-m_auto" }, [
               _c("button", { staticClass: "c-button c-button__link" }, [
-                _c("a", { attrs: { href: "/detail/" + salelist.id } }, [
+                _c("a", { attrs: { href: "/detail/" + salelist.product_id } }, [
                   _vm._v("詳細を見る")
                 ])
               ])
@@ -24125,10 +24115,10 @@ var render = function() {
     _c(
       "div",
       [
-        _c("h1", { staticClass: "c-title" }, [_vm._v("出品商品一覧")]),
+        _c("h1", { staticClass: "c-title u-mb_l" }, [_vm._v("出品商品一覧")]),
         _vm._v(" "),
         _vm._l(_vm.productlists, function(productlist, i) {
-          return _c("div", { key: i }, [
+          return _c("div", { key: i, staticClass: " u-mb_l" }, [
             _c("div", { staticClass: "u-flex-between" }, [
               _c("img", {
                 staticClass: "c-img c-img__product",
@@ -24139,7 +24129,10 @@ var render = function() {
                 _c("h2", [_vm._v(_vm._s(productlist.name))]),
                 _vm._v(" "),
                 _c("p", [
-                  _vm._v(_vm._s(_vm._f("moment")(productlist.updated_at)))
+                  _vm._v(
+                    "最終更新日時：" +
+                      _vm._s(_vm._f("moment")(productlist.updated_at))
+                  )
                 ])
               ])
             ]),

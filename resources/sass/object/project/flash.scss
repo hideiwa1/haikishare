@@ -7,6 +7,24 @@
 	background: $background-color_flash;
 	z-index: 4;
 	width: 100%;
-	height: $space_xxl;
+	height: 0;
 	font-size: $font-size_xl;
+    animation:fadeOut 3s linear 0s 1;
+    opacity: 0;
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity: 1;
+        height: $space_xxl;
+    }
+    60%{
+        opacity: 1;
+    }
+    95%{
+        height: $space_xxl;
+    }
+    100%{
+        opacity: 0;
+    }
 }

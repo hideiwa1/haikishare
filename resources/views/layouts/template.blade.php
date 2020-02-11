@@ -43,9 +43,6 @@
             @else
             <script src="{{ secure_asset('/js/app.js') }}"></script>
             @endif
-            <script>
-                
-            </script>
             </div>
         </footer>
 

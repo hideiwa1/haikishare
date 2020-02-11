@@ -14,20 +14,22 @@
         <h1 class="c-title">新着商品</h1>
         <div id="index">
        </div>
-        <p class="u-right"><a href="project">>>さらに見る</a></p>
+        <p class="u-right"><a href="product">>>さらに見る</a></p>
     </article>
 
     <article>
         <h1 class="c-title">利用方法</h1>
-        <div class="p-panel u-flex-around u-mb_m u-p_m">
+        <div class="u-mb_l u-p_m">
             <div class="u-flex">
-                <div class="p-panel__item3 u-mb_m">
+                <div class="p-panel__item60 u-mb_m">
                     <div class="c-textbox">
                         <p class="u-center">コンセプト</p>
                         「はいきしぇあ」は、賞味期限が近い、少し過ぎてしまったなどの理由で、まだ食べられるのに捨てられる食品などを有効活用しようというサービスです！
                     </div>
                 </div>
-                <div class="p-panel__item3 u-mb_m">
+            </div>
+            <div class="u-flex_end">
+                <div class="p-panel__item60 u-mb_m">
                     <div class="c-textbox">
                         <p class="u-center">買いたい方</p>
                         １、価格や商品名などで買いたい商品を検索。<br>
@@ -35,7 +37,9 @@
                         ３、販売店の店頭にてお支払い。
                     </div>
                 </div>
-                <div class="p-panel__item3 u-mb_m">
+            </div>
+            <div class="u-flex">
+                <div class="p-panel__item60 u-mb_m">
                     <div class="c-textbox">
                         <p class="u-center">売りたい方</p>
                         １、商品名、写真、期限などを入力して商品を登録<br>
@@ -44,8 +48,10 @@
                     </div>
                 </div>
             </div>
+            <div class="u-flex-around">
         <a href="/login" class="c-button c-button__link">商品を買いたい方はこちら</a>
             <a href="/store/login" class="c-button c-button__link">商品を売りたい方はこちら</a>
+            </div>
         </div>
     </article>
 

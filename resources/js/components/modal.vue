@@ -26,14 +26,8 @@
                     <a href='/buylist' class="c-button">購入履歴</a>
     </li>
                 <li class="p-navmenu__item">
-                    <a href='/likelist' class="c-button">お気に入り一覧</a>
-    </li>
-                <li class="p-navmenu__item">
-                    <a href='/passEdit' class="c-button">パスワード編集</a>
-    </li>
-                <li class="p-navmenu__item">
                     <a href='/logout' class="c-button">ログアウト</a>
-                </li>
+    </li>
             </ul>
             <ul v-if="user == 'store'">
                 <li class="p-navmenu__item">
@@ -55,11 +49,8 @@
                     <a href='/store/registProduct' class="c-button">新規商品登録</a>
     </li>
                 <li class="p-navmenu__item">
-                    <a href='/store/passEdit' class="c-button">パスワード編集</a>
-    </li>
-                <li class="p-navmenu__item">
                     <a href='/store/logout' class="c-button">ログアウト</a>
-                </li>
+    </li>
             </ul>
         </nav>
     </div>
@@ -68,6 +59,11 @@
 <script>
     const moment = require('moment');
     export default {
+        data: function(){
+            return{
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            };
+        },
         props: ['user'],
         filters: {
             moment: function(data) {

@@ -105,7 +105,7 @@
                 this.max = data.max;
                 this.area = data.area;
                 this.limit = data.limit;
-                this.pageChange(this.activePage);
+                this.pageChange(1);
             },
         }
     }

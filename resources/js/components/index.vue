@@ -32,7 +32,7 @@
         },
         filters: {
             moment: function(data) {
-                return moment(data).format('YY年MM月DD日 HH時');
+                return moment(data).format('MM月DD日 HH時');
             }
         },
     }

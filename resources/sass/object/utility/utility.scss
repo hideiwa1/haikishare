@@ -29,6 +29,24 @@
 	}
 }
 
+.u-flex_center {
+    @include mq() {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.u-flex_end {
+    @include mq() {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}
+
 .u-flex-form{
 		display: flex;
 		flex-direction: row;

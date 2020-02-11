@@ -19,10 +19,7 @@
             <a href='/mypage' class="c-button c-button__menu">マイページ</a>
         </li>
         <li class="p-navmenu__item">
-            <form method="post" action="/logout">
-                <input type="hidden" name="_token" :value="csrf">
-                <input type='submit' class="c-button c-button__menu u-font_default" value="ログアウト">
-            </form>
+            <a href='/logout' class="c-button c-button__menu">ログアウト</a>
         </li>
     </ul>
     <ul class="p-navmenu u-flex" v-if="user == 'store'">
@@ -33,10 +30,7 @@
             <a href='/store/mypage' class="c-button c-button__menu">ストアマイページ</a>
         </li>
         <li class="p-navmenu__item">
-           <form method="post" action="/store/logout">
-               <input type="hidden" name="_token" :value="csrf">
-               <input type='submit' class="c-button c-button__menu u-font_default" value="ログアウト">
-        </form>
+            <a href='/store/logout' class="c-button c-button__menu">ログアウト</a>
         </li>
     </ul>
        <div class="p-menu-trigger" @click = "toggleModal">
