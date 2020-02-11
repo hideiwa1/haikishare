@@ -17,6 +17,11 @@
 
 	&__link{
 		background-color: $background-color_button;
+    
+      &:hover{
+          background-color: $background-color_hover;
+          color: $font-color_base;
+      }
 	}
 
 	&__small{

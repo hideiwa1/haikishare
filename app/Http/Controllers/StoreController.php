@@ -7,6 +7,7 @@ use App\Store;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 class StoreController extends Controller
 {

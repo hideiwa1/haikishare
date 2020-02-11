@@ -108,14 +108,21 @@ class ProductController extends Controller
             -> paginate($span);
         return $buylists;
     }
-    
+    /*productlistページの表示*/
     public function productlist(){
         return view('store/productList');
     }
     
+    /*productList.vueからのAjax通信*/
+    /*登録商品の取得*/
     public function productlistJson(Request $request){
         $span = $request -> itemsPerPage;
-        $store_id = Auth::guard('store') -> id();
+        if(empty($request -> storeId)){
+            $store_id = Auth::guard('store') -> id();
+        }else{
+            $store_id = $request -> storeId;
+        }
+        
         $productlists = Product::where('store_id', $store_id) 
             ->where('delete_flg', false)
             ->orderBy('updated_at', 'desc') 
@@ -124,14 +131,18 @@ class ProductController extends Controller
         return $productlists;
     }
     
+    /*storelistページの表示*/
     public function salelist(){
         return view('store/saleList');
     }
 
+    /*saleList.vueからのAjax通信*/
+    /*販売商品の取得*/
     public function salelistJson(Request $request){
         $span = $request -> itemsPerPage;
         $store_id = Auth::guard('store') -> id();
         $salelists = Product::where('product.store_id', $store_id)
+            /*salesテーブルのdelete_flgがfalseの商品のみ取得*/
             -> leftJoin('sales', function($q){
                 $q -> on('products.id', '=', 'sales.product_id')
                     -> where('sales.delete_flg', false);
@@ -142,8 +153,10 @@ class ProductController extends Controller
         return $salelists;
     }
     
+    /*detailページの表示*/
     public function detail($id=''){
         $detail = Product::find($id);
+        /*削除済み、または存在しない場合はproductlistへリダイレクト*/
         if($detail -> delete_flg == true || empty($detail)){
             return redirect() -> action('ProductController@productlist');
         }
@@ -152,12 +165,14 @@ class ProductController extends Controller
         return view('detail', compact('detail', 'user_id', 'store_id'));
     }
     
+    /*商品キャンセル時の処理、detail.bladeからのPOST通信*/
     public function cancelProduct($id){
         $sale = Sale::where('product_id', $id)
             ->where('delete_flg', false) -> first();
         $sale -> delete_flg = true;
         $sale -> save();
         
+        /*ストアへキャンセルメールの送信*/
         $store = Store::find($sale -> product -> store_id);
         Log::debug('store:'.print_r($store, true));
         $title = '商品キャンセルのお知らせ';
@@ -170,11 +185,13 @@ class ProductController extends Controller
         return redirect() -> action('ProductController@detail', [$id])->with('message', 'キャンセルしました');;
     }
     
+    /*キャンセル時の処理、buylist.vueからのAjax通信*/
     public function cancelJson(Request $request){
         $id = $request -> id;
         $sale = Sale::find($id);
         Log::debug('sale:'.print_r($sale, true));
         
+        /*ストアへキャンセルメールの送信*/
         $store = Store::find($sale -> product -> store_id);
         Log::debug('store:'.print_r($store, true));
         $title = '商品キャンセルのお知らせ';
@@ -187,15 +204,13 @@ class ProductController extends Controller
         
         $sale -> delete_flg = true;
         $sale -> save();
-        
         return "";
     }
     
+    /*registProduct.vueからのAjax通信*/
     public function registJson(Request $request){
         $id = $request -> id;
-        Log::debug('id:'.$id);
         $product = Product::find($id);
-        Log::debug('product:'.print_r($product, true));
         return $product;
     }
 

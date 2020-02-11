@@ -2768,14 +2768,22 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       activePage: 1,
       itemsPerPage: 5,
       totalItemCount: 1,
-      pageRange: 5
+      pageRange: 5,
+      storeId: ''
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    console.log(location.pathname);
+
+    if (location.pathname.indexOf('/store/profile') !== -1) {
+      this.storeId = location.pathname.replace('/store/profile/', "");
+    }
+
     var param = {
-      itemsPerPage: this.itemsPerPage
+      itemsPerPage: this.itemsPerPage,
+      storeId: this.storeId
     };
     axios.get('/store/productlist/json?page=' + this.activePage, {
       params: param
@@ -23192,7 +23200,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("Liveview", {
-              staticClass: "c-img__profile",
+              staticClass: "c-img__profile u-block u-m_auto",
               attrs: { pic: _vm.pic },
               on: { change: _vm.picChange }
             })
@@ -24247,7 +24255,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("Liveview", {
-              staticClass: "c-img__profile",
+              staticClass: "c-img__profile u-block u-m_auto",
               attrs: { pic: _vm.pic },
               on: { change: _vm.picChange }
             })

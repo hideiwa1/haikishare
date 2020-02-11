@@ -20,65 +20,32 @@
     <article>
         <h1 class="c-title">利用方法</h1>
         <div class="p-panel u-flex-around u-mb_m u-p_m">
-        <a href="#user" class="c-button c-button__link">商品を買いたい方はこちら</a>
-            <a href="#store" class="c-button c-button__link">商品を売りたい方はこちら</a>
-        </div>
-        
-        <div id="store" class="p-panel u-p_m u-mb_l">
-            <h2 class="c-button c-button__link u-center">
-                商品を買いたい方</h2>
             <div class="u-flex">
                 <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP1</p>
-                    ユーザー登録をお願いします。<br>
-                    入力項目は「メールアドレス」「パスワード」の２項目のみ！
+                    <div class="c-textbox">
+                        <p class="u-center">コンセプト</p>
+                        「はいきしぇあ」は、賞味期限が近い、少し過ぎてしまったなどの理由で、まだ食べられるのに捨てられる食品などを有効活用しようというサービスです！
+                    </div>
+                </div>
+                <div class="p-panel__item3 u-mb_m">
+                    <div class="c-textbox">
+                        <p class="u-center">買いたい方</p>
+                        １、価格や商品名などで買いたい商品を検索。<br>
+                        ２、商品ページより「購入する」をクリック！<br>
+                        ３、販売店の店頭にてお支払い。
+                    </div>
+                </div>
+                <div class="p-panel__item3 u-mb_m">
+                    <div class="c-textbox">
+                        <p class="u-center">売りたい方</p>
+                        １、商品名、写真、期限などを入力して商品を登録<br>
+                        ２、商品が購入されるとメールが届きます。<br>
+                        ３、来店されたら、商品を販売！
+                    </div>
                 </div>
             </div>
-            <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP2</p>
-                    案件を依頼したい人<br>
-                    案件の概要、予算などを入力！<br>
-                    案件に応募したい人<br>
-                    案件一覧より、興味のあるものに「応募」するだけ！
-                </div>
-            </div>
-            <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP3</p>
-                    相手が決まったら、直接メッセージで打ち合わせ！
-                </div>
-            </div>
-            </div>
-        </div>
-        
-        <div id="store" class="p-panel u-p_m u-mb_l">
-          <h2 class="c-button c-button__link u-center">商品を売りたい方</h2>
-           <div class="u-flex">
-            <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP1</p>
-                    ユーザー登録をお願いします。<br>
-                    入力項目は「メールアドレス」「パスワード」の２項目のみ！
-                </div>
-            </div>
-            <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP2</p>
-                    案件を依頼したい人<br>
-                    案件の概要、予算などを入力！<br>
-                    案件に応募したい人<br>
-                    案件一覧より、興味のあるものに「応募」するだけ！
-                </div>
-            </div>
-            <div class="p-panel__item3 u-mb_m">
-                <div class="c-textbox">
-                    <p class="u-center">STEP3</p>
-                    相手が決まったら、直接メッセージで打ち合わせ！
-                </div>
-            </div>
-            </div>
+        <a href="/login" class="c-button c-button__link">商品を買いたい方はこちら</a>
+            <a href="/store/login" class="c-button c-button__link">商品を売りたい方はこちら</a>
         </div>
     </article>
 

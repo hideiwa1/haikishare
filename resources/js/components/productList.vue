@@ -38,11 +38,17 @@
                 itemsPerPage: 5,
                 totalItemCount: 1,
                 pageRange: 5,
+                storeId: '',
             };
         },
         mounted() {
+            console.log(location.pathname);
+            if(location.pathname.indexOf('/store/profile') !== -1){
+                this.storeId = location.pathname.replace('/store/profile/', "");
+            }
             const param = {
                 itemsPerPage: this.itemsPerPage,
+                storeId: this.storeId,
             };
             axios.get('/store/productlist/json?page=' + this.activePage, {
                     params: param

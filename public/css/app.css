@@ -217,6 +217,11 @@ select {
   background-color: #d0ccff;
 }
 
+.c-button__link:hover {
+  background-color: #00ffff;
+  color: #000000;
+}
+
 .c-button__small {
   background-color: #ffff66;
 }

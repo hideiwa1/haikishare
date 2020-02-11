@@ -8,7 +8,7 @@
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">プロフィール画像</label>
                 <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
-                <Liveview :pic="pic" @change="picChange" class="c-img__profile"/>
+                <Liveview :pic="pic" @change="picChange" class="c-img__profile u-block u-m_auto"/>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">名前</label>
