@@ -31,6 +31,7 @@
 
 
 <script>
+    /*商品一覧*/
     const axios = require('axios');
     const moment = require('moment');
     import Search from './search.vue';
@@ -56,6 +57,7 @@
             };
         },
         mounted() {
+            /*商品情報を取得*/
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
@@ -79,6 +81,7 @@
         },
         methods: {
             pageChange(page) {
+                /*ページ遷移時の処理*/
                 this.activePage = Number(page);
                 const param = {
                     itemsPerPage: this.itemsPerPage,
@@ -100,6 +103,7 @@
                     });
             },
             searchProduct(data) {
+                /*検索時の処理*/
                 console.log(data);
                 this.keyword = data.keyword;
                 this.category = data.category;

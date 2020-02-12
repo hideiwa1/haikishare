@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    /*input['file']のライブビュー機能*/
     export default {
         props: ['pic'],
         data(){

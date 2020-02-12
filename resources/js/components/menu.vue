@@ -43,6 +43,8 @@
 </template>
 
 <script>
+    /*ヘッダーのメニュー*/
+    /*modalShowフラグでモーダルを操作*/
     const axios = require('axios');
     const moment = require('moment');
     import Modal from './modal.vue';
@@ -50,6 +52,7 @@
         components: { Modal },
         data: function() {
             return {
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 modalShow: false,
                 user: '',

@@ -26,6 +26,7 @@
 
 
 <script>
+    /*購入履歴*/
     const axios = require('axios');
     const moment = require('moment');
     import Pagenate from './pagenate.vue';
@@ -42,6 +43,7 @@
             };
         },
         mounted() {
+            /*Ajax通信で商品情報の取得*/
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
@@ -63,6 +65,7 @@
         },
         methods: {
             pageChange(page){
+                /*ページ遷移時の処理*/
                 this.activePage = Number(page);
                 const param = {
                     itemsPerPage: this.itemsPerPage,
@@ -76,6 +79,7 @@
                 });
             },
             handleClick(value){
+                /*キャンセル時の処理*/
                 const me = this;
                 console.log(value);
                 const param = {
@@ -89,6 +93,7 @@
                     alert('キャンセルしました');
                 })
                     .then(function(){
+                    /*商品情報の再取得*/
                     const param = {
                         itemsPerPage: me.itemsPerPage,
                     };

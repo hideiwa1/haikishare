@@ -41,11 +41,13 @@
 
 
 <script>
+    /*ストアマイページ*/
     const axios = require('axios');
     const moment = require('moment');
     export default {
         data: function() {
             return {
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 salelists: [],
                 productlists: [],
@@ -59,6 +61,7 @@
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
+            /*販売済み商品の取得*/
             axios.get('/salelist/json?page=' + this.activePage, {
                 params: param
             })
@@ -66,6 +69,7 @@
                 this.salelists = response.data.data;
                 console.log(response);
             });
+            /*登録商品の取得*/
             axios.get('/productlist/json?page=' + this.activePage, {
                 params: param
             })
@@ -82,7 +86,7 @@
 
         },
         methods: {
-            handleClick(e){
+            /*handleClick(e){
                 const me = this;
                 console.log(e.target.value);
                 const param = {
@@ -110,7 +114,7 @@
                     });
                 })
                 ;
-            }
+            }*/
         }
     };
 

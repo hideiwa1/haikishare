@@ -17,6 +17,7 @@
 
 
 <script>
+    /*最新3件の商品情報を取得*/
     const axios = require('axios');
     const moment = require('moment');
     export default{

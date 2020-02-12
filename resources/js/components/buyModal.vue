@@ -16,10 +16,14 @@
 </template>
 
 <script>
+    /*商品購入時の確認モーダル*/
+    /*isShowフラグでモーダルを操作*/
+    /*購入時に来店予定日を入力してもらう*/
     const moment = require('moment');
     export default {
         data: function() {
             return {
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 url: window.location.pathname.replace('/detail/', ''),
                 modalShow: false,

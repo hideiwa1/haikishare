@@ -57,10 +57,12 @@
 </template>
 
 <script>
+    /*スマホ画面用のモーダルメーニュー*/
     const moment = require('moment');
     export default {
         data: function(){
             return{
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             };
         },

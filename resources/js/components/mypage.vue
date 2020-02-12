@@ -20,6 +20,7 @@
 
 
 <script>
+    /*ユーザーマイページ*/
     const axios = require('axios');
     const moment = require('moment');
     import Attention from './attention.vue';
@@ -27,6 +28,7 @@
         components: {Attention},
         data: function() {
             return {
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 buylists: [],
                 activePage: 1,
@@ -39,6 +41,7 @@
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
+            /*購入履歴の取得*/
             axios.get('/buylist/json?page=' + this.activePage, {
                     params: param
                 })
@@ -59,6 +62,7 @@
         },
         methods: {
             handleClick(value){
+                /*キャンセル時の処理*/
                 const me = this;
                 console.log(value);
                 const param = {
@@ -75,6 +79,7 @@
                     const param = {
                         itemsPerPage: me.itemsPerPage,
                     };
+                    /*商品情報を再取得*/
                     axios.get('/buylist/json?page=' + me.activePage, {
                         params: param
                     })

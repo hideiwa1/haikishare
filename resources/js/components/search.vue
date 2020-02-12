@@ -59,6 +59,7 @@
 
 
 <script>
+    /*商品検索*/
     const axios = require('axios');
     const moment = require('moment');
     export default {
@@ -76,11 +77,13 @@
             };
         },
         mounted() {
+            /*カテゴリーの取得*/
             axios.get('/categorylist/json')
                 .then(response => {
                 this.categoryList = response.data;
                 console.log(response.data);
             });
+            /*都道府県の取得*/
             axios.get('/arealist/json')
                 .then(response => {
                 this.areaList = response.data;
@@ -96,6 +99,7 @@
 
         },
         methods: {
+            /*検索ボタン押下時の処理、productList.vueに伝播*/
             handleClick(e){
                 this.$emit("change", {keyword: this.s_keyword, category: this.s_category, min: this.s_min, max: this.s_max, area: this.s_area, limit: this.s_limit});
             }

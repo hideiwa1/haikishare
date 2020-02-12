@@ -1850,6 +1850,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
+/*キャンセル時の確認モーダル*/
+
+/*isShowフラグでモーダルを操作*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -1936,11 +1942,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*商品購入時の確認モーダル*/
+
+/*isShowフラグでモーダルを操作*/
+
+/*購入時に来店予定日を入力してもらう*/
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       url: window.location.pathname.replace('/detail/', ''),
       modalShow: false,
@@ -2015,6 +2028,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*購入履歴*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2038,6 +2053,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*Ajax通信で商品情報の取得*/
     var param = {
       itemsPerPage: this.itemsPerPage
     };
@@ -2060,6 +2076,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     pageChange: function pageChange(page) {
       var _this2 = this;
 
+      /*ページ遷移時の処理*/
       this.activePage = Number(page);
       var param = {
         itemsPerPage: this.itemsPerPage
@@ -2074,6 +2091,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       });
     },
     handleClick: function handleClick(value) {
+      /*キャンセル時の処理*/
       var me = this;
       console.log(value);
       var param = {
@@ -2085,6 +2103,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         console.log(response.data);
         alert('キャンセルしました');
       }).then(function () {
+        /*商品情報の再取得*/
         var param = {
           itemsPerPage: me.itemsPerPage
         };
@@ -2130,6 +2149,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*最新3件の商品情報を取得*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2174,6 +2195,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*input['file']のライブビュー機能*/
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pic'],
   data: function data() {
@@ -2268,6 +2291,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ヘッダーのメニュー*/
+
+/*modalShowフラグでモーダルを操作*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2279,6 +2306,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       modalShow: false,
       user: ''
@@ -2374,11 +2402,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*スマホ画面用のモーダルメーニュー*/
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
@@ -2425,6 +2456,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ユーザーマイページ*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2436,6 +2469,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       buylists: [],
       activePage: 1,
@@ -2450,6 +2484,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     var param = {
       itemsPerPage: this.itemsPerPage
     };
+    /*購入履歴の取得*/
+
     axios.get('/buylist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
@@ -2467,6 +2503,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   computed: {},
   methods: {
     handleClick: function handleClick(value) {
+      /*キャンセル時の処理*/
       var me = this;
       console.log(value);
       var param = {
@@ -2481,6 +2518,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         var param = {
           itemsPerPage: me.itemsPerPage
         };
+        /*商品情報を再取得*/
+
         axios.get('/buylist/json?page=' + me.activePage, {
           params: param
         }).then(function (response) {
@@ -2517,6 +2556,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ページネーション*/
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     activePage: {
@@ -2627,6 +2668,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*商品一覧*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2656,6 +2699,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*商品情報を取得*/
     var param = {
       itemsPerPage: this.itemsPerPage
     };
@@ -2678,6 +2722,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     pageChange: function pageChange(page) {
       var _this2 = this;
 
+      /*ページ遷移時の処理*/
       this.activePage = Number(page);
       var param = {
         itemsPerPage: this.itemsPerPage,
@@ -2698,6 +2743,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       });
     },
     searchProduct: function searchProduct(data) {
+      /*検索時の処理*/
       console.log(data);
       this.keyword = data.keyword;
       this.category = data.category;
@@ -2750,6 +2796,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*登録商品一覧*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -2772,9 +2820,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
-    console.log(location.pathname);
-
+    /*URLによる分岐*/
     if (location.pathname.indexOf('/store/profile') !== -1) {
+      /*ストアプロフィールページの場合、ページIDから検索*/
       this.storeId = location.pathname.replace('/store/profile/', "");
     }
 
@@ -2783,6 +2831,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       itemsPerPage: this.itemsPerPage,
       storeId: this.storeId
     };
+    /*商品情報を取得*/
+
     axios.get('/productlist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
@@ -2802,6 +2852,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     pageChange: function pageChange(page) {
       var _this2 = this;
 
+      /*ページ遷移時の処理*/
       this.activePage = Number(page);
       var param = {
         itemsPerPage: this.itemsPerPage,
@@ -2899,10 +2950,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ユーザープロフィール編集ページ*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
-var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
-
+var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2911,6 +2963,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       areaList: [],
       name: this.name,
@@ -2924,6 +2977,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*プロフィール情報の取得*/
     axios.get('/userProfile/json').then(function (response) {
       console.log(response.data);
       _this.name = response.data.name;
@@ -2933,6 +2987,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       _this.email = response.data.email;
       _this.pic = response.data.pic;
     });
+    /*都道府県の取得*/
+
     axios.get('/arealist/json').then(function (response) {
       _this.areaList = response.data;
       console.log(response.data);
@@ -2947,6 +3003,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     errMsg: function errMsg() {
       var _this2 = this;
 
+      /*バリデーション*/
       var isValid = false;
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
@@ -2954,6 +3011,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           errMsgMax = '190文字以内で入力してください';
       return {
         name: function () {
+          /*必須、最大文字数*/
           if (!_this2.name) {
             return errMsgRequire;
           } else {
@@ -2965,6 +3023,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         address1: function () {
+          /*必須、数字*/
           if (!_this2.address1) {
             return errMsgRequire;
           } else {
@@ -2976,6 +3035,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         email: function () {
+          /*必須、メール形式*/
           if (!_this2.email) {
             return errMsgRequire;
           } else {
@@ -2989,6 +3049,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       };
     },
     isValid: function isValid() {
+      /*エラーがなければ送信ボタンをアクティブに*/
       if (Object.values(this.errMsg).filter(function (value) {
         return value !== '';
       }).length === 0) {
@@ -3093,10 +3154,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*商品出品・編集*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
-var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
-
+var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3105,6 +3167,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       url: window.location.pathname !== '/store/registProduct' ? window.location.pathname.replace('/store/registProduct/', '') : 'new',
       categoryList: [],
@@ -3120,10 +3183,13 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*新規、編集の分岐*/
     if (this.url !== 'new') {
       var param = {
         id: this.url
       };
+      /*編集の場合、商品情報の取得*/
+
       axios.get('/store/registProductJson', {
         params: param
       }).then(function (response) {
@@ -3137,6 +3203,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         _this.pic = response.data.pic;
       });
     }
+    /*カテゴリーの取得*/
+
 
     axios.get('/categorylist/json').then(function (response) {
       _this.categoryList = response.data;
@@ -3152,6 +3220,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     errMsg: function errMsg() {
       var _this2 = this;
 
+      /*バリデーション*/
       var isValid = false;
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
@@ -3160,6 +3229,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           errMsgJan = '13文字で入力してください';
       return {
         name: function () {
+          /*必須、最大文字数*/
           if (!_this2.name) {
             return errMsgRequire;
           } else {
@@ -3171,6 +3241,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         jan: function () {
+          /*数字、桁数チェック*/
           console.log('jan' + _this2.jan);
 
           if (_this2.jan && !/^\d*$/.test(_this2.jan)) {
@@ -3185,6 +3256,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         price: function () {
+          /*必須、数字、最大文字数*/
           if (!_this2.price) {
             return errMsgRequire;
           } else {
@@ -3198,6 +3270,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         limit: function () {
+          /*必須*/
           if (!_this2.limit && _this2.limit_flg === 'true') {
             return errMsgRequire;
           } else {
@@ -3205,6 +3278,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         pic: function () {
+          /*必須*/
           if (!_this2.pic) {
             return errMsgRequire;
           } else {
@@ -3214,6 +3288,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       };
     },
     isValid: function isValid() {
+      /*エラーがなければ送信ボタンをアクティブに*/
       if (Object.values(this.errMsg).filter(function (value) {
         return value !== '';
       }).length === 0) {
@@ -3228,6 +3303,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       console.log(data);
       this.pic = data.pic;
     },
+
+    /*JAN入力時の処理*/
     searchJan: function searchJan() {
       var _this3 = this;
 
@@ -3237,6 +3314,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         var param = {
           jan: this.jan
         };
+        /*JANによる商品検索*/
+
         axios.get('/store/searchJan', {
           params: param
         }).then(function (response) {
@@ -3308,6 +3387,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*販売商品一覧*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -3332,6 +3413,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     var param = {
       itemsPerPage: this.itemsPerPage
     };
+    /*商品情報の取得*/
+
     axios.get('/salelist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
@@ -3348,6 +3431,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   computed: {},
   methods: {
+    /*ページ遷移時の処理*/
     pageChange: function pageChange(page) {
       var _this2 = this;
 
@@ -3438,6 +3522,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*商品検索*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -3459,10 +3545,13 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*カテゴリーの取得*/
     axios.get('/categorylist/json').then(function (response) {
       _this.categoryList = response.data;
       console.log(response.data);
     });
+    /*都道府県の取得*/
+
     axios.get('/arealist/json').then(function (response) {
       _this.areaList = response.data;
       console.log(response.data);
@@ -3475,6 +3564,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   computed: {},
   methods: {
+    /*検索ボタン押下時の処理、productList.vueに伝播*/
     handleClick: function handleClick(e) {
       this.$emit("change", {
         keyword: this.s_keyword,
@@ -3541,6 +3631,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ストアマイページ*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -3548,6 +3640,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       salelists: [],
       productlists: [],
@@ -3563,12 +3656,16 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     var param = {
       itemsPerPage: this.itemsPerPage
     };
+    /*販売済み商品の取得*/
+
     axios.get('/salelist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
       _this.salelists = response.data.data;
       console.log(response);
     });
+    /*登録商品の取得*/
+
     axios.get('/productlist/json?page=' + this.activePage, {
       params: param
     }).then(function (response) {
@@ -3582,31 +3679,35 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   computed: {},
   methods: {
-    handleClick: function handleClick(e) {
-      var me = this;
-      console.log(e.target.value);
-      var param = {
-        id: e.target.value
-      };
-      axios.get('/cancel/json', {
-        params: param
-      }).then(function (response) {
-        console.log(response.data);
-        alert('キャンセルしました');
-      }).then(function () {
-        var param = {
-          itemsPerPage: me.itemsPerPage
+    /*handleClick(e){
+        const me = this;
+        console.log(e.target.value);
+        const param = {
+            id: e.target.value,
         };
-        axios.get('/buylist/json?page=' + me.activePage, {
-          params: param
-        }).then(function (response) {
-          me.buylists = response.data.data;
-          me.activePage = response.data.current_page;
-          me.totalItemCount = response.data.total;
-          console.log(response.data);
-        });
-      });
-    }
+        axios.get('/cancel/json',{
+            params: param
+        })
+            .then(response => {
+            console.log(response.data);
+            alert('キャンセルしました');
+        })
+            .then(function(){
+            const param = {
+                itemsPerPage: me.itemsPerPage,
+            };
+            axios.get('/buylist/json?page=' + me.activePage, {
+                params: param
+            })
+                .then(response => {
+                me.buylists = response.data.data;
+                me.activePage = response.data.current_page;
+                me.totalItemCount = response.data.total;
+                console.log(response.data);
+            });
+        })
+        ;
+    }*/
   }
 });
 
@@ -3693,6 +3794,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/*ストアプロフィールの編集*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); //import modalmsg from './modalmsg.vue';
@@ -3705,6 +3808,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       areaList: [],
       name: this.name,
@@ -3719,6 +3823,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   mounted: function mounted() {
     var _this = this;
 
+    /*プロフィール情報の取得*/
     axios.get('/store/storeProfile/json').then(function (response) {
       console.log(response.data);
       _this.name = response.data.name;
@@ -3729,6 +3834,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       _this.email = response.data.email;
       _this.pic = response.data.pic;
     });
+    /*都道府県の取得*/
+
     axios.get('/arealist/json').then(function (response) {
       _this.areaList = response.data;
       console.log(response.data);
@@ -3743,6 +3850,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     errMsg: function errMsg() {
       var _this2 = this;
 
+      /*バリデーション*/
       var isValid = false;
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
@@ -3750,6 +3858,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           errMsgMax = '190文字以内で入力してください';
       return {
         name: function () {
+          /*必須、最大文字数*/
           if (!_this2.name) {
             return errMsgRequire;
           } else {
@@ -3761,6 +3870,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         branch: function () {
+          /*必須、最大文字数*/
           if (!_this2.branch) {
             return errMsgRequire;
           } else {
@@ -3772,6 +3882,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         address1: function () {
+          /*必須、数字*/
           if (!_this2.address1) {
             return errMsgRequire;
           } else {
@@ -3783,6 +3894,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
           }
         }(),
         email: function () {
+          /*必須、メール系式*/
           if (!_this2.email) {
             return errMsgRequire;
           } else {
@@ -3796,6 +3908,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       };
     },
     isValid: function isValid() {
+      /*エラーがなければ送信ボタンをアクティブに*/
       if (Object.values(this.errMsg).filter(function (value) {
         return value !== '';
       }).length === 0) {
@@ -23630,7 +23743,11 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.categoryList, function(val) {
                 return _c("option", { domProps: { value: val.id } }, [
-                  _vm._v("\n                    " + _vm._s(val.name) + "\n")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(val.name) +
+                      "\n                "
+                  )
                 ])
               })
             ],

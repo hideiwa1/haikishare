@@ -70,6 +70,7 @@
 
 
 <script>
+     /*ストアプロフィールの編集*/
     const axios = require('axios');
     const moment = require('moment');
     //import modalmsg from './modalmsg.vue';
@@ -78,6 +79,7 @@
         components: {Liveview},
         data() {
             return {
+                /*csrfトークン*/
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 areaList: [],
                 name: this.name,
@@ -90,6 +92,7 @@
             };
         },
         mounted() {
+            /*プロフィール情報の取得*/
             axios.get('/store/storeProfile/json')
                 .then(response => {
                 console.log(response.data);
@@ -101,7 +104,7 @@
                 this.email = response.data.email;
                 this.pic = response.data.pic;
             });
-
+            /*都道府県の取得*/
             axios.get('/arealist/json')
                 .then(response => {
                 this.areaList = response.data;
@@ -115,6 +118,7 @@
         },
         computed: {
             errMsg(){
+                /*バリデーション*/
                 let isValid = false;
                 const errMsgRequire = '入力必須項目です',
                       errMsgInteger = '半角数字で入力してください',
@@ -122,6 +126,7 @@
                       errMsgMax = '190文字以内で入力してください';
                 return{
                     name: (()=>{
+                        /*必須、最大文字数*/
                         if(!this.name){
                             return errMsgRequire;
                         }else{
@@ -132,6 +137,7 @@
                         }
                     })(),
                     branch: (()=>{
+                        /*必須、最大文字数*/
                         if(!this.branch){
                             return errMsgRequire;
                         }else{
@@ -142,6 +148,7 @@
                         }
                     })(),
                     address1: (()=>{
+                        /*必須、数字*/
                         if(!this.address1){
                             return errMsgRequire;
                         }else{
@@ -152,6 +159,7 @@
                             }}
                     })(),
                     email: (()=>{
+                        /*必須、メール系式*/
                         if(!this.email){
                             return errMsgRequire;
                         }else{
@@ -164,6 +172,7 @@
                 }
             },
             isValid(){
+                /*エラーがなければ送信ボタンをアクティブに*/
                 if(Object.values(this.errMsg).filter(value => {return value !== '';}).length === 0){
                     return false;
                 }else{

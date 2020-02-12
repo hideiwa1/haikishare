@@ -24,6 +24,7 @@
 
 
 <script>
+    /*販売商品一覧*/
     const axios = require('axios');
     const moment = require('moment');
     import Pagenate from './pagenate.vue';
@@ -42,6 +43,7 @@
             const param = {
                 itemsPerPage: this.itemsPerPage,
             };
+            /*商品情報の取得*/
             axios.get('/salelist/json?page='+ this.activePage, {params: param})
                 .then(response => {
                 this.salelists = response.data.data;
@@ -59,6 +61,7 @@
 
         },
         methods: {
+            /*ページ遷移時の処理*/
             pageChange(page){
                 this.activePage = Number(page);
                 const param = {

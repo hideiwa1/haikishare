@@ -11,6 +11,7 @@
 
 
 <script>
+    /*ページネーション*/
     export default{
         props: {
             activePage: {

@@ -27,6 +27,7 @@
 
 
 <script>
+    /*登録商品一覧*/
     const axios = require('axios');
     const moment = require('moment');
     import Pagenate from './pagenate.vue';
@@ -45,8 +46,9 @@
             };
         },
         mounted() {
-            console.log(location.pathname);
+            /*URLによる分岐*/
             if(location.pathname.indexOf('/store/profile') !== -1){
+                /*ストアプロフィールページの場合、ページIDから検索*/
                 this.storeId = location.pathname.replace('/store/profile/', "");
             }
             console.log(this.storeId);
@@ -54,6 +56,7 @@
                 itemsPerPage: this.itemsPerPage,
                 storeId: this.storeId,
             };
+            /*商品情報を取得*/
             axios.get('/productlist/json?page=' + this.activePage, {
                     params: param
                 })
@@ -74,6 +77,7 @@
         },
         methods: {
             pageChange(page) {
+                /*ページ遷移時の処理*/
                 this.activePage = Number(page);
                 const param = {
                     itemsPerPage: this.itemsPerPage,
