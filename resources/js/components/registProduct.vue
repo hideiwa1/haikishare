@@ -44,9 +44,9 @@
                 <label class="c-form__title">
                     賞味期限・品質保持期限<span class="u-require u-inline u-ml_l">＊必須</span>
                 </label>
-                <input type="radio" name="limit_flg" value=false v-model="limit_flg">期限なし
-                <input type="radio" name="limit_flg" value=true v-model="limit_flg">期限あり
-                <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg !== 'false'">
+                <input type="radio" name="limit_flg" value=0 v-model="limit_flg">期限なし
+                <input type="radio" name="limit_flg" value=1 v-model="limit_flg">期限あり
+                <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg != 0">
                 <p v-if="this.errMsg.limit" class="u-error">{{this.errMsg.limit}}</p>
             </div>
             <div>
@@ -76,7 +76,7 @@
                 jan: "",
                 category: "",
                 price: "",
-                limit_flg: 'false',
+                limit_flg: 0,
                 limit: "",
                 pic: "",
             };
@@ -98,7 +98,7 @@
                         this.jan = response.data.jan ? String(response.data.jan) : '';
                         this.price = response.data.price;
                         this.limit = moment(response.data.limit).format('YYYY-MM-DDThh:mm');
-                        this.limit_flg = this.limit && 'true';
+                        this.limit_flg = response.data.limit_flg;
                         this.pic = response.data.pic;
                     });
 

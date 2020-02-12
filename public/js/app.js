@@ -3175,7 +3175,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       jan: "",
       category: "",
       price: "",
-      limit_flg: 'false',
+      limit_flg: 0,
       limit: "",
       pic: ""
     };
@@ -3199,7 +3199,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         _this.jan = response.data.jan ? String(response.data.jan) : '';
         _this.price = response.data.price;
         _this.limit = _moment(response.data.limit).format('YYYY-MM-DDThh:mm');
-        _this.limit_flg = _this.limit && 'true';
+        _this.limit_flg = response.data.limit_flg;
         _this.pic = response.data.pic;
       });
     }
@@ -23840,11 +23840,11 @@ var render = function() {
                 expression: "limit_flg"
               }
             ],
-            attrs: { type: "radio", name: "limit_flg", value: "false" },
-            domProps: { checked: _vm._q(_vm.limit_flg, "false") },
+            attrs: { type: "radio", name: "limit_flg", value: "0" },
+            domProps: { checked: _vm._q(_vm.limit_flg, "0") },
             on: {
               change: function($event) {
-                _vm.limit_flg = "false"
+                _vm.limit_flg = "0"
               }
             }
           }),
@@ -23858,16 +23858,16 @@ var render = function() {
                 expression: "limit_flg"
               }
             ],
-            attrs: { type: "radio", name: "limit_flg", value: "true" },
-            domProps: { checked: _vm._q(_vm.limit_flg, "true") },
+            attrs: { type: "radio", name: "limit_flg", value: "1" },
+            domProps: { checked: _vm._q(_vm.limit_flg, "1") },
             on: {
               change: function($event) {
-                _vm.limit_flg = "true"
+                _vm.limit_flg = "1"
               }
             }
           }),
           _vm._v("期限あり\n            "),
-          _vm.limit_flg !== "false"
+          _vm.limit_flg != 0
             ? _c("input", {
                 directives: [
                   {

@@ -42,12 +42,21 @@ class ProductController extends Controller
         $category && $sql[] = ['category_id', '=', $category];
         $min && $sql[] = ['price', '>=', $min];
         $max && $sql[] = ['price', '<=', $max];
-        if(!$limit || $limit == 'false'){
-            $sql[] = ['limit', '>', date('Y/m/d H:i:s')];
-        }
+        /*if(!$limit || $limit == 'false'){
+            $sql[] = function($query){
+                $query -> where('limit', '>', date('Y/m/d H:i:s'))
+                    ->orWhere('limit_flg', '=', 0)
+            };
+            //$sql[] = ['limit', '>', date('Y/m/d H:i:s')];
+            //$sql[] = ['limit_flg', '=', 0];
+        }*/
         /*都道府県の指定なしの場合*/
         if(empty($area)){
             $products = Product::where($sql)
+                ->when(!$limit || $limit == 'false',function($query){
+                    return $query -> where('limit', '>', date('Y/m/d H:i:s'))
+                        ->orWhere('limit_flg', '=', 0);
+                })
                 ->where('products.delete_flg', false)
                 -> leftJoin('sales', function($q){
                     $q -> on('products.id', '=', 'sales.product_id')
@@ -64,6 +73,10 @@ class ProductController extends Controller
                 $q -> where('address1', $area);
             })
                 -> where($sql)
+                ->when(!$limit || $limit == 'false',function($query){
+                    return $query -> where('limit', '>', date('Y/m/d H:i:s'))
+                        ->orWhere('limit_flg', '=', 0);
+                })
                 -> leftJoin('sales', function($q){
                     $q -> on('products.id', '=', 'sales.product_id')
                         -> where('sales.delete_flg', false);
