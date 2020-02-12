@@ -260,13 +260,15 @@ class ProductController extends Controller
     /*JANによる商品検索*/
     public function searchJan(Request $request){
         $jan = $request -> jan;
+        $store_id = Auth::guard('store') -> id();
         $product = Product::where('jan', $jan)
+            -> where('store_id', $store_id)
             -> orderBy('updated_at', 'desc')
             ->first();
         return $product;
     }
     
-    /*registProductからのAjax通信*/
+    /*registProductからのPOST送信*/
     /*商品登録*/
     public function saveJson(Request $request){
         Log::debug($request);
