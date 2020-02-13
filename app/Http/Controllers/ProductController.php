@@ -54,8 +54,10 @@ class ProductController extends Controller
         if(empty($area)){
             $products = Product::where($sql)
                 ->when(!$limit || $limit == 'false',function($query){
-                    return $query -> where('limit', '>', date('Y/m/d H:i:s'))
-                        ->orWhere('limit_flg', '=', 0);
+                    return $query -> where(function($query2){
+                        $query2 -> where('limit', '>', date('Y/m/d H:i:s'))
+                            ->orWhere('limit_flg', '=', 0);
+                    });
                 })
                 ->where('products.delete_flg', false)
                 -> leftJoin('sales', function($q){
@@ -65,7 +67,8 @@ class ProductController extends Controller
                 /*saleのデータがないものを抽出*/
                 -> whereNull('sales.product_id')
                 -> orderBy('products.updated_at', 'desc') 
-                -> paginate($span, ['products.*']);
+                -> paginate($span);
+ 
         /*都道府県の指定ありの場合*/
         }else{
             /*ストアの住所検索後、その他の検索を実施*/
@@ -74,8 +77,10 @@ class ProductController extends Controller
             })
                 -> where($sql)
                 ->when(!$limit || $limit == 'false',function($query){
-                    return $query -> where('limit', '>', date('Y/m/d H:i:s'))
-                        ->orWhere('limit_flg', '=', 0);
+                    return $query -> where(function($query2){
+                        $query2 -> where('limit', '>', date('Y/m/d H:i:s'))
+                            ->orWhere('limit_flg', '=', 0);
+                    });
                 })
                 -> leftJoin('sales', function($q){
                     $q -> on('products.id', '=', 'sales.product_id')
