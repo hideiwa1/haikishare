@@ -319,6 +319,7 @@ class ProductController extends Controller
         }
         $sale -> visit = $visit;
         $sale -> save();
+        $url = url('/', null, true);
         
         /*メールの送信（ストアへ）*/
         $store = Store::find($sale -> product -> store_id);
@@ -327,7 +328,7 @@ class ProductController extends Controller
         $text = '登録した商品が購入されました。';
         $product = Product::find($id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit, $url));
         
         /*メールの送信（ユーザーへ）*/
         $user = User::find($user_id);
@@ -335,7 +336,7 @@ class ProductController extends Controller
         $name = $user -> name;
         $text = '商品を購入しました。';
         $to = $user -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $visit, $url));
         
         return redirect() -> action('ProductController@detail', [$id])->with('message', '購入完了');
     }

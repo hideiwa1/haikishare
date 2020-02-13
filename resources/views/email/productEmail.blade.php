@@ -16,7 +16,7 @@
             商品名：{{$product -> name}}
         </p>
         <p id="button">
-            <a href="{{url() -> current()}}/detail/{{$product -> id}}">リンクのテスト</a>
+            <a href="{{$url}}/detail/{{$product -> id}}">リンクのテスト</a>
         </p>
         {{$visit}}
         @if(!empty($visit))
