@@ -67,7 +67,7 @@ class ProductController extends Controller
                 /*saleのデータがないものを抽出*/
                 -> whereNull('sales.product_id')
                 -> orderBy('products.updated_at', 'desc') 
-                -> paginate($span);
+                -> paginate($span, ['products.*']);
  
         /*都道府県の指定ありの場合*/
         }else{
