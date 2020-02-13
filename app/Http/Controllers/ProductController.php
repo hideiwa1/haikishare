@@ -197,6 +197,7 @@ class ProductController extends Controller
         $sale -> save();
         
         /*ストアへキャンセルメールの送信*/
+        $url = url('/', null, true);
         $store = Store::find($sale -> product -> store_id);
         Log::debug('store:'.print_r($store, true));
         $title = '商品キャンセルのお知らせ';
@@ -204,7 +205,7 @@ class ProductController extends Controller
         $text = '購入された商品がキャンセルされました。';
         $product = Product::find($id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $url));
         
         return redirect() -> action('ProductController@detail', [$id])->with('message', 'キャンセルしました');;
     }
@@ -216,6 +217,7 @@ class ProductController extends Controller
         Log::debug('sale:'.print_r($sale, true));
         
         /*ストアへキャンセルメールの送信*/
+        $url = url('/', null, true);
         $store = Store::find($sale -> product -> store_id);
         Log::debug('store:'.print_r($store, true));
         $title = '商品キャンセルのお知らせ';
@@ -224,7 +226,7 @@ class ProductController extends Controller
         $text = '購入された商品がキャンセルされました。';
         $product = Product::find($sale -> product_id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $url));
         
         $sale -> delete_flg = true;
         $sale -> save();
