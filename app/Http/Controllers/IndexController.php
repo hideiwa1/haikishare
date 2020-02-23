@@ -11,7 +11,16 @@ class IndexController extends Controller
 {
     public function index(){
         /*indexページの表示*/
-        return view('index');
+        $flg = '';
+        /*ユーザー側のログイン認証があるか*/
+        $user = Auth::id();
+        if(!empty($user)) $flg = 'user';
+        if(empty($user)){
+            /*ストア側のログイン認証があるか*/
+            $user = Auth::guard('store') -> id();
+            if(isset($user)) $flg = 'store';
+        }
+        return view('index',compact('flg'));
     }
     
     public function json(){

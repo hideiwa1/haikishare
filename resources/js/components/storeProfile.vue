@@ -71,7 +71,7 @@
             <p v-if="this.errMsg.new_password_confirmation" class="u-error">{{this.errMsg.new_password_confirmation}}</p>
     </div>
         <div>
-            <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
+            <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__submit">
     </div>
     </form>
     </div>

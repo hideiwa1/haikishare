@@ -23756,7 +23756,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", [
           _c("input", {
-            staticClass: "c-form c-button c-form__text c-button__link",
+            staticClass: "c-form c-button c-form__text c-button__submit",
             attrs: { type: "submit", disabled: _vm.isValid }
           })
         ])
@@ -25078,7 +25078,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", [
           _c("input", {
-            staticClass: "c-form c-button c-form__text c-button__link",
+            staticClass: "c-form c-button c-form__text c-button__submit",
             attrs: { type: "submit", disabled: _vm.isValid }
           })
         ])

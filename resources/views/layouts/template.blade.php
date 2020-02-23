@@ -10,7 +10,13 @@
         <header id="header" class="header__back">
            <div class="header">
             <h1>
-                <a href="/">
+                @if( Auth::check('user') )
+                <a href="/mypage">
+                @elseif( Auth::check('store') )
+                <a href="/store/mypage">
+                    @else
+                    <a href="/">
+                @endif
                 @if(app('env') == 'local')
                 <img src="{{ asset('/img/logo.png') }}" class="hero__banner c-img">
                 @else
