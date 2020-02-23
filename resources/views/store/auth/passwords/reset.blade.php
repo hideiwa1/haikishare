@@ -32,7 +32,7 @@
                 <span class="c-form__title">Password再入力</span>
                 <input type="password" name="password_confirmation" placeholder="再入力" class="c-form__text">
             </p>
-            <input type="submit" name="submit" value="送信" class="c-button c-form__text c-button__link">
+            <input type="submit" name="submit" value="送信" class="c-button c-form__text c-button__submit">
         </div>
     </form>
 </main>

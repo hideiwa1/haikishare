@@ -11,8 +11,16 @@
 
     <form method="post" action="{{ route('password.email') }}" class="p-form">
         {{ csrf_field() }}
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
         <h1 class="c-title u-center u-mb_xl">パスワード再発行</h1>
         <div class="p-form__content">
+           <p class="u-error">
+               @foreach($errors -> all() as $error)
+               {{ $error }}
+               @endforeach
+           </p>
             <p>
                 ご登録のメールアドレスを入力してください。
             </p>
@@ -21,7 +29,7 @@
                     <input type="text" name="email" placeholder="email" class="c-form__text" value="{{ old('email') }}">
                 </label>
             </p>
-            <input type="submit" name="submit" value="送信" class="c-button c-form__text c-button__link">
+            <input type="submit" name="submit" value="送信" class="c-button c-form__text c-button__submit">
         </div>
     </form>
 </main>

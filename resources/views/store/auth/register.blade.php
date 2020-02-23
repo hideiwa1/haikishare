@@ -56,7 +56,7 @@
                 <input type="password" name="password_confirmation" placeholder="再入力" class="c-form c-form__text">
                 <span class="u-error">{{ $errors -> first('password_confirmation')}}</span>
             </p>
-            <input type="submit" value="新規登録" class="c-button c-form__text c-button__link">
+            <input type="submit" value="新規登録" class="c-button c-form__text c-button__submit">
         </div>
     </form>
 </main>

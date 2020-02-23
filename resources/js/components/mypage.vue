@@ -64,7 +64,7 @@
             handleClick(value){
                 /*キャンセル時の処理*/
                 const me = this;
-                console.log(value);
+                console.log('id: '+ value);
                 const param = {
                     id: value,
                 };

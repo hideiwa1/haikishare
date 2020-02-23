@@ -74,7 +74,7 @@
                 <form method="post" action="/cancel/{{$detail -> id}}" class="p-modal--center u-center u-p_xl">
                     <p class="c-title">本当にキャンセルしますか？</p>
                     {{ csrf_field() }}
-                    <input type="submit" value="はい" class="c-button c-button__link u-w_50 u-m_auto">
+                    <input type="submit" value="はい" class="c-button c-button__submit u-w_50 u-m_auto">
                 </form>
                 
             </div>
@@ -108,21 +108,21 @@
         <div id="buyButton"></div>
         @elseif(!empty($store_id))
             @if($detail -> store_id == $store_id)
-        <button class="c-button c-button__link u-w_50 u-m_auto u-mb_l"><a href="/store/registProduct/{{$detail->id}}">編集する</a></button>
+        <button class="c-button c-button__submit u-w_50 u-m_auto u-mb_l"><a href="/store/registProduct/{{$detail->id}}">編集する</a></button>
         <div id="attention">
             <button-attend @click="handleShow">削除する</button-attend>
             <div v-if="isShow" @click.self="closeModal" class="p-modal p-modal-back" v-cloak>
                 <form action="/store/deleteProduct/{{$detail->id}}" method="post" class="p-modal--center u-center u-p_xl">
                     <p class="c-title">本当に削除しますか？</p>
                     {{ csrf_field() }}
-                    <input type="submit" value="はい" class="c-button c-button__link u-w_50 u-m_auto">
+                    <input type="submit" value="はい" class="c-button c-button__submit u-w_50 u-m_auto">
                 </form>
             </div>
         </div>
         @endif
         
         @else
-        <button class="c-button c-button__link u-w_50 u-m_auto u-mb_l"><a href="/login">購入にはログインが必要です</a></button>
+        <button class="c-button c-button__submit u-w_50 u-m_auto u-mb_l"><a href="/login">購入にはログインが必要です</a></button>
         @endif
         @endif
     </div>

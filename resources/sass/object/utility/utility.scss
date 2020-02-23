@@ -220,7 +220,11 @@
 	vertical-align: middle;
 }
 
-/**/
+/*font-size*/
 .u-font_default{
 	font-size: $font-size_default;
+}
+
+.u-bold{
+    font-weight: bold;
 }

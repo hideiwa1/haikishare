@@ -210,7 +210,7 @@ class ProductController extends Controller
         $text = '購入された商品がキャンセルされました。';
         $product = Product::find($id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $url));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product,'', $url));
         
         return redirect() -> action('ProductController@detail', [$id])->with('message', 'キャンセルしました');;
     }
@@ -224,14 +224,12 @@ class ProductController extends Controller
         /*ストアへキャンセルメールの送信*/
         $url = url('/', null, true);
         $store = Store::find($sale -> product -> store_id);
-        Log::debug('store:'.print_r($store, true));
         $title = '商品キャンセルのお知らせ';
         $name = $store -> name.$store -> branch;
-        Log::debug('name:'.print_r($name, true));
         $text = '購入された商品がキャンセルされました。';
         $product = Product::find($sale -> product_id);
         $to = $store -> email;
-        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, $url));
+        Mail::to($to)->send(new ProductMail($title, $name, $text, $product, '', $url));
         
         $sale -> delete_flg = true;
         $sale -> save();
@@ -251,10 +249,17 @@ class ProductController extends Controller
             $title = '登録商品編集';
             $data = Product::find($id);
             $store = Auth::guard('store')->id();
-            $data = Product::find($id);
             /*投稿者以外はマイページへリダイレクト*/
-            if($data -> store_id !== $store){
-                return redirect('storemypage');
+            if(!$data){
+                return redirect('store/mypage');
+            }else if($data -> store_id !== $store){
+                return redirect('store/mypage');
+            }
+            $sale = Sale::where('product_id', $id)
+                -> where('delete_flg', false)
+                -> exists();
+            if($sale){
+                return redirect('store/mypage');
             }
         }else{
             $title = '新規商品登録';
@@ -289,7 +294,7 @@ class ProductController extends Controller
         $product -> category_id = $request -> category;
         $product -> jan = $request -> jan;
         $product -> price = $request -> price;
-        
+        $product -> comment = $request -> comment;
         $product -> limit = Carbon::parse($request -> limit)->format('Y-m-d H:i:s');
         $product -> limit_flg = ($request -> limit_flg === 'true')? true: false;
         if($request -> file('pic')){

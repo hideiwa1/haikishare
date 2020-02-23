@@ -1,12 +1,12 @@
 <template>
     <div id="attention">
-        <button @click="handleShow" class="c-button c-button__link">
+        <button @click="handleShow" class="c-button c-button__submit">
             <slot></slot>
         </button>
         <div v-if="isShow" @click.self="closeModal" class="p-modal p-modal-back">
             <div class="p-modal--center u-center u-p_xl">
                 <p class="c-title">本当にキャンセルしますか？</p>
-                <button type="submit" @click="handleClick" :id=this.value class="c-button c-button__link u-w_50 u-m_auto">キャンセルする</button>
+                <button type="submit" @click="handleClick" :id=this.value class="c-button c-button__submit u-w_50 u-m_auto">キャンセルする</button>
             </div>
         </div>
     </div>

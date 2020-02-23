@@ -23,6 +23,17 @@
 			}
 		}
 	}
+    
+    &__item2 {
+        width: 100%;
+
+        @include mq() {
+            width: 48%;
+            display: block;
+        }
+
+    }
+    
 
 	&__item3 {
 		width: 100%;

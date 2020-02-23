@@ -2043,6 +2043,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
   },
   data: function data() {
     return {
+      /*csrfトークン*/
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       buylists: [],
       activePage: 1,
       itemsPerPage: 5,
@@ -2093,7 +2095,8 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     handleClick: function handleClick(value) {
       /*キャンセル時の処理*/
       var me = this;
-      console.log(value);
+      console.log('id: ' + value);
+      alert('キャンセルしました');
       var param = {
         id: value
       };
@@ -2101,7 +2104,6 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         params: param
       }).then(function (response) {
         console.log(response.data);
-        alert('キャンセルしました');
       }).then(function () {
         /*商品情報の再取得*/
         var param = {
@@ -2505,7 +2507,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
     handleClick: function handleClick(value) {
       /*キャンセル時の処理*/
       var me = this;
-      console.log(value);
+      console.log('id: ' + value);
       var param = {
         id: value
       };
@@ -2950,6 +2952,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*ユーザープロフィール編集ページ*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2971,7 +2981,10 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       address2: this.address2,
       comment: this.comment,
       email: this.email,
-      pic: this.pic
+      pic: this.pic,
+      current_password: this.current_password,
+      new_password: this.new_password,
+      new_password_confirmation: this.new_password_confirmation
     };
   },
   mounted: function mounted() {
@@ -2986,6 +2999,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       _this.comment = response.data.comment;
       _this.email = response.data.email;
       _this.pic = response.data.pic;
+      _this.current_password = '';
+      _this.new_password = '';
+      _this.new_password_confirmation = '';
     });
     /*都道府県の取得*/
 
@@ -3008,7 +3024,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
           errMsgEmail = 'email形式で入力してください',
-          errMsgMax = '190文字以内で入力してください';
+          errMsgMax = '190文字以内で入力してください',
+          errMsgDiscord = '再入力と一致しません',
+          errMsgMin = '4文字以上で入力してください';
       return {
         name: function () {
           /*必須、最大文字数*/
@@ -3044,6 +3062,22 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
             } else {
               return '';
             }
+          }
+        }(),
+        current_password: function () {
+          if (!_this2.current_password && _this2.new_password) {
+            return errMsgRequire;
+          } else {
+            return '';
+          }
+        }(),
+        new_password: function () {
+          if (_this2.new_password !== _this2.new_password_confirmation) {
+            return errMsgDiscord;
+          } else if (_this2.new_password.length < 4 && _this2.new_password.length > 0) {
+            return errMsgMin;
+          } else {
+            return '';
           }
         }()
       };
@@ -3154,6 +3188,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*商品出品・編集*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3177,6 +3220,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       price: "",
       limit_flg: 0,
       limit: "",
+      comment: "",
       pic: ""
     };
   },
@@ -3200,6 +3244,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
         _this.price = response.data.price;
         _this.limit = _moment(response.data.limit).format('YYYY-MM-DDThh:mm');
         _this.limit_flg = response.data.limit_flg;
+        _this.comment = response.data.comment;
         _this.pic = response.data.pic;
       });
     }
@@ -3325,6 +3370,7 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
             _this3.category = response.data.category_id;
             _this3.name = response.data.name;
             _this3.price = response.data.price;
+            _this3.comment = response.data.comment;
             _this3.pic = response.data.pic;
           }
         });
@@ -3794,6 +3840,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*ストアプロフィールの編集*/
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3817,7 +3872,10 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       address2: this.address2,
       comment: this.comment,
       email: this.email,
-      pic: this.pic
+      pic: this.pic,
+      current_password: this.current_password,
+      new_password: this.new_password,
+      new_password_confirmation: this.new_password_confirmation
     };
   },
   mounted: function mounted() {
@@ -3833,6 +3891,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       _this.comment = response.data.comment;
       _this.email = response.data.email;
       _this.pic = response.data.pic;
+      _this.current_password = '';
+      _this.new_password = '';
+      _this.new_password_confirmation = '';
     });
     /*都道府県の取得*/
 
@@ -3855,7 +3916,9 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
       var errMsgRequire = '入力必須項目です',
           errMsgInteger = '半角数字で入力してください',
           errMsgEmail = 'email形式で入力してください',
-          errMsgMax = '190文字以内で入力してください';
+          errMsgMax = '190文字以内で入力してください',
+          errMsgDiscord = '再入力と一致しません',
+          errMsgMin = '4文字以上で入力してください';
       return {
         name: function () {
           /*必須、最大文字数*/
@@ -3903,6 +3966,22 @@ var _moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js
             } else {
               return '';
             }
+          }
+        }(),
+        current_password: function () {
+          if (!_this2.current_password && _this2.new_password) {
+            return errMsgRequire;
+          } else {
+            return '';
+          }
+        }(),
+        new_password: function () {
+          if (_this2.new_password !== _this2.new_password_confirmation) {
+            return errMsgDiscord;
+          } else if (_this2.new_password.length < 4 && _this2.new_password.length > 0) {
+            return errMsgMin;
+          } else {
+            return '';
           }
         }()
       };
@@ -22057,7 +22136,10 @@ var render = function() {
   return _c("div", { attrs: { id: "attention" } }, [
     _c(
       "button",
-      { staticClass: "c-button c-button__link", on: { click: _vm.handleShow } },
+      {
+        staticClass: "c-button c-button__submit",
+        on: { click: _vm.handleShow }
+      },
       [_vm._t("default")],
       2
     ),
@@ -22085,7 +22167,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button__link u-w_50 u-m_auto",
+                  staticClass: "c-button c-button__submit u-w_50 u-m_auto",
                   attrs: { type: "submit", id: this.value },
                   on: { click: _vm.handleClick }
                 },
@@ -22123,7 +22205,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "c-button c-button__link u-w_50 u-m_auto",
+        staticClass: "c-button c-button__submit u-w_50 u-m_auto",
         on: { click: _vm.showModal }
       },
       [_vm._v(_vm._s(this.message))]
@@ -22220,7 +22302,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("input", {
-                  staticClass: "c-button c-button__link u-w_50 u-m_auto",
+                  staticClass: "c-button c-button__submit u-w_50 u-m_auto",
                   attrs: { type: "submit" }
                 })
               ]
@@ -23138,7 +23220,9 @@ var render = function() {
                           "div",
                           { staticClass: "c-textarea c-textarea__product" },
                           [
-                            _c("h2", [_vm._v(_vm._s(product.name))]),
+                            _c("h2", { staticClass: "u-word" }, [
+                              _vm._v(_vm._s(product.name))
+                            ]),
                             _vm._v(" "),
                             product.limit_flg == true
                               ? _c("p", [
@@ -23366,13 +23450,19 @@ var render = function() {
               staticClass: "c-img__profile u-block u-m_auto",
               attrs: { pic: _vm.pic },
               on: { change: _vm.picChange }
-            })
+            }),
+            _vm._v(" "),
+            this.errMsg.pic
+              ? _c("p", { staticClass: "u-error" }, [
+                  _vm._v(_vm._s(this.errMsg.pic))
+                ])
+              : _vm._e()
           ],
           1
         ),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [_vm._v("名前")]),
+          _vm._m(0),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23394,13 +23484,17 @@ var render = function() {
                 _vm.name = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.name
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.name))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                都道府県\n            ")
-          ]),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "select",
@@ -23447,7 +23541,13 @@ var render = function() {
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          this.errMsg.address1
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.address1))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
@@ -23477,8 +23577,10 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          this.errMsg.jan
-            ? _c("p", [_vm._v(_vm._s(this.errMsg.jan))])
+          this.errMsg.address2
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.address2))
+              ])
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -23507,13 +23609,17 @@ var render = function() {
                 _vm.comment = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.comment
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.comment))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                メールアドレス\n            ")
-          ]),
+          _vm._m(2),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -23535,16 +23641,118 @@ var render = function() {
                 _vm.email = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.email
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.email))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("p", [_vm._v("パスワードを変更する際は、下記に入力してください")]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("現在のパスワード")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.current_password,
+                expression: "current_password"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "current_password" },
+            domProps: { value: _vm.current_password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.current_password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.current_password
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.current_password))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("新しいパスワード")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.new_password,
+                expression: "new_password"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "new_password" },
+            domProps: { value: _vm.new_password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.new_password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.new_password
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.new_password))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("新しいパスワード（再入力）")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.new_password_confirmation,
+                expression: "new_password_confirmation"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "new_password_confirmation" },
+            domProps: { value: _vm.new_password_confirmation },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.new_password_confirmation = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.new_password_confirmation
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.new_password_confirmation))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", [
           _c("input", {
@@ -23561,45 +23769,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("現在のパスワード")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "current_password" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("名前"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("新しいパスワード")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "new_password" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                都道府県"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("新しいパスワード（再入力）")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "new_password_confirmation" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                メールアドレス"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   }
 ]
@@ -23897,9 +24093,43 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("\n                説明文\n            ")
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment,
+                expression: "comment"
+              }
+            ],
+            staticClass: "c-form c-textarea",
+            attrs: { name: "comment" },
+            domProps: { value: _vm.comment },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.comment = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.comment
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.comment))
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
         _c("div", [
           _c("input", {
-            staticClass: "c-form c-button c-form__text c-button__link",
+            staticClass: "c-form c-button c-form__text c-button__submit",
             attrs: { type: "submit", disabled: _vm.isValid }
           })
         ])
@@ -24514,13 +24744,19 @@ var render = function() {
               staticClass: "c-img__profile u-block u-m_auto",
               attrs: { pic: _vm.pic },
               on: { change: _vm.picChange }
-            })
+            }),
+            _vm._v(" "),
+            this.errMsg.pic
+              ? _c("p", { staticClass: "u-error" }, [
+                  _vm._v(_vm._s(this.errMsg.pic))
+                ])
+              : _vm._e()
           ],
           1
         ),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [_vm._v("名前")]),
+          _vm._m(0),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -24542,11 +24778,17 @@ var render = function() {
                 _vm.name = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.name
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.name))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [_vm._v("支店名")]),
+          _vm._m(1),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -24568,13 +24810,17 @@ var render = function() {
                 _vm.branch = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.branch
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.branch))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                都道府県\n    ")
-          ]),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "select",
@@ -24617,7 +24863,13 @@ var render = function() {
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          this.errMsg.address1
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.address1))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_m" }, [
@@ -24647,8 +24899,10 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          this.errMsg.jan
-            ? _c("p", [_vm._v(_vm._s(this.errMsg.jan))])
+          this.errMsg.address2
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.address2))
+              ])
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -24677,13 +24931,17 @@ var render = function() {
                 _vm.comment = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.comment
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.comment))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
-          _c("label", { staticClass: "c-form__title" }, [
-            _vm._v("\n                メールアドレス\n    ")
-          ]),
+          _vm._m(3),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -24705,16 +24963,118 @@ var render = function() {
                 _vm.email = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          this.errMsg.email
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.email))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("p", [_vm._v("パスワードを変更する際は、下記に入力してください")]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("現在のパスワード")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.current_password,
+                expression: "current_password"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "current_password" },
+            domProps: { value: _vm.current_password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.current_password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.current_password
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.current_password))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "u-flex-form u-mb_m" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("新しいパスワード")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.new_password,
+                expression: "new_password"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "new_password" },
+            domProps: { value: _vm.new_password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.new_password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.new_password
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.new_password))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
+          _c("label", { staticClass: "c-form__title" }, [
+            _vm._v("新しいパスワード（再入力）")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.new_password_confirmation,
+                expression: "new_password_confirmation"
+              }
+            ],
+            staticClass: "c-form c-form__text",
+            attrs: { type: "password", name: "new_password_confirmation" },
+            domProps: { value: _vm.new_password_confirmation },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.new_password_confirmation = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          this.errMsg.new_password_confirmation
+            ? _c("p", { staticClass: "u-error" }, [
+                _vm._v(_vm._s(this.errMsg.new_password_confirmation))
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", [
           _c("input", {
@@ -24731,45 +25091,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("現在のパスワード")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "current_password" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("名前"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_m" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("新しいパスワード")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "new_password" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("支店名"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-flex-form u-mb_xl" }, [
-      _c("label", { staticClass: "c-form__title" }, [
-        _vm._v("新しいパスワード（再入力）")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-form c-form__text",
-        attrs: { type: "password", name: "new_password_confirmation" }
-      })
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                都道府県"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "c-form__title" }, [
+      _vm._v("\n                メールアドレス"),
+      _c("span", { staticClass: "u-require u-inline u-ml_l" }, [
+        _vm._v("＊必須")
+      ])
     ])
   }
 ]
@@ -37031,7 +37390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('button-attend', {
   props: ['isShow'],
-  template: "<button @click=\"modalShow\" class=\"c-button c-button__link u-w_50 u-m_auto\"><slot></slot></button>",
+  template: "<button @click=\"modalShow\" class=\"c-button c-button__submit u-w_50 u-m_auto\"><slot></slot></button>",
   methods: {
     modalShow: function modalShow() {
       console.log('kurikku');

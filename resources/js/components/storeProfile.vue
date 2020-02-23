@@ -8,18 +8,21 @@
             <label class="c-form__title">プロフィール画像</label>
             <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
             <Liveview :pic="pic" @change="picChange" class="c-img__profile u-block u-m_auto"/>
+            <p v-if="this.errMsg.pic" class="u-error">{{this.errMsg.pic}}</p>
     </div>
         <div  class="u-flex-form u-mb_m">
-            <label class="c-form__title">名前</label>
+            <label class="c-form__title">名前<span class="u-require u-inline u-ml_l">＊必須</span></label>
             <input type="text" name='name' v-model="name" class="c-form c-form__text">
+            <p v-if="this.errMsg.name" class="u-error">{{this.errMsg.name}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
-            <label class="c-form__title">支店名</label>
+            <label class="c-form__title">支店名<span class="u-require u-inline u-ml_l">＊必須</span></label>
             <input type="text" name='branch' v-model="branch" class="c-form c-form__text">
+            <p v-if="this.errMsg.branch" class="u-error">{{this.errMsg.branch}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">
-                都道府県
+                都道府県<span class="u-require u-inline u-ml_l">＊必須</span>
     </label>
             <select v-model="address1" name="address1" class="c-form c-form__select">
                 <option value="" selected>選択してください▼</option>
@@ -27,39 +30,45 @@
                     {{val.name}}
     </option>
     </select>
+            <p v-if="this.errMsg.address1" class="u-error">{{this.errMsg.address1}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title" >
                 住所
     </label>
             <input type="text" name="address2" v-model="address2"  class="c-form c-form__text">
-            <p v-if="this.errMsg.jan">{{this.errMsg.jan}}</p>
+            <p v-if="this.errMsg.address2" class="u-error">{{this.errMsg.address2}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">
                 コメント
     </label>
             <input type="text" name="comment" v-model="comment" class="c-form c-form__text">
+            <p v-if="this.errMsg.comment" class="u-error">{{this.errMsg.comment}}</p>
     </div>
 
         <div class="u-flex-form u-mb_xl">
             <label class="c-form__title">
-                メールアドレス
+                メールアドレス<span class="u-require u-inline u-ml_l">＊必須</span>
     </label>
             <input type="text" name="email" v-model="email"  class="c-form c-form__text">
+            <p v-if="this.errMsg.email" class="u-error">{{this.errMsg.email}}</p>
     </div>
         <p>パスワードを変更する際は、下記に入力してください</p>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">現在のパスワード</label>
-            <input type="password" name="current_password" class="c-form c-form__text">
+            <input type="password" name="current_password" v-model="current_password" class="c-form c-form__text">
+            <p v-if="this.errMsg.current_password" class="u-error">{{this.errMsg.current_password}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">新しいパスワード</label>
-            <input type="password" name="new_password" class="c-form c-form__text">
+            <input type="password" name="new_password" v-model="new_password" class="c-form c-form__text">
+            <p v-if="this.errMsg.new_password" class="u-error">{{this.errMsg.new_password}}</p>
     </div>
         <div class="u-flex-form u-mb_xl">
             <label class="c-form__title">新しいパスワード（再入力）</label>
-            <input type="password" name="new_password_confirmation" class="c-form c-form__text">
+            <input type="password" name="new_password_confirmation" v-model="new_password_confirmation" class="c-form c-form__text" >
+            <p v-if="this.errMsg.new_password_confirmation" class="u-error">{{this.errMsg.new_password_confirmation}}</p>
     </div>
         <div>
             <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
@@ -89,6 +98,9 @@
                 comment: this.comment,
                 email: this.email,
                 pic: this.pic,
+                current_password: this.current_password,
+                new_password: this.new_password,
+                new_password_confirmation: this.new_password_confirmation,
             };
         },
         mounted() {
@@ -103,6 +115,9 @@
                 this.comment = response.data.comment;
                 this.email = response.data.email;
                 this.pic = response.data.pic;
+                this.current_password = '';
+                this.new_password = '';
+                this.new_password_confirmation = '';
             });
             /*都道府県の取得*/
             axios.get('/arealist/json')
@@ -123,7 +138,9 @@
                 const errMsgRequire = '入力必須項目です',
                       errMsgInteger = '半角数字で入力してください',
                       errMsgEmail = 'email形式で入力してください',
-                      errMsgMax = '190文字以内で入力してください';
+                      errMsgMax = '190文字以内で入力してください',
+                errMsgDiscord = '再入力と一致しません',
+                    errMsgMin = '4文字以上で入力してください';
                 return{
                     name: (()=>{
                         /*必須、最大文字数*/
@@ -168,6 +185,22 @@
                             }else{
                                 return '';
                             }}
+                    })(),
+                    current_password: (() => {
+                        if(!this.current_password && this.new_password){
+                            return errMsgRequire;
+                        }else{
+                            return '';
+                        }
+                    })(),
+                    new_password: (() => {
+                        if(this.new_password !== this.new_password_confirmation){
+                            return errMsgDiscord;
+                        }else if(this.new_password.length < 4 && this.new_password.length > 0){
+                            return errMsgMin;
+                        }else{
+                            return '';
+                        }
                     })(),
                 }
             },

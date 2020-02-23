@@ -35,6 +35,8 @@
         components: { Pagenate, Attention },
         data: function() {
             return {
+                /*csrfトークン*/
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 buylists: [],
                 activePage: 1,
                 itemsPerPage: 5,
@@ -81,7 +83,8 @@
             handleClick(value){
                 /*キャンセル時の処理*/
                 const me = this;
-                console.log(value);
+                console.log('id: ' + value);
+                alert('キャンセルしました');
                 const param = {
                     id: value,
                 };
@@ -90,7 +93,7 @@
                 })
                     .then(response => {
                     console.log(response.data);
-                    alert('キャンセルしました');
+                    
                 })
                     .then(function(){
                     /*商品情報の再取得*/

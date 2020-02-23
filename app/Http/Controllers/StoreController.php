@@ -7,13 +7,14 @@ use App\Store;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Hash;
 use Log;
 
 class StoreController extends Controller
 {
     /*profileEditページの表示*/
     public function edit(){
-        $data = Store::find(Auth::id());
+        $data = Store::find(Auth::guard('store') -> id());
         return view('store/profileEdit', compact('data'));
     }
 

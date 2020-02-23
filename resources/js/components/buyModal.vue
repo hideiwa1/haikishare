@@ -1,6 +1,6 @@
 <template>
     <div id="buyButton">
-        <button @click="showModal" class="c-button c-button__link u-w_50 u-m_auto">{{this.message}}</button>
+        <button @click="showModal" class="c-button c-button__submit u-w_50 u-m_auto">{{this.message}}</button>
         <div id="modal" class="p-modal p-modal-back" @click.self="closeModal" v-if="modalShow">
             <form method="post" :action="'/buy/'+url" class="p-modal--center u-center u-p_xl">
                 <div class="u-mb_m">
@@ -9,7 +9,7 @@
                 <input type="radio" value="after" v-model="day_flg">明日以降
                     <input type="date" name="visit" v-model="visit" v-if="day_flg === 'after'" class="c-form">
                 </div>
-                <input type="submit" class="c-button c-button__link u-w_50 u-m_auto">
+                <input type="submit" class="c-button c-button__submit u-w_50 u-m_auto">
             </form>
         </div>
     </div>

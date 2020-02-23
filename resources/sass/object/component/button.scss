@@ -28,4 +28,22 @@
 	&__small{
 		background-color: $background-color_small;
 	}
+    
+    &__submit{
+        background-color: $background-color_submit;
+        color: $font-color_header;
+        
+        & a{
+            color: $font-color_header;
+        }
+
+        &:hover{
+            background-color: $background-color_submit_hover;
+            color: $font-color_base;
+            
+            & a{
+                color: $font-color_base;
+            }
+        }
+    }
 }

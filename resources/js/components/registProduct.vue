@@ -49,8 +49,17 @@
                 <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg != 0">
                 <p v-if="this.errMsg.limit" class="u-error">{{this.errMsg.limit}}</p>
             </div>
+
+            <div class="u-flex-form u-mb_m">
+                <label class="c-form__title">
+                    説明文
+                </label>
+                <textarea name="comment" v-model="comment" class="c-form c-textarea"></textarea>
+                <p v-if="this.errMsg.comment" class="u-error">{{this.errMsg.comment}}</p>
+            </div>
+
             <div>
-                <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__link">
+                <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__submit">
             </div>
         </form>
     </div>
@@ -78,6 +87,7 @@
                 price: "",
                 limit_flg: 0,
                 limit: "",
+                comment: "",
                 pic: "",
             };
         },
@@ -99,6 +109,7 @@
                         this.price = response.data.price;
                         this.limit = moment(response.data.limit).format('YYYY-MM-DDThh:mm');
                         this.limit_flg = response.data.limit_flg;
+                    this.comment = response.data.comment;
                         this.pic = response.data.pic;
                     });
 
@@ -215,6 +226,7 @@
                                 this.category = response.data.category_id;
                                 this.name = response.data.name;
                                 this.price = response.data.price;
+                                this.comment = response.data.comment;
                                 this.pic = response.data.pic;
                             }
                         });

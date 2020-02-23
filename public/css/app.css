@@ -237,6 +237,24 @@ select {
   background-color: #ffff66;
 }
 
+.c-button__submit {
+  background-color: #ea553a;
+  color: #ffffff;
+}
+
+.c-button__submit a {
+  color: #ffffff;
+}
+
+.c-button__submit:hover {
+  background-color: #ef857d;
+  color: #000000;
+}
+
+.c-button__submit:hover a {
+  color: #000000;
+}
+
 /*タイムスタンプ*/
 
 .c-date {
@@ -379,6 +397,11 @@ select {
 
 .c-title {
   font-size: 24px;
+}
+
+.c-subtitle {
+  font-size: 36px;
+  font-weight: bold;
 }
 
 /*コメント*/
@@ -730,6 +753,17 @@ select {
   }
 }
 
+.p-panel__item2 {
+  width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+  .p-panel__item2 {
+    width: 48%;
+    display: block;
+  }
+}
+
 .p-panel__item3 {
   width: 100%;
 }
@@ -1055,9 +1089,13 @@ select {
   vertical-align: middle;
 }
 
-/**/
+/*font-size*/
 
 .u-font_default {
   font-size: 18px;
+}
+
+.u-bold {
+  font-weight: bold;
 }
 
