@@ -10,9 +10,9 @@
         <header id="header" class="header__back">
            <div class="header">
             <h1>
-                @if( Auth::check('user') )
+                @if( Auth::guard('user') -> check() )
                 <a href="/mypage">
-                @elseif( Auth::check('store') )
+                @elseif( Auth::guard('store') -> check() )
                 <a href="/store/mypage">
                     @else
                     <a href="/">

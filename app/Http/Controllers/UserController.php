@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Sale;
 use Hash;
+use Log;
 
 class UserController extends Controller
 {
@@ -81,6 +82,8 @@ class UserController extends Controller
                     -> where('products.store_id', $store);
             })
             -> exists();
+        //Log::debug('$sql: '.$sale -> toSql());
+        Log::debug('$sale: '.print_r($sale, true));
         if(!$sale){
             return redirect('store/mypage');
         }
