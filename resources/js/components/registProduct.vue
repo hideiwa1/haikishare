@@ -7,13 +7,13 @@
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">商品名<span class="u-require u-inline u-ml_l">＊必須</span></label>
                 <input type="text" name='name' v-model="name" class="c-form c-form__text">
-                <p v-if="this.errMsg.name" class="u-error">{{this.errMsg.name}}</p>
+                <p v-if="this.errMsg.name" class="u-error" v-cloak>{{this.errMsg.name}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">商品画像<span class="u-require u-inline u-ml_l">＊必須</span></label>
                 <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
                 <Liveview :pic="pic" @change="picChange" class="c-img__pic" />
-                <p v-if="this.errMsg.pic" class="u-error">{{this.errMsg.pic}}</p>
+                <p v-if="this.errMsg.pic" class="u-error" v-cloak>{{this.errMsg.pic}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">カテゴリー</label>
@@ -23,21 +23,21 @@
                         {{val.name}}
                     </option>
                 </select>
-                <p v-if="this.errMsg.category" class="u-error">{{this.errMsg.category}}</p>
+                <p v-if="this.errMsg.category" class="u-error" v-cloak>{{this.errMsg.category}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     JANコード
                 </label>
                 <input type="num" name="jan" v-model="jan" @change="searchJan" class="c-form c-form__text">
-                <p v-if="this.errMsg.jan" class="u-error">{{this.errMsg.jan}}</p>
+                <p v-if="this.errMsg.jan" class="u-error" v-cloak>{{this.errMsg.jan}}</p>
             </div>
             <div class="u-flex-form u-mb_m">
                 <label class="c-form__title">
                     価格<span class="u-require u-inline u-ml_l">＊必須</span>
                 </label>
                 <input type="num" name="price" v-model="price" class="c-form c-form__num">円
-                <p v-if="this.errMsg.price" class="u-error">{{this.errMsg.price}}</p>
+                <p v-if="this.errMsg.price" class="u-error" v-cloak>{{this.errMsg.price}}</p>
             </div>
 
             <div class="u-flex-form u-mb_m">
@@ -47,7 +47,7 @@
                 <input type="radio" name="limit_flg" value=0 v-model="limit_flg">期限なし
                 <input type="radio" name="limit_flg" value=1 v-model="limit_flg">期限あり
                 <input type="datetime-local" name="limit" v-model="limit" v-if="limit_flg != 0">
-                <p v-if="this.errMsg.limit" class="u-error">{{this.errMsg.limit}}</p>
+                <p v-if="this.errMsg.limit" class="u-error" v-cloak>{{this.errMsg.limit}}</p>
             </div>
 
             <div class="u-flex-form u-mb_m">
@@ -55,7 +55,7 @@
                     説明文
                 </label>
                 <textarea name="comment" v-model="comment" class="c-form c-textarea"></textarea>
-                <p v-if="this.errMsg.comment" class="u-error">{{this.errMsg.comment}}</p>
+                <p v-if="this.errMsg.comment" class="u-error" v-cloak>{{this.errMsg.comment}}</p>
             </div>
 
             <div>

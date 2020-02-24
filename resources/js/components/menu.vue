@@ -1,6 +1,6 @@
 <template>
    <div id="menu">
-       <ul class="p-navmenu u-flex" v-if="user == ''">
+       <ul class="p-navmenu u-flex" v-if="user == ''" v-cloak>
            <li class="p-navmenu__item">
                <a href='/product' class="c-button c-button__menu">商品検索</a>
             </li>
@@ -11,7 +11,7 @@
                <a href='/store/login' class="c-button c-button__menu">売りたい方</a>
             </li>
     </ul>
-    <ul class="p-navmenu u-flex" v-if="user == 'user'">
+       <ul class="p-navmenu u-flex" v-if="user == 'user'" v-cloak>
         <li class="p-navmenu__item">
             <a href='/product' class="c-button c-button__menu">商品検索</a>
         </li>
@@ -22,7 +22,7 @@
             <a href='/logout' class="c-button c-button__menu">ログアウト</a>
         </li>
     </ul>
-    <ul class="p-navmenu u-flex" v-if="user == 'store'">
+       <ul class="p-navmenu u-flex" v-if="user == 'store'" v-cloak>
         <li class="p-navmenu__item">
             <a href='/product' class="c-button c-button__menu">商品検索</a>
         </li>

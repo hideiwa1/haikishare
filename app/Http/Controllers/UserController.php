@@ -85,10 +85,8 @@ class UserController extends Controller
                 $q -> on('sales.product_id', '=', 'products.id')
                     -> where('products.store_id', $store);
             })
-            -> get();
-        //Log::debug('$sql: '.$sale -> toSql());
-        Log::debug('$sale: '.print_r($sale, true));
-        if($sale -> count() > 0){
+            -> exists();
+        if($sale){
             return view('profile', compact('user', 'sale'));
         }else{
             return redirect('store/mypage');

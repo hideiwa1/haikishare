@@ -1,7 +1,7 @@
 <template>
     <div id="buyButton">
         <button @click="showModal" class="c-button c-button__submit u-w_50 u-m_auto">{{this.message}}</button>
-        <div id="modal" class="p-modal p-modal-back" @click.self="closeModal" v-if="modalShow">
+        <div id="modal" class="p-modal p-modal-back" @click.self="closeModal" v-if="modalShow" v-cloak>
             <form method="post" :action="'/buy/'+url" class="p-modal--center u-center u-p_xl">
                 <div class="u-mb_m">
                 <input type="hidden" name="_token" :value="csrf">

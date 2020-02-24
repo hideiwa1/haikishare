@@ -8,17 +8,17 @@
             <label class="c-form__title">プロフィール画像</label>
             <span>＊ドラッグ＆ドロップまたはクリック後ファイルを選択して下さい</span>
             <Liveview :pic="pic" @change="picChange" class="c-img__profile u-block u-m_auto"/>
-            <p v-if="this.errMsg.pic" class="u-error">{{this.errMsg.pic}}</p>
+            <p v-if="this.errMsg.pic" class="u-error" v-cloak>{{this.errMsg.pic}}</p>
     </div>
         <div  class="u-flex-form u-mb_m">
             <label class="c-form__title">名前<span class="u-require u-inline u-ml_l">＊必須</span></label>
             <input type="text" name='name' v-model="name" class="c-form c-form__text">
-            <p v-if="this.errMsg.name" class="u-error">{{this.errMsg.name}}</p>
+            <p v-if="this.errMsg.name" class="u-error" v-cloak>{{this.errMsg.name}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">支店名<span class="u-require u-inline u-ml_l">＊必須</span></label>
             <input type="text" name='branch' v-model="branch" class="c-form c-form__text">
-            <p v-if="this.errMsg.branch" class="u-error">{{this.errMsg.branch}}</p>
+            <p v-if="this.errMsg.branch" class="u-error" v-cloak>{{this.errMsg.branch}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">
@@ -30,21 +30,21 @@
                     {{val.name}}
     </option>
     </select>
-            <p v-if="this.errMsg.address1" class="u-error">{{this.errMsg.address1}}</p>
+            <p v-if="this.errMsg.address1" class="u-error" v-cloak>{{this.errMsg.address1}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title" >
                 住所
     </label>
             <input type="text" name="address2" v-model="address2"  class="c-form c-form__text">
-            <p v-if="this.errMsg.address2" class="u-error">{{this.errMsg.address2}}</p>
+            <p v-if="this.errMsg.address2" class="u-error" v-cloak>{{this.errMsg.address2}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">
                 コメント
     </label>
             <input type="text" name="comment" v-model="comment" class="c-form c-form__text">
-            <p v-if="this.errMsg.comment" class="u-error">{{this.errMsg.comment}}</p>
+            <p v-if="this.errMsg.comment" class="u-error" v-cloak>{{this.errMsg.comment}}</p>
     </div>
 
         <div class="u-flex-form u-mb_xl">
@@ -52,23 +52,23 @@
                 メールアドレス<span class="u-require u-inline u-ml_l">＊必須</span>
     </label>
             <input type="text" name="email" v-model="email"  class="c-form c-form__text">
-            <p v-if="this.errMsg.email" class="u-error">{{this.errMsg.email}}</p>
+            <p v-if="this.errMsg.email" class="u-error" v-cloak>{{this.errMsg.email}}</p>
     </div>
         <p>パスワードを変更する際は、下記に入力してください</p>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">現在のパスワード</label>
             <input type="password" name="current_password" v-model="current_password" class="c-form c-form__text">
-            <p v-if="this.errMsg.current_password" class="u-error">{{this.errMsg.current_password}}</p>
+            <p v-if="this.errMsg.current_password" class="u-error" v-cloak>{{this.errMsg.current_password}}</p>
     </div>
         <div class="u-flex-form u-mb_m">
             <label class="c-form__title">新しいパスワード</label>
             <input type="password" name="new_password" v-model="new_password" class="c-form c-form__text">
-            <p v-if="this.errMsg.new_password" class="u-error">{{this.errMsg.new_password}}</p>
+            <p v-if="this.errMsg.new_password" class="u-error" v-cloak>{{this.errMsg.new_password}}</p>
     </div>
         <div class="u-flex-form u-mb_xl">
             <label class="c-form__title">新しいパスワード（再入力）</label>
             <input type="password" name="new_password_confirmation" v-model="new_password_confirmation" class="c-form c-form__text" >
-            <p v-if="this.errMsg.new_password_confirmation" class="u-error">{{this.errMsg.new_password_confirmation}}</p>
+            <p v-if="this.errMsg.new_password_confirmation" class="u-error" v-cloak>{{this.errMsg.new_password_confirmation}}</p>
     </div>
         <div>
             <input type="submit" :disabled="isValid" class="c-form c-button c-form__text c-button__submit">

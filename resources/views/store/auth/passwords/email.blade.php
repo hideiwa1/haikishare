@@ -16,11 +16,6 @@
         </div>
         <h1 class="c-title u-center u-mb_xl">パスワード再発行</h1>
         <div class="p-form__content">
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-            @endif
             <p class="u-error">
                 @foreach($errors -> all() as $error)
                 {{ $error }}

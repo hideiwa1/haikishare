@@ -10,7 +10,7 @@
                 <img :src="productlist.pic" class="c-img c-img__product">
                 <div class="c-textarea c-textarea__product">
                     <h2 class="u-word">{{productlist.name}}</h2>
-                    <p v-if="!storeId"  class="u-word">最終更新日時：{{productlist.updated_at | moment}}</p>
+                    <p v-if="!storeId"  class="u-word" v-cloak>最終更新日時：{{productlist.updated_at | moment}}</p>
                     <p v-else-if="storeId && productlist.limit == true"  class="u-word">価格：{{productlist.price}}円<br>期限：{{productlist.limit | moment}}
                 </p>
                     <p v-else class="u-word">価格：{{productlist.price}}円<br>期限：期限なし</p>
@@ -18,7 +18,7 @@
     </div>
             <div class="u-flex-between u-w_50 u-m_auto">
                 <button class="c-button c-button__link"><a :href="'/detail/' + productlist.id">詳細を見る</a></button>
-                <button v-if="!productlist.sale && !storeId" class="c-button c-button__link"><a :href="'/store/registProduct/' + productlist.product_id">編集する</a></button>
+                <button v-if="!productlist.sale && !storeId" class="c-button c-button__link" v-cloak><a :href="'/store/registProduct/' + productlist.product_id">編集する</a></button>
         </div>
     </div>
         <pagenate :active-page="activePage" :items-per-page="itemsPerPage" :total-item-count="totalItemCount" :page-range="pageRange" @change="pageChange" />

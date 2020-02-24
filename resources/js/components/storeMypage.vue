@@ -30,7 +30,7 @@
         <div class="u-flex-between u-w_50 u-m_auto">
             <button class="c-button c-button__link">
             <a :href="'/detail/' + productlist.id">詳細を見る</a></button>
-            <button v-if=!productlist.sale class="c-button c-button__link"><a :href="'/store/registProduct/' + productlist.id">編集する</a></button>
+            <button v-if=!productlist.sale class="c-button c-button__link" v-cloak><a :href="'/store/registProduct/' + productlist.id">編集する</a></button>
     </div>
     </div>
         <div class="u-right"><a href="/store/productlist" class="u-right">さらに見る</a></div>

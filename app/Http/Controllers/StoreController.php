@@ -42,7 +42,7 @@ class StoreController extends Controller
         }
         /*バリデーションチェック*/
         if($request -> current_password){
-            if(!(Hash::check($request -> current_password, Auth::guard('store') -> password))){
+            if(!(Hash::check($request -> current_password, Auth::guard('store') -> user() -> password))){
                 return redirect() -> back() -> with('message','パスワードが間違えています');
             }
             if(strcmp($request -> current_password, $request -> new_password) == 0){

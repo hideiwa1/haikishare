@@ -15,7 +15,7 @@
                     <img :src=product.pic class="c-img c-img__product">
                         <div class="c-textarea c-textarea__product">
                             <h2 class="u-word">{{product.name}}</h2>
-                            <p v-if="product.limit_flg == true">価格：{{product.price}}円<br>
+                            <p v-if="product.limit_flg == true" v-cloak>価格：{{product.price}}円<br>
                                 期限：{{product.limit | moment}}</p>
                             <p v-else>価格：{{product.price}}円<br>
                                 期限：期限なし</p>

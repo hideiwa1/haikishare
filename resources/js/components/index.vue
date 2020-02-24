@@ -5,7 +5,7 @@
            <img :src=val.pic class="c-img c-img__index">
             <div class="c-textarea">
                 <h2 class="u-word">{{val.name}}</h2>
-                <p v-if="val.limit_flg == true" class="u-word">価格：{{val.price}}円<br>
+                <p v-if="val.limit_flg == true" class="u-word" v-cloak>価格：{{val.price}}円<br>
                 期限：{{val.limit|moment}}</p>
                 <p v-else class="u-word">価格：{{val.price}}円<br>
                     期限：期限なし</p>

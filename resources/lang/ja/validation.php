@@ -158,6 +158,7 @@ return [
         'branch' => '支店名',
         'address1' => '都道府県',
         'address2' => '住所',
+        'new_password' => '新パスワード',
 		],
 
 ];

@@ -22735,11 +22735,17 @@ var render = function() {
   return _c("div", { staticClass: "p-modal", attrs: { id: "modal" } }, [
     _c("nav", { staticClass: "p-modal-menu" }, [
       _vm.user == ""
-        ? _c("ul", [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])
+        ? _c("ul", {}, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
         : _vm._e(),
       _vm._v(" "),
       _vm.user == "user"
-        ? _c("ul", [
+        ? _c("ul", {}, [
             _vm._m(3),
             _vm._v(" "),
             _vm._m(4),
@@ -22753,7 +22759,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.user == "store"
-        ? _c("ul", [
+        ? _c("ul", {}, [
             _vm._m(8),
             _vm._v(" "),
             _vm._m(9),
@@ -23225,7 +23231,7 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             product.limit_flg == true
-                              ? _c("p", [
+                              ? _c("p", {}, [
                                   _vm._v(
                                     "価格：" + _vm._s(product.price) + "円"
                                   ),
