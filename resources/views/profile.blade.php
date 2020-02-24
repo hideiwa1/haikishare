@@ -9,7 +9,7 @@
 
 <main class="main">
     {{ csrf_field() }}
-    
+    {{$sale}}
     <div class="p-form">
         <img src="{{$user -> pic}}" alt="" class="c-img__profile u-block u-m_auto u-mb_l">
         <h1 class="c-title u-center">

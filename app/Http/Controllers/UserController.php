@@ -74,6 +74,10 @@ class UserController extends Controller
     /*profileページの表示*/
     public function profile($id){
         $user = User::find($id);
+        if(empty($user) || $user -> delete_flg == true){
+            return redirect('store/mypage');
+        }
+        
         $store = Auth::guard('store') -> id();
         $sale = Sale::where('sales.user_id', $id)
             -> where('sales.delete_flg', false)
@@ -84,12 +88,10 @@ class UserController extends Controller
             -> exists();
         //Log::debug('$sql: '.$sale -> toSql());
         Log::debug('$sale: '.print_r($sale, true));
-        if(!$sale){
+        if($sale){
+            return view('profile', compact('user', 'sale'));
+        }else{
             return redirect('store/mypage');
         }
-        if($user -> delete_flg == true || empty($user)){
-            return redirect() -> back() -> with('message','ユーザー情報がありません');
-        }
-        return view('profile', compact('user'));
     }
 }
