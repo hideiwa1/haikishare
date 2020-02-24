@@ -36,7 +36,7 @@
         
         <h2 class="c-title u-center u-mb_m">利用方法</h2>
         <div class="u-mb_l u-flex-between">
-            <div class="p-panel__item2">
+            <div class="p-panel__item2 u-mb_m">
                 <div class="c-textbox u-mb_m">
                         <p class="u-center">買いたい方</p>
                         <p>
@@ -48,7 +48,7 @@
                     </div>
                 
             </div>
-            <div class="p-panel__item2">
+            <div class="p-panel__item2 u-mb_m">
                 <div class="c-textbox u-mb_m">
                         <p class="u-center">売りたい方</p>
                         <p>
