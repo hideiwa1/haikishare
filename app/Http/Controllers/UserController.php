@@ -85,7 +85,7 @@ class UserController extends Controller
                 $q -> on('sales.product_id', '=', 'products.id')
                     -> where('products.store_id', $store);
             })
-            -> exists();
+            -> get();
         //Log::debug('$sql: '.$sale -> toSql());
         Log::debug('$sale: '.print_r($sale, true));
         if($sale){
