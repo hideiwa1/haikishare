@@ -82,6 +82,7 @@ class ProductController extends Controller
                             ->orWhere('limit_flg', '=', 0);
                     });
                 })
+                ->where('products.delete_flg', false)
                 -> leftJoin('sales', function($q){
                     $q -> on('products.id', '=', 'sales.product_id')
                         -> where('sales.delete_flg', false);
@@ -296,7 +297,7 @@ class ProductController extends Controller
         $product -> price = $request -> price;
         $product -> comment = $request -> comment;
         $product -> limit = Carbon::parse($request -> limit)->format('Y-m-d H:i:s');
-        $product -> limit_flg = ($request -> limit_flg === 'true')? true: false;
+        $product -> limit_flg = ($request -> limit_flg == 1)? true: false;
         if($request -> file('pic')){
             //$this -> validate($request, $rules);
             /*herokuでは画像の保存ができないため、AWS s3を利用*/
