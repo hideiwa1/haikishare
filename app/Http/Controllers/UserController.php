@@ -81,14 +81,14 @@ class UserController extends Controller
         $store = Auth::guard('store') -> id();
         $sale = Sale::where('sales.user_id', $id)
             -> where('sales.delete_flg', false)
-            -> leftJoin('products', function($q) use ($store){
+            -> rightJoin('products', function($q) use ($store){
                 $q -> on('sales.product_id', '=', 'products.id')
                     -> where('products.store_id', $store);
             })
             -> get();
         //Log::debug('$sql: '.$sale -> toSql());
         Log::debug('$sale: '.print_r($sale, true));
-        if($sale){
+        if($sale -> count() > 0){
             return view('profile', compact('user', 'sale'));
         }else{
             return redirect('store/mypage');
